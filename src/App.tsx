@@ -1,13 +1,13 @@
-import React from 'react';
-import './App.css';
+import "./App.css";
+import React from "react";
+import {BrowserRouter} from "react-router-dom";
+import {DemeterRoute} from "@D/route/demeter-route";
 
 function App() {
     return (
-        <div className="App">
-            <header className="App-header">
-                <h1>Demeter</h1>
-            </header>
-        </div>
+        <BrowserRouter>
+            <DemeterRoute/>
+        </BrowserRouter>
     );
 }
 

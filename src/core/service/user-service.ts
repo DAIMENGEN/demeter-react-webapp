@@ -12,9 +12,9 @@ export class UserService extends BaseService<UserEntity> {
         return DbEntityDataFactory.update(this.adminId, UserEntity, oldUser, partialFields);
     }
 
-    public login(account: string, password: string, callback: (user: UserEntity) => void): void {
+    public login(account: string, password: string, successCallback: (user: UserEntity) => void, failedCallback: (error: Error) => void): void {
         const URL = "/loginRoute";
-        this.post<UserEntity>(URL, {account, password}).then(callback);
+        this.post<UserEntity>(URL, {account, password}).then(successCallback).catch(failedCallback);
     }
 
     public registerRequest(user: UserEntity, callback: (user: UserEntity) => void): void {
