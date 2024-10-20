@@ -6,8 +6,8 @@ const axiosInstance: AxiosInstance = axios.create({
 });
 
 enum ApiStatus {
-    Success,
-    Error,
+    Success = "Success",
+    Failure = "Failure",
 }
 
 interface ApiResponse<T> {
