@@ -6,9 +6,9 @@ import {Button, Form, Input, Layout, Space} from "antd";
 import {UserService} from "@D/core/service/user-service";
 import {useAntdMessage} from "@D/core/hooks/use-antd-message";
 import {useDemeterDispatch} from "@D/core/store/demeter-hook";
-import {setCurrentUserAction} from "@D/core/store/features/user-slice";
 import login_bg_image from "../../assets/images/bg/login-bg-image.jpeg";
 import login_logo_wr_image from "../../assets/images/logo/login_logo_wr.jpg";
+import {setCurrentUserAction, setUserServiceAction} from "@D/core/store/features/user-slice";
 
 export const LoginPage: React.FC = () => {
     const {Content} = Layout;
@@ -23,6 +23,7 @@ export const LoginPage: React.FC = () => {
             (currentUser: UserEntity) => {
                 success("Login Successfully").then(() => {
                     dispatch(setCurrentUserAction(currentUser));
+                    dispatch(setUserServiceAction(userService));
                     navigate("/home");
                 });
             },

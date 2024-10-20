@@ -5,7 +5,7 @@ import {useDemeterDispatch, useDemeterSelector} from "@D/core/store/demeter-hook
 import header_logo_white_image from "../../assets/images/logo/header_logo_white.png"
 import {HomeOutlined, LogoutOutlined} from "@ant-design/icons";
 import {Outlet, useNavigate} from "react-router-dom";
-import {setCurrentUserAction} from "@D/core/store/features/user-slice";
+import {setCurrentUserAction, setUserServiceAction} from "@D/core/store/features/user-slice";
 
 export const HomePage: React.FC = () => {
     const {Header, Footer, Content} = Layout;
@@ -17,6 +17,7 @@ export const HomePage: React.FC = () => {
         switch (key) {
             case "/logout":
                 dispatch(setCurrentUserAction(undefined));
+                dispatch(setUserServiceAction(undefined));
                 navigate(key);
                 break;
             case "/home":

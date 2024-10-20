@@ -9,6 +9,7 @@ export const DemeterRoute: React.FC = () => {
         <Routes>
             <Route path="/" element={<LoginPage/>}/>
             <Route path="/login" element={<LoginPage/>}/>
+            <Route path="/logout" element={<LoginPage/>}/>
             <Route path="/home" element={<Authentication children={<HomePage/>}/>}/>
         </Routes>
     )

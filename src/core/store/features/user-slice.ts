@@ -25,5 +25,5 @@ const userStoreStateSlice = createSlice({
     }
 });
 
-export const {setCurrentUserAction} = userStoreStateSlice.actions;
+export const {setCurrentUserAction, setUserServiceAction} = userStoreStateSlice.actions;
 export default userStoreStateSlice.reducer;
