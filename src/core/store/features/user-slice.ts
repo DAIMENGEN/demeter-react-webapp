@@ -16,10 +16,10 @@ const userStoreStateSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        setCurrentUserAction: (state, action: PayloadAction<IUserEntity>) => {
+        setCurrentUserAction: (state, action: PayloadAction<IUserEntity | undefined>) => {
             state.currentUser = action.payload;
         },
-        setUserServiceAction: (state, action: PayloadAction<UserService>) => {
+        setUserServiceAction: (state, action: PayloadAction<UserService | undefined>) => {
             state.userService = action.payload;
         }
     }
