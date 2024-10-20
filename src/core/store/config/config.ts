@@ -1,4 +1,3 @@
-import StorageSession from "redux-persist/lib/storage/session"
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const persistConfig = {
@@ -9,6 +8,6 @@ export const persistConfig = {
 
 export const userPersistConfig = {
     key: "userState",
-    storage: StorageSession,
+    storage: AsyncStorage,
 };
 
