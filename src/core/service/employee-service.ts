@@ -12,9 +12,14 @@ export class EmployeeService extends BaseService<EmployeeEntity> {
         return EntityDataFactory.update(EmployeeEntity, oldUser, partialFields);
     }
 
-    public login(account: string, password: string, successCallback: (token: string) => void, failedCallback: (error: Error) => void): void {
+    public loginRequest(account: string, password: string, successCallback: (token: string) => void, failedCallback: (error: Error) => void): void {
         const URL = "/loginRoute";
         this.post<string>(URL, {account, password}).then(successCallback).catch(failedCallback);
+    }
+
+    public logoutRequest(account: string, successCallback: () => void, failedCallback: (error: Error) => void): void {
+        const URL = "/logoutRoute";
+        this.post<string>(URL, {account}).then(successCallback).catch(failedCallback);
     }
 
     public registerRequest(user: EmployeeEntity, callback: (user: EmployeeEntity) => void): void {

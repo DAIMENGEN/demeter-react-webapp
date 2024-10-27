@@ -1,7 +1,7 @@
 import "./home-page.scss";
 import React, {useCallback} from "react";
 import {Layout, Menu, MenuProps, Space, Watermark} from "antd";
-import {useDemeterDispatch} from "@D/core/store/demeter-hook";
+import {useDemeterDispatch, useDemeterSelector} from "@D/core/store/demeter-hook";
 import header_logo_white_image from "../../assets/images/logo/header_logo_white.png"
 import {HomeOutlined, LogoutOutlined} from "@ant-design/icons";
 import {Outlet, useNavigate} from "react-router-dom";
@@ -11,13 +11,16 @@ export const HomePage: React.FC = () => {
     const {Header, Footer, Content} = Layout;
     const navigate = useNavigate();
     const dispatch = useDemeterDispatch();
+    const employeeService = useDemeterSelector(state => state.employeeStoreState.employeeService);
     const onClick: MenuProps["onClick"] = useCallback((e: any) => {
         const {key} = e;
         switch (key) {
             case "/logout":
-                localStorage.removeItem("token");
-                dispatch(setEmployeeServiceAction(undefined));
-                navigate(key);
+                employeeService?.logoutRequest("mengen.dai", () => {
+                    localStorage.removeItem("token");
+                    dispatch(setEmployeeServiceAction(undefined));
+                    navigate(key);
+                }, (error: Error) => console.error(error))
                 break;
             case "/home":
                 navigate(key);
@@ -25,7 +28,7 @@ export const HomePage: React.FC = () => {
             default:
                 break;
         }
-    }, [dispatch, navigate]);
+    }, [dispatch, navigate, employeeService]);
 
     return (
         <Watermark content={"用户名"}>

@@ -16,7 +16,7 @@ export const LoginPage: React.FC = () => {
     const {contextHolderMessage, success, failure} = useAntdMessage();
     const onFinish = useCallback((values: { account: string, password: string }) => {
         const employeeService = new EmployeeService();
-        employeeService.login(
+        employeeService.loginRequest(
             values.account,
             values.password,
             (token: string) => {
