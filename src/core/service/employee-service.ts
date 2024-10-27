@@ -22,33 +22,33 @@ export class EmployeeService extends BaseService<EmployeeEntity> {
         return EntityDataFactory.update(EmployeeEntity, oldUser, partialFields);
     }
 
-    public loginRequest(account: string, password: string, successCallback: (token: string) => void, failedCallback?: (error: Error) => void): void {
+    public loginRequest(account: string, password: string, success: (token: string) => void, failure?: (error: Error) => void): void {
         const URL = "/loginRoute";
-        this.post<string>(URL, {account, password}).then(successCallback).catch(failedCallback);
+        this.post<string>(URL, {account, password}).then(success).catch(failure);
     }
 
-    public logoutRequest(account: string, successCallback: () => void, failedCallback?: (error: Error) => void): void {
+    public logoutRequest(account: string, success: () => void, failure?: (error: Error) => void): void {
         const URL = "/logoutRoute";
-        this.post<string>(URL, {account}).then(successCallback).catch(failedCallback);
+        this.post<string>(URL, {account}).then(success).catch(failure);
     }
 
-    public registerRequest(user: EmployeeEntity, successCallback: (user: EmployeeEntity) => void, failedCallback?: (error: Error) => void): void {
+    public registerRequest(user: EmployeeEntity, success: (user: EmployeeEntity) => void, failure?: (error: Error) => void): void {
         const URL = "/registerRoute";
-        this.post<EmployeeEntity>(URL, user).then(successCallback).catch(failedCallback);
+        this.post<EmployeeEntity>(URL, user).then(success).catch(failure);
     }
 
-    public batchRegisterRequest(users: Array<EmployeeEntity>, successCallback: (users: Array<EmployeeEntity>) => void, failedCallback?: (error: Error) => void): void {
+    public batchRegisterRequest(users: Array<EmployeeEntity>, success: (users: Array<EmployeeEntity>) => void, failure?: (error: Error) => void): void {
         const URL = "/batchRegisterRoute";
-        this.post<Array<EmployeeEntity>>(URL, users).then(successCallback).catch(failedCallback);
+        this.post<Array<EmployeeEntity>>(URL, users).then(success).catch(failure);
     }
 
-    public resetPasswordRequest(newPassword: string, oldPassword: string, successCallback: (employee: EmployeeEntity) => void, failedCallback?: (error: Error) => void): void {
+    public resetPasswordRequest(newPassword: string, oldPassword: string, success: (employee: EmployeeEntity) => void, failure?: (error: Error) => void): void {
         const URL = "/resetPasswordRoute";
-        this.post<EmployeeEntity>(URL, {newPassword, oldPassword}).then(successCallback).catch(failedCallback);
+        this.post<EmployeeEntity>(URL, {newPassword, oldPassword}).then(success).catch(failure);
     }
 
-    public getUsernameRequest(successCallback: (username: string) => void, failedCallback?: (error: Error) => void): void {
+    public getUsernameRequest(success: (username: string) => void, failure?: (error: Error) => void): void {
         const URL = "/getUsernameRoute";
-        this.get<string>(URL).then(successCallback).catch(failedCallback);
+        this.get<string>(URL).then(success).catch(failure);
     }
 }

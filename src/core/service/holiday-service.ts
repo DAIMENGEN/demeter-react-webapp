@@ -22,59 +22,59 @@ export class HolidayService extends BaseService<HolidayEntity> {
         return EntityDataFactory.update(HolidayEntity, oldHoliday, partialFields);
     }
 
-    public createHolidayRequest(holiday: HolidayEntity, callback: (holiday: HolidayEntity) => void): void {
+    public createHolidayRequest(holiday: HolidayEntity, success: (holiday: HolidayEntity) => void, failure?: (error: Error) => void): void {
         const URL = "/createHolidayRoute";
-        this.post<HolidayEntity>(URL, holiday).then(callback);
+        this.post<HolidayEntity>(URL, holiday).then(success).catch(failure);
     }
 
-    public createHolidaysRequest(holidays: Array<HolidayEntity>, callback: (holidays: Array<HolidayEntity>) => void): void {
+    public createHolidaysRequest(holidays: Array<HolidayEntity>, success: (holidays: Array<HolidayEntity>) => void, failure?: (error: Error) => void): void {
         const URL = "/createHolidaysRoute";
-        this.post<Array<HolidayEntity>>(URL, holidays).then(callback)
+        this.post<Array<HolidayEntity>>(URL, holidays).then(success).catch(failure);
     }
 
-    public deleteHolidaysRequest(callback: (deletedHolidays: Array<HolidayEntity>) => void): void {
+    public deleteHolidaysRequest(success: (deletedHolidays: Array<HolidayEntity>) => void, failure?: (error: Error) => void): void {
         const URL = "/deleteHolidaysRoute";
-        this.post<Array<HolidayEntity>>(URL).then(callback);
+        this.post<Array<HolidayEntity>>(URL).then(success).catch(failure);
 
     }
 
-    public deleteHolidayByIdRequest(holidayId: string, callback: (deletedHoliday: HolidayEntity) => void): void {
+    public deleteHolidayByIdRequest(holidayId: string, success: (deletedHoliday: HolidayEntity) => void, failure?: (error: Error) => void): void {
         const URL = "/deleteHolidayByIdRoute";
-        this.post<HolidayEntity>(URL, {holidayId}).then(callback);
+        this.post<HolidayEntity>(URL, {holidayId}).then(success).catch(failure);
     }
 
-    public deleteHolidayByIdsRequest(holidayIds: Array<string>, callback: (deletedHolidays: Array<HolidayEntity>) => void): void {
+    public deleteHolidayByIdsRequest(holidayIds: Array<string>, success: (deletedHolidays: Array<HolidayEntity>) => void, failure?: (error: Error) => void): void {
         const URL = "/deleteHolidayByIdsRoute";
-        this.post<Array<HolidayEntity>>(URL, {holidayIds}).then(callback);
+        this.post<Array<HolidayEntity>>(URL, {holidayIds}).then(success).catch(failure);
     }
 
-    public updateHolidayRequest(holiday: HolidayEntity, callback: (updatedHoliday: HolidayEntity) => void): void {
+    public updateHolidayRequest(holiday: HolidayEntity, success: (updatedHoliday: HolidayEntity) => void, failure?: (error: Error) => void): void {
         const URL = "/updateHolidayRoute";
-        this.put<HolidayEntity>(URL, holiday).then(callback);
+        this.put<HolidayEntity>(URL, holiday).then(success).catch(failure);
     }
 
-    public updateHolidaysRequest(holidays: Array<HolidayEntity>, callback: (updatedHoliday: Array<HolidayEntity>) => void): void {
+    public updateHolidaysRequest(holidays: Array<HolidayEntity>, success: (updatedHoliday: Array<HolidayEntity>) => void, failure?: (error: Error) => void): void {
         const URL = "/updateHolidaysRoute";
-        this.put<Array<HolidayEntity>>(URL, holidays).then(callback);
+        this.put<Array<HolidayEntity>>(URL, holidays).then(success).catch(failure);
     }
 
-    public getHolidaysRequest(callback: (holidays: Array<HolidayEntity>) => void): void {
+    public getHolidaysRequest(success: (holidays: Array<HolidayEntity>) => void, failure?: (error: Error) => void): void {
         const URL = "/getHolidaysRoute";
-        this.get<Array<HolidayEntity>>(URL).then(callback);
+        this.get<Array<HolidayEntity>>(URL).then(success).catch(failure);
     }
 
-    public getNationalHolidaysRequest(callback: (holidays: Array<HolidayEntity>) => void): void {
+    public getNationalHolidaysRequest(success: (holidays: Array<HolidayEntity>) => void, failure?: (error: Error) => void): void {
         const URL = "/getNationalHolidaysRoute";
-        this.get<Array<HolidayEntity>>(URL).then(callback);
+        this.get<Array<HolidayEntity>>(URL).then(success).catch(failure);
     }
 
-    public getCompanyHolidaysRequest(callback: (holidays: Array<HolidayEntity>) => void): void {
+    public getCompanyHolidaysRequest(success: (holidays: Array<HolidayEntity>) => void, failure?: (error: Error) => void): void {
         const URL = "/getCompanyHolidaysRoute";
-        this.get<Array<HolidayEntity>>(URL).then(callback);
+        this.get<Array<HolidayEntity>>(URL).then(success).catch(failure);
     }
 
-    public getSpecialWorkdaysRequest(callback: (holidays: Array<HolidayEntity>) => void): void {
+    public getSpecialWorkdaysRequest(success: (holidays: Array<HolidayEntity>) => void, failure?: (error: Error) => void): void {
         const URL = "/getSpecialWorkdaysRoute";
-        this.get<Array<HolidayEntity>>(URL).then(callback);
+        this.get<Array<HolidayEntity>>(URL).then(success).catch(failure);
     }
 }
