@@ -3,11 +3,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export const persistConfig = {
     key: "root",
     storage: AsyncStorage,
-    whitelist: ["employeeState"],
+    whitelist: ["employeeStore"],
 };
 
 export const employeePersistConfig = {
-    key: "employeeState",
+    key: "employeeStore",
     storage: AsyncStorage,
 };
 

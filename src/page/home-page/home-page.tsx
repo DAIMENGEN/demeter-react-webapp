@@ -1,24 +1,24 @@
 import "./home-page.scss";
 import React, {useCallback} from "react";
 import {Layout, Menu, MenuProps, Space, Watermark} from "antd";
-import {useDemeterDispatch, useDemeterSelector} from "@D/core/store/demeter-hook";
+import {useDemeterSelector} from "@D/core/store/demeter-hook";
 import header_logo_white_image from "../../assets/images/logo/header_logo_white.png"
 import {HomeOutlined, LogoutOutlined} from "@ant-design/icons";
 import {Outlet, useNavigate} from "react-router-dom";
-import {setEmployeeServiceAction} from "@D/core/store/features/employee-slice";
+import {EmployeeService} from "@D/core/service/employee-service";
 
 export const HomePage: React.FC = () => {
     const {Header, Footer, Content} = Layout;
     const navigate = useNavigate();
-    const dispatch = useDemeterDispatch();
-    const employeeService = useDemeterSelector(state => state.employeeStoreState.employeeService);
+    // const dispatch = useDemeterDispatch();
+    const username = useDemeterSelector(state => state.employeeStore.username);
     const onClick: MenuProps["onClick"] = useCallback((e: any) => {
         const {key} = e;
         switch (key) {
             case "/logout":
-                employeeService?.logoutRequest("mengen.dai", () => {
+                const employeeService: EmployeeService = EmployeeService.getInstance();
+                employeeService.logoutRequest("mengen.dai", () => {
                     localStorage.removeItem("token");
-                    dispatch(setEmployeeServiceAction(undefined));
                     navigate(key);
                 }, (error: Error) => console.error(error))
                 break;
@@ -28,10 +28,10 @@ export const HomePage: React.FC = () => {
             default:
                 break;
         }
-    }, [dispatch, navigate, employeeService]);
+    }, [navigate]);
 
     return (
-        <Watermark content={"用户名"}>
+        <Watermark content={username}>
             <Layout className={"home-container"} style={{height: "100vh"}}>
                 <Header className={"header"}>
                     <Space className="header-left">
@@ -50,7 +50,7 @@ export const HomePage: React.FC = () => {
                     </Space>
                     <Space className="header-right">
                         <Space>
-                            <span style={{color: "white", fontSize: "16px"}}>{"用户名"}</span>
+                            <span style={{color: "white", fontSize: "16px"}}>{username}</span>
                         </Space>
                         <Menu className="header-right-menu"
                               onClick={onClick}

@@ -5,6 +5,15 @@ import {EntityDataFactory} from "@D/utils/entity/entity-data-factory";
 
 export class HolidayService extends BaseService<HolidayEntity> {
 
+    private static instance: HolidayService;
+
+    public static getInstance(): HolidayService {
+        if (!HolidayService.instance) {
+            HolidayService.instance = new HolidayService();
+        }
+        return HolidayService.instance;
+    }
+
     public create(partialFields: Omit<HolidayEntity, keyof EntityData>): HolidayEntity {
         return EntityDataFactory.create<HolidayEntity>(HolidayEntity, partialFields);
     }

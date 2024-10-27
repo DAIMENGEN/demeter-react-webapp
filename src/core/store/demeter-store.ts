@@ -4,7 +4,7 @@ import employeeReducer from "@D/core/store/features/employee-slice";
 import {persistConfig, employeePersistConfig} from "@D/core/store/config/config";
 
 const reducers = combineReducers({
-    employeeStoreState: persistReducer(employeePersistConfig, employeeReducer),
+    employeeStore: persistReducer(employeePersistConfig, employeeReducer),
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

@@ -6,8 +6,8 @@ import {useAntdMessage} from "@D/core/hooks/use-antd-message";
 import {useDemeterDispatch} from "@D/core/store/demeter-hook";
 import login_bg_image from "../../assets/images/bg/login-bg-image.jpeg";
 import login_logo_wr_image from "../../assets/images/logo/login_logo_wr.jpg";
-import {setEmployeeServiceAction} from "@D/core/store/features/employee-slice";
 import {EmployeeService} from "@D/core/service/employee-service";
+import {setUsernameAction} from "@D/core/store/features/employee-slice";
 
 export const LoginPage: React.FC = () => {
     const {Content} = Layout;
@@ -22,7 +22,7 @@ export const LoginPage: React.FC = () => {
             (token: string) => {
                 success("Login Successfully").then(() => {
                     localStorage.setItem("token", token);
-                    dispatch(setEmployeeServiceAction(employeeService));
+                    dispatch(setUsernameAction("mengen.dai"));
                     navigate("/home");
                 });
             },

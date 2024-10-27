@@ -4,6 +4,16 @@ import {EntityData} from "@D/utils/entity/entity-data";
 import {EntityDataFactory} from "@D/utils/entity/entity-data-factory";
 
 export class EmployeeService extends BaseService<EmployeeEntity> {
+
+    private static instance: EmployeeService;
+
+    public static getInstance(): EmployeeService {
+        if (!EmployeeService.instance) {
+            EmployeeService.instance = new EmployeeService();
+        }
+        return EmployeeService.instance;
+    }
+
     public create(partialFields: Omit<EmployeeEntity, keyof EntityData>): EmployeeEntity {
         return EntityDataFactory.create<EmployeeEntity>(EmployeeEntity, partialFields);
     }
