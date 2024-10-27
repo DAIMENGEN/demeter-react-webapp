@@ -22,7 +22,10 @@ export const LoginPage: React.FC = () => {
             (token: string) => {
                 success("Login Successfully").then(() => {
                     localStorage.setItem("token", token);
-                    dispatch(setUsernameAction("mengen.dai"));
+                    employeeService.getUsernameRequest(
+                        (username: string) => dispatch(setUsernameAction(username)),
+                        (error: Error) => console.error(error)
+                    );
                     navigate("/home");
                 });
             },

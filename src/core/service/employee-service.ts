@@ -22,48 +22,33 @@ export class EmployeeService extends BaseService<EmployeeEntity> {
         return EntityDataFactory.update(EmployeeEntity, oldUser, partialFields);
     }
 
-    public loginRequest(account: string, password: string, successCallback: (token: string) => void, failedCallback: (error: Error) => void): void {
+    public loginRequest(account: string, password: string, successCallback: (token: string) => void, failedCallback?: (error: Error) => void): void {
         const URL = "/loginRoute";
         this.post<string>(URL, {account, password}).then(successCallback).catch(failedCallback);
     }
 
-    public logoutRequest(account: string, successCallback: () => void, failedCallback: (error: Error) => void): void {
+    public logoutRequest(account: string, successCallback: () => void, failedCallback?: (error: Error) => void): void {
         const URL = "/logoutRoute";
         this.post<string>(URL, {account}).then(successCallback).catch(failedCallback);
     }
 
-    public registerRequest(user: EmployeeEntity, callback: (user: EmployeeEntity) => void): void {
+    public registerRequest(user: EmployeeEntity, successCallback: (user: EmployeeEntity) => void, failedCallback?: (error: Error) => void): void {
         const URL = "/registerRoute";
-        this.post<EmployeeEntity>(URL, user).then(callback);
+        this.post<EmployeeEntity>(URL, user).then(successCallback).catch(failedCallback);
     }
 
-    public batchRegisterRequest(users: Array<EmployeeEntity>, callback: (users: Array<EmployeeEntity>) => void): void {
+    public batchRegisterRequest(users: Array<EmployeeEntity>, successCallback: (users: Array<EmployeeEntity>) => void, failedCallback?: (error: Error) => void): void {
         const URL = "/batchRegisterRoute";
-        this.post<Array<EmployeeEntity>>(URL, users).then(callback);
+        this.post<Array<EmployeeEntity>>(URL, users).then(successCallback).catch(failedCallback);
     }
 
-    public updateUserRequest(user: EmployeeEntity, callback: (updatedUser: EmployeeEntity) => void): void {
-        const URL = "/updateUserRoute";
-        this.post<EmployeeEntity>(URL, user).then(callback);
+    public resetPasswordRequest(newPassword: string, oldPassword: string, successCallback: (employee: EmployeeEntity) => void, failedCallback?: (error: Error) => void): void {
+        const URL = "/resetPasswordRoute";
+        this.post<EmployeeEntity>(URL, {newPassword, oldPassword}).then(successCallback).catch(failedCallback);
     }
 
-    public batchUpdateUserRequest(users: Array<EmployeeEntity>, callback: (updatedUsers: Array<EmployeeEntity>) => void): void {
-        const URL = "/batchUpdateUserRoute";
-        this.post<Array<EmployeeEntity>>(URL, users).then(callback);
-    }
-
-    public getAllUsersRequest(callback: (users: Array<EmployeeEntity>) => void): void {
-        const URL = "/getAllUsersRoute";
-        this.post<Array<EmployeeEntity>>(URL).then(callback);
-    }
-
-    public getUsersByTeamIdRequest(teamId: string, callback: (users: Array<EmployeeEntity>) => void): void {
-        const URL = "/getUsersByTeamIdRoute";
-        this.post<Array<EmployeeEntity>>(URL, {teamId}).then(callback)
-    }
-
-    public getUsersByDepartmentIdRequest(departmentId: string, callback: (users: Array<EmployeeEntity>) => void): void {
-        const URL = "/getUsersByDepartmentIdRoute";
-        this.post<Array<EmployeeEntity>>(URL, {departmentId}).then(callback)
+    public getUsernameRequest(successCallback: (username: string) => void, failedCallback?: (error: Error) => void): void {
+        const URL = "/getUsernameRoute";
+        this.get<string>(URL).then(successCallback).catch(failedCallback);
     }
 }

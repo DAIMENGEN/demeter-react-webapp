@@ -10,7 +10,6 @@ import {EmployeeService} from "@D/core/service/employee-service";
 export const HomePage: React.FC = () => {
     const {Header, Footer, Content} = Layout;
     const navigate = useNavigate();
-    // const dispatch = useDemeterDispatch();
     const username = useDemeterSelector(state => state.employeeStore.username);
     const onClick: MenuProps["onClick"] = useCallback((e: any) => {
         const {key} = e;
