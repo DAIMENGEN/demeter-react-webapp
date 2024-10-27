@@ -1,0 +1,38 @@
+import {EntityData} from "@D/utils/entity/entity-data";
+
+export interface IEmployeeEntity extends EntityData {
+    account: string;
+    password: string;
+    username: string;
+    email: string;
+    phone: string;
+    isActive: boolean;
+}
+
+export class EmployeeEntity implements IEmployeeEntity {
+    id: string;
+    account: string;
+    password: string;
+    username: string;
+    email: string;
+    phone: string;
+    isActive: boolean;
+
+    constructor(
+        id: string,
+        account: string,
+        password: string,
+        username: string,
+        email: string,
+        phone: string,
+        isActive: boolean,
+    ) {
+        this.id = id;
+        this.account = account;
+        this.password = password;
+        this.username = username;
+        this.email = email;
+        this.phone = phone;
+        this.isActive = isActive;
+    }
+}

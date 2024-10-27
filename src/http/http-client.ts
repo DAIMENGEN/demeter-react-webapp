@@ -1,8 +1,9 @@
 import axios, {AxiosInstance, AxiosResponse} from "axios";
 
 const axiosInstance: AxiosInstance = axios.create({
-    baseURL: "api",
+    baseURL: "http://localhost:9090",
     timeout: 5000,
+    withCredentials: true,
 });
 
 enum ApiStatus {
@@ -19,6 +20,10 @@ interface ApiResponse<T> {
 
 axiosInstance.interceptors.request.use(
     config => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers['Authorization'] = `Bearer ${token}`;
+        }
         return config;
     },
     error => {

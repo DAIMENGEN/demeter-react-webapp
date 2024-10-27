@@ -1,8 +1,8 @@
-import {DbEntityData} from "@D/utils/database/db-entity-data";
+import {EntityData} from "@D/utils/entity/entity-data";
 import {HolidayType} from "@D/core/constant/holiday-type";
 import {CountryCode} from "@D/core/constant/country-code";
 
-export interface IHolidayEntity extends DbEntityData {
+export interface IHolidayEntity extends EntityData {
     title: string;
     holidayDate: string;
     holidayType: HolidayType;
@@ -18,10 +18,6 @@ export class HolidayEntity implements IHolidayEntity {
     holidayType: HolidayType;
     isRecurring: boolean;
     countryCode: CountryCode;
-    creatorId: string;
-    updaterId: string;
-    createDateTime: string;
-    updateDateTime: string;
     description?: string;
 
     constructor(
@@ -31,10 +27,6 @@ export class HolidayEntity implements IHolidayEntity {
         holidayType: HolidayType,
         isRecurring: boolean,
         countryCode: CountryCode,
-        creatorId: string,
-        updaterId: string,
-        createDateTime: string,
-        updateDateTime: string,
         description?: string
     ) {
         this.id = id;
@@ -44,9 +36,5 @@ export class HolidayEntity implements IHolidayEntity {
         this.holidayType = holidayType;
         this.isRecurring = isRecurring;
         this.countryCode = countryCode;
-        this.creatorId = creatorId;
-        this.updaterId = updaterId;
-        this.createDateTime = createDateTime;
-        this.updateDateTime = updateDateTime;
     }
 }

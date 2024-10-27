@@ -1,26 +1,16 @@
 import {BaseService} from "@D/core/service/service";
-import {UserEntity} from "@D/core/entity/user-entity";
 import {HolidayEntity} from "@D/core/entity/holiday-entity";
-import {DbEntityData} from "@D/utils/database/db-entity-data";
-import {DbEntityDataFactory} from "@D/utils/database/db-entity-data-factory";
+import {EntityData} from "@D/utils/entity/entity-data";
+import {EntityDataFactory} from "@D/utils/entity/entity-data-factory";
 
 export class HolidayService extends BaseService<HolidayEntity> {
 
-    private currentUser: UserEntity;
-
-    constructor(currentUser: UserEntity) {
-        super();
-        this.currentUser = currentUser;
+    public create(partialFields: Omit<HolidayEntity, keyof EntityData>): HolidayEntity {
+        return EntityDataFactory.create<HolidayEntity>(HolidayEntity, partialFields);
     }
 
-    public create(partialFields: Omit<HolidayEntity, keyof DbEntityData>): HolidayEntity {
-        const userId = this.currentUser.id;
-        return DbEntityDataFactory.create<HolidayEntity>(userId, HolidayEntity, partialFields);
-    }
-
-    public update(oldHoliday: HolidayEntity, partialFields: Omit<HolidayEntity, keyof DbEntityData>): HolidayEntity {
-        const userId = this.currentUser.id;
-        return DbEntityDataFactory.update(userId, HolidayEntity, oldHoliday, partialFields);
+    public update(oldHoliday: HolidayEntity, partialFields: Omit<HolidayEntity, keyof EntityData>): HolidayEntity {
+        return EntityDataFactory.update(HolidayEntity, oldHoliday, partialFields);
     }
 
     public createHolidayRequest(holiday: HolidayEntity, callback: (holiday: HolidayEntity) => void): void {

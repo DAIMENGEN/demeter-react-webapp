@@ -1,11 +1,11 @@
 import {HttpClient} from "@D/http/http-client";
-import {DbEntityData} from "@D/utils/database/db-entity-data";
+import {EntityData} from "@D/utils/entity/entity-data";
 
 export interface Service<T> {
 
-    create(partialFields: Omit<T, keyof DbEntityData>): T;
+    create(partialFields: Omit<T, keyof EntityData>): T;
 
-    update(oldEntity: T, partialFields: Omit<T, keyof DbEntityData>): T;
+    update(oldEntity: T, partialFields: Omit<T, keyof EntityData>): T;
 
 }
 
@@ -27,7 +27,7 @@ export abstract class BaseService<T> implements Service<T> {
         return this.httpClient.post<T>(url, params);
     }
 
-    abstract create(partialFields: Omit<T, keyof DbEntityData>): T
+    abstract create(partialFields: Omit<T, keyof EntityData>): T
 
-    abstract update(oldEntity: T, partialFields: Omit<T, keyof DbEntityData>): T
+    abstract update(oldEntity: T, partialFields: Omit<T, keyof EntityData>): T
 }

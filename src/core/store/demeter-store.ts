@@ -1,10 +1,10 @@
 import {persistReducer, persistStore} from "redux-persist";
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
-import userReducer from "@D/core/store/features/user-slice";
-import {persistConfig, userPersistConfig} from "@D/core/store/config/config";
+import employeeReducer from "@D/core/store/features/employee-slice";
+import {persistConfig, employeePersistConfig} from "@D/core/store/config/config";
 
 const reducers = combineReducers({
-    userStoreState: persistReducer(userPersistConfig, userReducer),
+    employeeStoreState: persistReducer(employeePersistConfig, employeeReducer),
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

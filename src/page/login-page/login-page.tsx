@@ -1,14 +1,13 @@
 import React, {useCallback} from "react";
 import "./login-page.scss";
 import {useNavigate} from "react-router-dom";
-import {UserEntity} from "@D/core/entity/user-entity";
 import {Button, Form, Input, Layout, Space} from "antd";
-import {UserService} from "@D/core/service/user-service";
 import {useAntdMessage} from "@D/core/hooks/use-antd-message";
 import {useDemeterDispatch} from "@D/core/store/demeter-hook";
 import login_bg_image from "../../assets/images/bg/login-bg-image.jpeg";
 import login_logo_wr_image from "../../assets/images/logo/login_logo_wr.jpg";
-import {setCurrentUserAction, setUserServiceAction} from "@D/core/store/features/user-slice";
+import {setEmployeeServiceAction} from "@D/core/store/features/employee-slice";
+import {EmployeeService} from "@D/core/service/employee-service";
 
 export const LoginPage: React.FC = () => {
     const {Content} = Layout;
@@ -16,14 +15,14 @@ export const LoginPage: React.FC = () => {
     const dispatch = useDemeterDispatch();
     const {contextHolderMessage, success, failure} = useAntdMessage();
     const onFinish = useCallback((values: { account: string, password: string }) => {
-        const userService = new UserService();
-        userService.login(
+        const employeeService = new EmployeeService();
+        employeeService.login(
             values.account,
             values.password,
-            (currentUser: UserEntity) => {
+            (token: string) => {
                 success("Login Successfully").then(() => {
-                    dispatch(setCurrentUserAction(currentUser));
-                    dispatch(setUserServiceAction(userService));
+                    localStorage.setItem("token", token);
+                    dispatch(setEmployeeServiceAction(employeeService));
                     navigate("/home");
                 });
             },
