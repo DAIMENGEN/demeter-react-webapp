@@ -6,6 +6,6 @@ export const Authentication: React.FC<{ children?: React.ReactNode }> = ({childr
     if (token) {
         return <>{children}</>;
     } else {
-        return <Navigate to={"/login"} replace></Navigate>
+        return <Navigate to={"/login-page"} replace></Navigate>
     }
 }

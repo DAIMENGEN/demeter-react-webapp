@@ -1,0 +1,88 @@
+@import "@D/common/style/_variables";
+
+.schedule-home {
+  min-height: $content-height;
+
+  .schedule-home-sider {
+    text-align: center;
+    position: fixed;
+    height: $content-height;
+    inset-inline-start: 0;
+    scrollbar-width: thin;
+    scrollbar-gutter: stable;
+    background-color: #ffffff;
+    border-inline-end: 1px solid rgba(5, 5, 5, 0.06);
+
+    .schedule-home-sider-trigger {
+      height: 48px;
+      cursor: pointer;
+      text-align: center;
+      line-height: 48px;
+      transition: all 0.2s;
+    }
+
+    .schedule-home-sider-menu {
+      border-inline-end: none;
+    }
+
+    .schedule-home-sider-favorites-collapse {
+      border-radius: 0;
+
+      .schedule-home-sider-favorites-collapse-empty-content {
+        :first-child {
+          height: 150px;
+        }
+
+        :nth-child(2) {
+          color: #323338;
+          font-size: 18px;
+        }
+
+        :nth-child(3) {
+          color: #676879;
+          font-size: 14px;
+          padding-bottom: 50px;
+        }
+      }
+
+      .ant-collapse-header {
+        padding: 12px 5px;
+
+        .ant-collapse-header-text {
+          flex: none;
+        }
+
+        .ant-collapse-expand-icon {
+          padding-left: 22px;
+          padding-inline-end: 10px;
+        }
+      }
+    }
+
+    .schedule-home-sider-workspace-collapse {
+      border-radius: 0;
+
+      .schedule-home-sider-workspace-collapse-menu{
+        border-inline-end: none;
+      }
+
+      .ant-collapse-header {
+        padding: 12px 5px;
+
+        .ant-collapse-header-text {
+          flex: none;
+        }
+
+        .ant-collapse-expand-icon {
+          padding-left: 23px;
+          padding-inline-end: 10px;
+        }
+      }
+    }
+  }
+
+  .schedule-home-content {
+    text-align: center;
+    overflow: auto;
+  }
+}

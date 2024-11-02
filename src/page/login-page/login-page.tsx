@@ -1,5 +1,5 @@
-import React, {useCallback} from "react";
 import "./login-page.scss";
+import React, {useCallback} from "react";
 import {useNavigate} from "react-router-dom";
 import {Button, Form, Input, Layout, Space} from "antd";
 import {useAntdMessage} from "@D/core/hooks/use-antd-message";
@@ -26,7 +26,7 @@ export const LoginPage: React.FC = () => {
                         (username: string) => dispatch(setUsernameAction(username)),
                         (error: Error) => console.error(error)
                     );
-                    navigate("/home");
+                    navigate("/home-page");
                 });
             },
             (error: Error) => {
@@ -36,7 +36,7 @@ export const LoginPage: React.FC = () => {
     }, [dispatch, navigate, success, failure]);
 
     return (
-        <Layout className={"layout-container"} style={{
+        <Layout className={"login-page"} style={{
             backgroundImage: `url(${login_bg_image})`,
             backgroundSize: "cover",
             backgroundPositionX: "44%",

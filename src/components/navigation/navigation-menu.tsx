@@ -1,15 +1,12 @@
 import React from "react";
 import {Card, Flex} from "antd";
-import {ScheduleNavigationMenu} from "@D/components/navigation/schedule-navigation-menu";
+import {NavigationScheduleMenu} from "@D/components/navigation/navigation-schedule-menu";
 
 export const NavigationMenu: React.FC = () => {
     return (
-        <Flex gap={20} vertical style={{
-            backgroundColor: "#f0f2f5",
-            padding: 20
-        }}>
+        <Flex gap={20} vertical style={{padding: 20}}>
             <Card title="热门工具" bordered={false}>
-                <ScheduleNavigationMenu/>
+                <NavigationScheduleMenu/>
             </Card>
 
             <Card title="内网平台" bordered={false}>

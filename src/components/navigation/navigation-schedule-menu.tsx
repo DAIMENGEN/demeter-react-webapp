@@ -5,8 +5,10 @@ import full_schedule_week_png from "@D/assets/images/schedule/full-schedule-week
 import full_schedule_month_png from "@D/assets/images/schedule/full-schedule-month.png";
 import full_schedule_quarter_png from "@D/assets/images/schedule/full-schedule-quarter.png";
 import full_schedule_year_png from "@D/assets/images/schedule/full-schedule-year.png";
+import {useNavigate} from "react-router-dom";
 
-export const ScheduleNavigationMenu: React.FC = () => {
+export const NavigationScheduleMenu: React.FC = () => {
+    const navigate = useNavigate();
     return (
         <Card hoverable style={{width: 600}} styles={{body: {padding: 5, overflow: 'hidden'}}}>
             <Flex justify="space-between">
@@ -27,10 +29,9 @@ export const ScheduleNavigationMenu: React.FC = () => {
                 <Flex vertical align="flex-end" justify="space-between"
                       style={{padding: 10, width: 220}}>
                     <Typography.Text>
-                        Gantt charts are visual tools to help teams
-                        track progress and manage resources effectively.
+                        Gantt charts are powerful visual tools that help teams effectively track progress and manage schedules, ensuring resources are allocated efficiently throughout a project.
                     </Typography.Text>
-                    <Button type="primary" href="#" target="_blank">
+                    <Button type="primary" onClick={() => navigate('/home-page/schedule-home')}>
                         Enter
                     </Button>
                 </Flex>

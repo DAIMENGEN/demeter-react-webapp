@@ -1,5 +1,4 @@
-.home-container {
-  height: 100vh;
+.home-page{
 
   .header {
     position: sticky;
@@ -39,7 +38,14 @@
   }
 
   .content {
-    background-color: #ffffff;
+    // style
+  }
+
+  .footer {
+    background-color: #4096ff;
+    min-height: 100px;
+    text-align: center;
+    align-content: center;
   }
 }
 
