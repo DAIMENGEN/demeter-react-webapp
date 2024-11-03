@@ -1,4 +1,4 @@
-@import "@D/common/style/_variables";
+@use "@D/common/style/_variables" as *;
 
 .schedule-home {
   min-height: $content-height;
@@ -14,10 +14,10 @@
     border-inline-end: 1px solid rgba(5, 5, 5, 0.06);
 
     .schedule-home-sider-trigger {
-      height: 48px;
+      height: 75px;
       cursor: pointer;
       text-align: center;
-      line-height: 48px;
+      line-height: 75px;
       transition: all 0.2s;
     }
 
@@ -62,7 +62,7 @@
     .schedule-home-sider-workspace-collapse {
       border-radius: 0;
 
-      .schedule-home-sider-workspace-collapse-menu{
+      .schedule-home-sider-workspace-collapse-menu {
         border-inline-end: none;
       }
 
@@ -84,5 +84,65 @@
   .schedule-home-content {
     text-align: center;
     overflow: auto;
+    padding-left: 20px;
+
+    .schedule-home-content-header {
+      background-color: white;
+      height: 75px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+      :first-child {
+
+        .schedule-home-content-header-left {
+
+          .schedule-home-content-header-title {
+            height: 75px;
+            padding: 7.5px 30px 7.5px 0;
+
+            div {
+              height: 30px;
+              line-height: 30px;
+              text-align: left;
+            }
+
+            :first-child {
+              font-size: 18px;
+            }
+
+            :last-child {
+              font-size: 16px;
+            }
+          }
+
+          .schedule-home-content-header-background {
+            img {
+              width: 75px;
+              height: 75px;
+            }
+          }
+        }
+
+        .schedule-home-content-header-right {
+
+          .schedule-home-content-header-feedback-button {
+            height: 75px;
+            line-height: 75px;
+          }
+
+          .schedule-home-content-header-search-button {
+            height: 75px;
+            line-height: 75px;
+          }
+        }
+      }
+    }
+
+    .schedule-home-content-content {
+      background-color: white;
+      padding: 20px;
+    }
   }
 }
