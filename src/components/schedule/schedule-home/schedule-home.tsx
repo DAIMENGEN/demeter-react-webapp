@@ -169,7 +169,7 @@ export const ScheduleHome: React.FC = () => {
                                 <img src={schedulerIllustrationSvg} alt={"background"}/>
                             </div>
                         </Flex>
-                        <Flex vertical={false} className={"schedule-home-content-header-right"}>
+                        <Flex vertical={false} gap={10} className={"schedule-home-content-header-right"}>
                             <div className={"schedule-home-content-header-feedback-button"}>
                                 <Button type="text" icon={<FeedbackIcon01 width={20} height={20} color={"#2c2c2c"}/>}>Give
                                     feedback </Button>
@@ -194,12 +194,13 @@ export const ScheduleHome: React.FC = () => {
                                               label: <div
                                                   style={{fontSize: 18, fontWeight: 700, color: "#323338"}}>Recently
                                                   visited</div>,
-                                              children: <p>
-                                                  A dog is a type of domesticated animal.
-                                                  Known for its loyalty and faithfulness,
-                                                  it can be found as a welcome guest in many households across the
-                                                  world.
-                                              </p>,
+                                              children: <div className={"schedule-home-content-content-left-recently-visited"}>
+                                                  {Array.from({ length: 24 }, (_, i) => (
+                                                      <Button key={i} type="primary">
+                                                          Button
+                                                      </Button>
+                                                  ))}
+                                              </div>,
                                           },
                                           {
                                               key: 'update-feed',

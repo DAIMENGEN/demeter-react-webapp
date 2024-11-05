@@ -158,6 +158,14 @@
             flex: none;
           }
         }
+
+        .schedule-home-content-content-left-recently-visited {
+          display: grid;
+          grid-auto-rows: auto;
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          grid-gap: 20px;
+          padding: 16px 16px 24px 16px;
+        }
       }
 
       .schedule-home-content-content-right {

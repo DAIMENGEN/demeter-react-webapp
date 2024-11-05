@@ -3,7 +3,7 @@ import {Route, Routes} from "react-router-dom";
 import {LoginPage} from "@D/page/login-page/login-page";
 import {Authentication} from "@D/route/authentication";
 import {HomePage} from "@D/page/home-page/home-page";
-import {NavigationMenu} from "@D/components/navigation/navigation-menu";
+import {NavigationMenu} from "@D/components/navigation/navigation-menu/navigation-menu";
 import {ScheduleHome} from "@D/components/schedule/schedule-home/schedule-home";
 
 export const DemeterRoute: React.FC = () => {
