@@ -196,9 +196,19 @@ export const ScheduleHome: React.FC = () => {
                                                   visited</div>,
                                               children: <div className={"schedule-home-content-content-left-recently-visited"}>
                                                   {Array.from({ length: 24 }, (_, i) => (
-                                                      <Button key={i} type="primary">
-                                                          Button
-                                                      </Button>
+                                                      <div key={i} className={"recently-visited-item"}>
+                                                          <Flex vertical={true}>
+                                                              <div style={{backgroundColor: "red", height: 150}}>
+
+                                                              </div>
+                                                              <div style={{height: 35, textAlign: "left", padding: 10, fontSize: 18, fontWeight: "bolder", color: "#323338"}}>
+                                                                  <span>First Schedule</span>
+                                                              </div>
+                                                              <div style={{height: 35, textAlign: "left", padding: 10, fontSize: 16}}>
+                                                                  <h1>Schedule owner: Mengen.dai</h1>
+                                                              </div>
+                                                          </Flex>
+                                                      </div>
                                                   ))}
                                               </div>,
                                           },
