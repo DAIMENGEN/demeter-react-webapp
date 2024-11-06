@@ -9,10 +9,11 @@ import {WorkspaceIcon01} from "@D/common/icons/workspace-icon-01";
 import {ConditionalRender} from "@D/utils/ConditionalRender";
 import {MoreIcon01} from "@D/common/icons/more-icon-01";
 import {SearchIcon01} from "@D/common/icons/search-icon-01";
-import schedulerIllustrationSvg from "@D/assets/images/schedule/scheduler-illustration.svg"
 import getStartedSvg from "@D/assets/images/common/get-started-svg.svg";
 import helpCenterSvg from "@D/assets/images/common/help-center-svg.svg";
+import scheduleTemplate from "@D/assets/images/schedule/schedule_template.svg";
 import fullScheduleDayPng from "@D/assets/images/schedule/full-schedule-day.png";
+import schedulerIllustrationSvg from "@D/assets/images/schedule/scheduler-illustration.svg"
 import {FeedbackIcon01} from "@D/common/icons/feedback-icon-01";
 import {QuickIcon01} from "@D/common/icons/quick-icon-01";
 import {useDemeterSelector} from "@D/core/store/demeter-hook";
@@ -22,8 +23,9 @@ export const ScheduleHome: React.FC = () => {
     const {Sider, Header, Content} = Layout;
     const [collapsed, setCollapsed] = useState(false);
     const [marginInlineStart, setMarginInlineStart] = useState(200);
-    const [activeKeys, setActiveKeys] = useState<Array<string>>([]);
     const [selectedKeys, setSelectedKeys] = useState<Array<string>>([]);
+    const [siderActiveKeys, setSiderActiveKeys] = useState<Array<string>>([]);
+    const [contentActiveKeys, setContentActiveKeys] = useState<Array<string>>(["recently-visited", "update-feed"]);
     const username = useDemeterSelector(state => state.employeeStore.username);
     return (
         <Layout className={"schedule-home"} hasSider>
@@ -70,8 +72,8 @@ export const ScheduleHome: React.FC = () => {
                                   expandIcon={(e) => e.isActive ?
                                       <StarIcon01 width={16} height={16} color={"#efce4a"}/> :
                                       <StarIcon02 width={16} height={16} color={"#2c2c2c"}/>}
-                                  onChange={(key) => setActiveKeys(key)}
-                                  activeKey={activeKeys}
+                                  onChange={(key) => setSiderActiveKeys(key)}
+                                  activeKey={siderActiveKeys}
                                   accordion
                                   ghost
                                   items={[
@@ -96,8 +98,8 @@ export const ScheduleHome: React.FC = () => {
                                   ]}/>
                         <Collapse className={"schedule-home-sider-workspace-collapse"}
                                   expandIcon={(_) => <WorkspaceIcon01 width={15} height={15} color={"2c2c2c"}/>}
-                                  onChange={(key) => setActiveKeys(key)}
-                                  activeKey={activeKeys}
+                                  onChange={(key) => setSiderActiveKeys(key)}
+                                  activeKey={siderActiveKeys}
                                   accordion
                                   ghost
                                   items={[
@@ -160,21 +162,21 @@ export const ScheduleHome: React.FC = () => {
             <Layout className={"schedule-home-content"} style={{marginInlineStart: marginInlineStart}}>
                 <Header className={"schedule-home-content-header"}>
                     <Flex vertical={false} justify={"space-between"}>
-                        <Flex vertical={false} className={"schedule-home-content-header-left"}>
-                            <div className={"schedule-home-content-header-title"}>
+                        <Flex vertical={false}>
+                            <div className={"title"}>
                                 <div>{DateUtil.getGreeting()}, {username} !</div>
                                 <div>Quickly access your recent boards, Inbox and workspaces</div>
                             </div>
-                            <div className={"schedule-home-content-header-background"}>
+                            <div className={"background"}>
                                 <img src={schedulerIllustrationSvg} alt={"background"}/>
                             </div>
                         </Flex>
-                        <Flex vertical={false} gap={10} className={"schedule-home-content-header-right"}>
-                            <div className={"schedule-home-content-header-feedback-button"}>
+                        <Flex vertical={false} gap={10}>
+                            <div className={"feedback-button"}>
                                 <Button type="text" icon={<FeedbackIcon01 width={20} height={20} color={"#2c2c2c"}/>}>Give
                                     feedback </Button>
                             </div>
-                            <div className={"schedule-home-content-header-search-button"}>
+                            <div className={"search-button"}>
                                 <Button type="primary" icon={<QuickIcon01 width={20} height={20} color={"#ffffff"}/>}>
                                     Quick Search
                                 </Button>
@@ -185,30 +187,25 @@ export const ScheduleHome: React.FC = () => {
                 <Content className={"schedule-home-content-content"}>
                     <Flex vertical={false} gap={20}>
                         <div className={"schedule-home-content-content-left"}>
-                            <Collapse expandIcon={({isActive}) => <CaretRightOutlined rotate={isActive ? 90 : 0}/>}
-                                      accordion
-                                      ghost
+                            <Collapse ghost
+                                      activeKey={contentActiveKeys}
+                                      onChange={(key) => setContentActiveKeys(key)}
+                                      expandIcon={({isActive}) => <CaretRightOutlined rotate={isActive ? 90 : 0}/>}
                                       items={[
                                           {
                                               key: 'recently-visited',
-                                              label: <div
-                                                  style={{fontSize: 18, fontWeight: 700, color: "#323338"}}>Recently
-                                                  visited</div>,
-                                              children: <div className={"schedule-home-content-content-left-recently-visited"}>
-                                                  {Array.from({ length: 24 }, (_, i) => (
-                                                      <div key={i} className={"recently-visited-item"}>
-                                                          <Flex vertical={true}>
-                                                              <div style={{backgroundColor: "red", height: 150}}>
-
-                                                              </div>
-                                                              <div style={{height: 35, textAlign: "left", padding: 10, fontSize: 18, fontWeight: "bolder", color: "#323338"}}>
-                                                                  <span>First Schedule</span>
-                                                              </div>
-                                                              <div style={{height: 35, textAlign: "left", padding: 10, fontSize: 16}}>
-                                                                  <h1>Schedule owner: Mengen.dai</h1>
-                                                              </div>
-                                                          </Flex>
-                                                      </div>
+                                              label: <div>Recently visited</div>,
+                                              children: <div>
+                                                  {Array.from({length: 5}, (_, i) => (
+                                                      <Flex key={i} vertical={true}>
+                                                          <img src={scheduleTemplate} alt={"schedule template"}/>
+                                                          <div>
+                                                              <span>First Schedule</span>
+                                                          </div>
+                                                          <div>
+                                                              <span>Schedule owner: Mengen.dai</span>
+                                                          </div>
+                                                      </Flex>
                                                   ))}
                                               </div>,
                                           },
@@ -227,9 +224,8 @@ export const ScheduleHome: React.FC = () => {
                                       ]}/>
                         </div>
                         <div className={"schedule-home-content-content-right"}>
-                            <Space direction={"vertical"} size={"middle"} style={{display: "flex"}}>
-                                <Flex className={"schedule-home-content-content-explore-templates"}
-                                      vertical={true}
+                            <Flex vertical={true} gap={"middle"}>
+                                <Flex vertical={true}
                                       gap={15}>
                                     <Image src={fullScheduleDayPng} preview={{src: fullScheduleDayPng}}/>
                                     <p>
@@ -237,10 +233,10 @@ export const ScheduleHome: React.FC = () => {
                                     </p>
                                     <Button>Explore templates</Button>
                                 </Flex>
-                                <div style={{fontSize: 16, fontWeight: 500, color: "#323338", textAlign: "left"}}>
+                                <div>
                                     Learn & get inspired
                                 </div>
-                                <Card className={"schedule-home-content-content-right-card"} hoverable bordered={false}>
+                                <Card hoverable bordered={false}>
                                     <Flex justify="space-between">
                                         <div>
                                             <img src={getStartedSvg} alt={"Getting started"}/>
@@ -251,7 +247,7 @@ export const ScheduleHome: React.FC = () => {
                                         </div>
                                     </Flex>
                                 </Card>
-                                <Card className={"schedule-home-content-content-right-card"} hoverable bordered={false}>
+                                <Card hoverable bordered={false}>
                                     <Flex justify="space-between">
                                         <div>
                                             <img src={helpCenterSvg} alt={"Help center"}/>
@@ -262,7 +258,7 @@ export const ScheduleHome: React.FC = () => {
                                         </div>
                                     </Flex>
                                 </Card>
-                            </Space>
+                            </Flex>
                         </div>
                     </Flex>
                 </Content>

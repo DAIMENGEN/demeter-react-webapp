@@ -94,49 +94,40 @@
       z-index: 1;
       box-shadow: 0 3px 12px #e6e9ef;
 
-      :first-child {
+      .title {
+        height: 75px;
+        padding: 7.5px 30px 7.5px 0;
 
-        .schedule-home-content-header-left {
-
-          .schedule-home-content-header-title {
-            height: 75px;
-            padding: 7.5px 30px 7.5px 0;
-
-            div {
-              height: 30px;
-              line-height: 30px;
-              text-align: left;
-            }
-
-            :first-child {
-              font-size: 18px;
-            }
-
-            :last-child {
-              font-size: 16px;
-            }
-          }
-
-          .schedule-home-content-header-background {
-            img {
-              width: 75px;
-              height: 75px;
-            }
-          }
+        div {
+          height: 30px;
+          line-height: 30px;
+          text-align: left;
         }
 
-        .schedule-home-content-header-right {
-
-          .schedule-home-content-header-feedback-button {
-            height: 75px;
-            line-height: 75px;
-          }
-
-          .schedule-home-content-header-search-button {
-            height: 75px;
-            line-height: 75px;
-          }
+        :first-child {
+          font-size: 18px;
         }
+
+        :last-child {
+          font-size: 16px;
+        }
+      }
+
+      .background {
+        img {
+          width: 75px;
+          height: 75px;
+        }
+      }
+
+      .feedback-button {
+        height: 75px;
+        line-height: 75px;
+      }
+
+      .search-button {
+        height: 75px;
+        line-height: 75px;
       }
     }
 
@@ -150,80 +141,119 @@
         box-shadow: 0 3px 12px #e6e9ef;
 
         .ant-collapse-header {
+
           .ant-collapse-expand-icon {
             height: 34px;
           }
 
           .ant-collapse-header-text {
             flex: none;
+
+            div:first-child {
+              color: #323338;
+              font-size: 18px;
+              font-weight: 700;
+            }
           }
         }
 
-        .schedule-home-content-content-left-recently-visited {
-          display: grid;
-          grid-gap: 20px;
-          grid-auto-rows: auto;
-          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        .ant-collapse-content-box {
+          > div:first-child {
+            display: grid;
+            grid-gap: 20px;
+            grid-auto-rows: auto;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 
-          .recently-visited-item {
-            height: 240px;
-            border-radius: 5px;
-            border: 1px solid #d0d4e4;
+            > div {
+              border-radius: 5px;
+              overflow: hidden;
+              border: 1px solid #d0d4e4;
+
+              > img:first-child {
+                width: 100%;
+              }
+
+              > div:nth-child(2) {
+                color: #323338;
+                font-size: 18px;
+                text-align: left;
+                font-weight: bolder;
+                padding: 5px 10px 0 10px;
+              }
+
+              > div:nth-child(3) {
+                color: #323338;
+                font-size: 16px;
+                text-align: left;
+                padding: 5px 10px 10px 10px;
+              }
+            }
           }
         }
       }
 
       .schedule-home-content-content-right {
         width: 350px;
-        height: 400px;
 
-        .schedule-home-content-content-explore-templates {
-          box-shadow: 0 3px 12px #e6e9ef;
-          padding: 10px;
-          border-radius: 10px;
+        > div:first-child {
 
-          p {
-            text-align: left;
-            font-size: 16px;
-            color: #323338;
-          }
-
-          button {
-            height: 40px;
-            font-size: 16px;
-            color: #323338;
-          }
-        }
-
-        .schedule-home-content-content-right-card {
-          box-shadow: 0 3px 12px #e6e9ef;
-          transition: box-shadow 0.3s ease;
-
-          .ant-card-body {
+          > div:nth-child(1) {
+            box-shadow: 0 3px 12px #e6e9ef;
             padding: 10px;
+            border-radius: 10px;
 
-            .ant-flex.ant-flex-justify-space-between {
-              height: 50px;
+            p {
+              text-align: left;
+              font-size: 16px;
+              color: #323338;
+            }
 
-              .schedule-home-content-content-right-card-text {
-                text-align: left;
-                width: 78%;
+            button {
+              height: 40px;
+              font-size: 16px;
+              color: #323338;
+            }
+          }
 
-                h2 {
-                  font-weight: bold;
-                  color: #323338;
+          > div:nth-child(2) {
+            color: #323338;
+            font-size: 16px;
+            text-align: left;
+            font-weight: 500;
+          }
+
+          > div:nth-child(3),
+          > div:nth-child(4) {
+            box-shadow: 0 3px 12px #e6e9ef;
+            transition: box-shadow 0.3s ease;
+
+            .ant-card-body {
+              padding: 10px;
+
+              .ant-flex.ant-flex-justify-space-between {
+                height: 50px;
+
+                .schedule-home-content-content-right-card-text {
+                  text-align: left;
+                  width: 78%;
+
+                  h2 {
+                    font-weight: bold;
+                    color: #323338;
+                  }
                 }
-              }
 
-              img {
-                width: 50px;
+                img {
+                  width: 50px;
+                }
               }
             }
           }
-        }
 
-        .schedule-home-content-content-right-card:hover {
-          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+          > div:nth-child(3):hover,
+          > div:nth-child(4):hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+          }
         }
       }
     }
