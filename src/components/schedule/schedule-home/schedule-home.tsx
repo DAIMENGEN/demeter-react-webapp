@@ -1,6 +1,6 @@
 import "./schedule-home.scss";
 import React, {useState} from "react";
-import {Button, Card, Collapse, Flex, Image, Layout, Menu, Space} from "antd";
+import {Button, Card, Collapse, Dropdown, Flex, Image, Layout, Menu, Space} from "antd";
 import {StarIcon01} from "@D/common/icons/star-icon-01";
 import {StarIcon02} from "@D/common/icons/star-icon-02";
 import {FavoritesEmptyIcon} from "@D/common/icons/favorites-empty-icon";
@@ -18,6 +18,9 @@ import {FeedbackIcon01} from "@D/common/icons/feedback-icon-01";
 import {QuickIcon01} from "@D/common/icons/quick-icon-01";
 import {useDemeterSelector} from "@D/core/store/demeter-hook";
 import {DateUtil} from "@D/utils/date/date-util";
+import {SortIcon01} from "@D/common/icons/sort-icon-01";
+import {AddIcon01} from "@D/common/icons/add-icon-01";
+import {ImportIcon01} from "@D/common/icons/import-icon-01";
 
 export const ScheduleHome: React.FC = () => {
     const {Sider, Header, Content} = Layout;
@@ -107,10 +110,38 @@ export const ScheduleHome: React.FC = () => {
                                           key: "workspaces",
                                           label: 'Workspaces',
                                           extra: <Space size={"small"}>
-                                              <Button type={"text"}
-                                                      style={{width: 25, height: 25}}
-                                                      onClick={(e) => e.stopPropagation()}
-                                                      icon={<MoreIcon01 width={16} height={16} color={"#2c2c2c"}/>}/>
+                                              <Dropdown menu={{
+                                                  items: [
+                                                      {
+                                                          key: '0',
+                                                          label: <span>Add new schedule</span>,
+                                                          icon: <AddIcon01 width={15} height={15} color={"#2c2c2c"}/>,
+                                                      },
+                                                      {
+                                                          key: '1',
+                                                          label: <span>Sort schedule</span>,
+                                                          icon: <SortIcon01 width={15} height={15} color={"#2c2c2c"}/>,
+                                                      },
+                                                      {
+                                                          key: '2',
+                                                          label: <span>Import schedule</span>,
+                                                          icon: <ImportIcon01 width={15} height={15} color={"#2c2c2c"}/>,
+                                                      },
+                                                      {
+                                                          type: 'divider',
+                                                      },
+                                                      {
+                                                          key: '3',
+                                                          label: '3rd menu item',
+                                                      },
+                                                  ]
+                                              }}>
+                                                  <Button type={"text"}
+                                                          style={{width: 25, height: 25}}
+                                                          onClick={(e) => e.stopPropagation()}
+                                                          icon={<MoreIcon01 width={16} height={16}
+                                                                            color={"#2c2c2c"}/>}/>
+                                              </Dropdown>
                                               <Button type={"text"}
                                                       style={{width: 25, height: 25}}
                                                       onClick={(e) => e.stopPropagation()}
