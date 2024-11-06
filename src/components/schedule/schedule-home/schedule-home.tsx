@@ -196,7 +196,7 @@ export const ScheduleHome: React.FC = () => {
                                               key: 'recently-visited',
                                               label: <div>Recently visited</div>,
                                               children: <div>
-                                                  {Array.from({length: 5}, (_, i) => (
+                                                  {Array.from({length: 8}, (_, i) => (
                                                       <Flex key={i} vertical={true}>
                                                           <img src={scheduleTemplate} alt={"schedule template"}/>
                                                           <div>

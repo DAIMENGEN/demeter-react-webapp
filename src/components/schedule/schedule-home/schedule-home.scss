@@ -162,7 +162,7 @@
             display: grid;
             grid-gap: 20px;
             grid-auto-rows: auto;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
 
             > div {
               border-radius: 5px;
