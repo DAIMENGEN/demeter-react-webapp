@@ -125,7 +125,8 @@ export const ScheduleHome: React.FC = () => {
                                                       {
                                                           key: '2',
                                                           label: <span>Import schedule</span>,
-                                                          icon: <ImportIcon01 width={15} height={15} color={"#2c2c2c"}/>,
+                                                          icon: <ImportIcon01 width={15} height={15}
+                                                                              color={"#2c2c2c"}/>,
                                                       },
                                                       {
                                                           type: 'divider',
@@ -148,41 +149,153 @@ export const ScheduleHome: React.FC = () => {
                                                       icon={<SearchIcon01 width={16} height={16} color={"#2c2c2c"}/>}/>
                                           </Space>,
                                           children: <Menu className={"schedule-home-sider-workspace-collapse-menu"}
-                                                          mode="inline"
+                                                          mode="vertical"
                                                           selectedKeys={selectedKeys}
                                                           onClick={(e) => setSelectedKeys([e.key])}
                                                           items={[
                                                               {
                                                                   key: 'schedule-1',
-                                                                  label: 'Schedule 1'
+                                                                  label: 'Schedule 1',
+                                                                  children: [
+                                                                      {key: 'schedule-1-1', label: 'Open in New Tab'},
+                                                                      {key: 'schedule-1-divider-1', type: 'divider'},
+                                                                      {key: 'schedule-1-2', label: 'Rename Schedule'},
+                                                                      {key: 'schedule-1-3', label: 'Add to favorites'},
+                                                                      {
+                                                                          key: 'schedule-1-4',
+                                                                          label: 'Save as a template'
+                                                                      },
+                                                                      {key: 'schedule-1-divider-2', type: 'divider'},
+                                                                      {key: 'schedule-1-5', label: 'Delete Schedule'},
+                                                                      {key: 'schedule-1-6', label: 'Export Schedule'},
+                                                                      {key: 'schedule-1-7', label: 'Share Schedule'},
+                                                                  ],
                                                               },
                                                               {
                                                                   key: 'schedule-2',
-                                                                  label: 'Schedule 2'
+                                                                  label: 'Schedule 2',
+                                                                  children: [
+                                                                      {key: 'schedule-2-1', label: 'Open in New Tab'},
+                                                                      {key: 'schedule-2-divider-1', type: 'divider'},
+                                                                      {key: 'schedule-2-2', label: 'Rename Schedule'},
+                                                                      {key: 'schedule-2-3', label: 'Add to favorites'},
+                                                                      {
+                                                                          key: 'schedule-2-4',
+                                                                          label: 'Save as a template'
+                                                                      },
+                                                                      {key: 'schedule-2-divider-2', type: 'divider'},
+                                                                      {key: 'schedule-2-5', label: 'Delete Schedule'},
+                                                                      {key: 'schedule-2-6', label: 'Export Schedule'},
+                                                                      {key: 'schedule-2-7', label: 'Share Schedule'},
+                                                                  ],
                                                               },
                                                               {
                                                                   key: 'schedule-3',
-                                                                  label: 'Schedule 3'
+                                                                  label: 'Schedule 3',
+                                                                  children: [
+                                                                      {key: 'schedule-3-1', label: 'Open in New Tab'},
+                                                                      {key: 'schedule-3-divider-1', type: 'divider'},
+                                                                      {key: 'schedule-3-2', label: 'Rename Schedule'},
+                                                                      {key: 'schedule-3-3', label: 'Add to favorites'},
+                                                                      {
+                                                                          key: 'schedule-3-4',
+                                                                          label: 'Save as a template'
+                                                                      },
+                                                                      {key: 'schedule-3-divider-2', type: 'divider'},
+                                                                      {key: 'schedule-3-5', label: 'Delete Schedule'},
+                                                                      {key: 'schedule-3-6', label: 'Export Schedule'},
+                                                                      {key: 'schedule-3-7', label: 'Share Schedule'},
+                                                                  ],
                                                               },
                                                               {
                                                                   key: 'schedule-4',
-                                                                  label: 'Schedule 5'
+                                                                  label: 'Schedule 4',
+                                                                  children: [
+                                                                      {key: 'schedule-4-1', label: 'Open in New Tab'},
+                                                                      {key: 'schedule-4-divider-1', type: 'divider'},
+                                                                      {key: 'schedule-4-2', label: 'Rename Schedule'},
+                                                                      {key: 'schedule-4-3', label: 'Add to favorites'},
+                                                                      {
+                                                                          key: 'schedule-4-4',
+                                                                          label: 'Save as a template'
+                                                                      },
+                                                                      {key: 'schedule-4-divider-2', type: 'divider'},
+                                                                      {key: 'schedule-4-5', label: 'Delete Schedule'},
+                                                                      {key: 'schedule-4-6', label: 'Export Schedule'},
+                                                                      {key: 'schedule-4-7', label: 'Share Schedule'},
+                                                                  ],
                                                               },
                                                               {
                                                                   key: 'schedule-5',
-                                                                  label: 'Schedule 5'
+                                                                  label: 'Schedule 5',
+                                                                  children: [
+                                                                      {key: 'schedule-5-1', label: 'Open in New Tab'},
+                                                                      {key: 'schedule-5-divider-1', type: 'divider'},
+                                                                      {key: 'schedule-5-2', label: 'Rename Schedule'},
+                                                                      {key: 'schedule-5-3', label: 'Add to favorites'},
+                                                                      {
+                                                                          key: 'schedule-5-4',
+                                                                          label: 'Save as a template'
+                                                                      },
+                                                                      {key: 'schedule-5-divider-2', type: 'divider'},
+                                                                      {key: 'schedule-5-5', label: 'Delete Schedule'},
+                                                                      {key: 'schedule-5-6', label: 'Export Schedule'},
+                                                                      {key: 'schedule-5-7', label: 'Share Schedule'},
+                                                                  ],
                                                               },
                                                               {
                                                                   key: 'schedule-6',
-                                                                  label: 'Schedule 6'
+                                                                  label: 'Schedule 6',
+                                                                  children: [
+                                                                      {key: 'schedule-6-1', label: 'Open in New Tab'},
+                                                                      {key: 'schedule-6-divider-1', type: 'divider'},
+                                                                      {key: 'schedule-6-2', label: 'Rename Schedule'},
+                                                                      {key: 'schedule-6-3', label: 'Add to favorites'},
+                                                                      {
+                                                                          key: 'schedule-6-4',
+                                                                          label: 'Save as a template'
+                                                                      },
+                                                                      {key: 'schedule-6-divider-2', type: 'divider'},
+                                                                      {key: 'schedule-6-5', label: 'Delete Schedule'},
+                                                                      {key: 'schedule-6-6', label: 'Export Schedule'},
+                                                                      {key: 'schedule-6-7', label: 'Share Schedule'},
+                                                                  ],
                                                               },
                                                               {
                                                                   key: 'schedule-7',
-                                                                  label: 'Schedule 7'
+                                                                  label: 'Schedule 7',
+                                                                  children: [
+                                                                      {key: 'schedule-7-1', label: 'Open in New Tab'},
+                                                                      {key: 'schedule-7-divider-1', type: 'divider'},
+                                                                      {key: 'schedule-7-2', label: 'Rename Schedule'},
+                                                                      {key: 'schedule-7-3', label: 'Add to favorites'},
+                                                                      {
+                                                                          key: 'schedule-7-4',
+                                                                          label: 'Save as a template'
+                                                                      },
+                                                                      {key: 'schedule-7-divider-2', type: 'divider'},
+                                                                      {key: 'schedule-7-5', label: 'Delete Schedule'},
+                                                                      {key: 'schedule-7-6', label: 'Export Schedule'},
+                                                                      {key: 'schedule-7-7', label: 'Share Schedule'},
+                                                                  ],
                                                               },
                                                               {
                                                                   key: 'schedule-8',
-                                                                  label: 'Schedule 8'
+                                                                  label: 'Schedule 8',
+                                                                  children: [
+                                                                      {key: 'schedule-8-1', label: 'Open in New Tab'},
+                                                                      {key: 'schedule-8-divider-1', type: 'divider'},
+                                                                      {key: 'schedule-8-2', label: 'Rename Schedule'},
+                                                                      {key: 'schedule-8-3', label: 'Add to favorites'},
+                                                                      {
+                                                                          key: 'schedule-8-4',
+                                                                          label: 'Save as a template'
+                                                                      },
+                                                                      {key: 'schedule-8-divider-2', type: 'divider'},
+                                                                      {key: 'schedule-8-5', label: 'Delete Schedule'},
+                                                                      {key: 'schedule-8-6', label: 'Export Schedule'},
+                                                                      {key: 'schedule-8-7', label: 'Share Schedule'},
+                                                                  ],
                                                               },
                                                           ]}/>
                                       }
