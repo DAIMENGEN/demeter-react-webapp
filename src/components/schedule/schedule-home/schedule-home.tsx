@@ -21,10 +21,12 @@ import {DateUtil} from "@D/utils/date/date-util";
 import {SortIcon01} from "@D/common/icons/sort-icon-01";
 import {AddIcon01} from "@D/common/icons/add-icon-01";
 import {ImportIcon01} from "@D/common/icons/import-icon-01";
+import {AddSchedule} from "@D/components/schedule/add-schedule/add-schedule";
 
 export const ScheduleHome: React.FC = () => {
     const {Sider, Header, Content} = Layout;
     const [collapsed, setCollapsed] = useState(false);
+    const [addScheduleOpen, setAddScheduleOpen] = useState(false);
     const [marginInlineStart, setMarginInlineStart] = useState(200);
     const [selectedKeys, setSelectedKeys] = useState<Array<string>>([]);
     const [siderActiveKeys, setSiderActiveKeys] = useState<Array<string>>([]);
@@ -116,6 +118,10 @@ export const ScheduleHome: React.FC = () => {
                                                           key: '0',
                                                           label: <span>Add new schedule</span>,
                                                           icon: <AddIcon01 width={15} height={15} color={"#2c2c2c"}/>,
+                                                          onClick: (e) => {
+                                                              e.domEvent.stopPropagation();
+                                                              setAddScheduleOpen(true);
+                                                          },
                                                       },
                                                       {
                                                           key: '1',
@@ -407,6 +413,7 @@ export const ScheduleHome: React.FC = () => {
                     </Flex>
                 </Content>
             </Layout>
+            <AddSchedule open={addScheduleOpen} onCancel={() => setAddScheduleOpen(false)}/>
         </Layout>
     )
 }

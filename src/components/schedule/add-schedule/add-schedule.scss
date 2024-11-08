@@ -1,0 +1,20 @@
+.add-schedule-draggable-modal {
+  .ant-modal-header {
+    .ant-modal-title {
+      font-size: 22px;
+
+      .ant-flex {
+        padding: 30px 0;
+
+        .add-schedule-icon {
+          color: white;
+          width: 100px;
+          height: 100px;
+          font-size: 50px;
+          border-radius: 10px;
+          background-color: #91003c;
+        }
+      }
+    }
+  }
+}
