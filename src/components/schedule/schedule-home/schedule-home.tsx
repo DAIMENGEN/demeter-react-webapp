@@ -16,24 +16,33 @@ import fullScheduleDayPng from "@D/assets/images/schedule/full-schedule-day.png"
 import schedulerIllustrationSvg from "@D/assets/images/schedule/scheduler-illustration.svg"
 import {FeedbackIcon01} from "@D/common/icons/feedback-icon-01";
 import {QuickIcon01} from "@D/common/icons/quick-icon-01";
-import {useDemeterSelector} from "@D/core/store/demeter-hook";
+import {useDemeterDispatch, useDemeterSelector} from "@D/core/store/demeter-hook";
 import {DateUtil} from "@D/utils/date/date-util";
 import {SortIcon01} from "@D/common/icons/sort-icon-01";
 import {AddIcon01} from "@D/common/icons/add-icon-01";
 import {ImportIcon01} from "@D/common/icons/import-icon-01";
 import {AddSchedule} from "@D/components/schedule/add-schedule/add-schedule";
+import {setAddScheduleModalVisible} from "@D/core/store/features/schedule-slice";
+import {useScheduleMenuItems} from "@D/components/schedule/hooks/use-schedule-menu-items";
+import {useUsername} from "@D/core/hooks/use-username";
+import {useDeleteSchedule} from "@D/components/schedule/hooks/use-delete-schedule";
 
 export const ScheduleHome: React.FC = () => {
     const {Sider, Header, Content} = Layout;
+    const dispatch = useDemeterDispatch();
+    const username = useUsername();
     const [collapsed, setCollapsed] = useState(false);
-    const [addScheduleOpen, setAddScheduleOpen] = useState(false);
     const [marginInlineStart, setMarginInlineStart] = useState(200);
     const [selectedKeys, setSelectedKeys] = useState<Array<string>>([]);
     const [siderActiveKeys, setSiderActiveKeys] = useState<Array<string>>([]);
+    const {deleteScheduleHolderMessage, deleteSchedule} = useDeleteSchedule();
+    const scheduleMenuItems = useScheduleMenuItems();
     const [contentActiveKeys, setContentActiveKeys] = useState<Array<string>>(["recently-visited", "update-feed"]);
-    const username = useDemeterSelector(state => state.employeeStore.username);
+    const addScheduleModalVisible = useDemeterSelector(state => state.scheduleStore.addScheduleModalVisible);
+
     return (
         <Layout className={"schedule-home"} hasSider>
+            {deleteScheduleHolderMessage}
             <Sider className={"schedule-home-sider"} width={200} trigger={null} collapsedWidth={50} collapsible
                    collapsed={collapsed}>
                 <div className={"schedule-home-sider-trigger"} onClick={(_) => {
@@ -115,21 +124,17 @@ export const ScheduleHome: React.FC = () => {
                                               <Dropdown menu={{
                                                   items: [
                                                       {
-                                                          key: '0',
+                                                          key: "add-new-schedule",
                                                           label: <span>Add new schedule</span>,
-                                                          icon: <AddIcon01 width={15} height={15} color={"#2c2c2c"}/>,
-                                                          onClick: (e) => {
-                                                              e.domEvent.stopPropagation();
-                                                              setAddScheduleOpen(true);
-                                                          },
+                                                          icon: <AddIcon01 width={15} height={15} color={"#2c2c2c"}/>
                                                       },
                                                       {
-                                                          key: '1',
+                                                          key: "sort-schedule",
                                                           label: <span>Sort schedule</span>,
                                                           icon: <SortIcon01 width={15} height={15} color={"#2c2c2c"}/>,
                                                       },
                                                       {
-                                                          key: '2',
+                                                          key: "import-schedule",
                                                           label: <span>Import schedule</span>,
                                                           icon: <ImportIcon01 width={15} height={15}
                                                                               color={"#2c2c2c"}/>,
@@ -141,7 +146,21 @@ export const ScheduleHome: React.FC = () => {
                                                           key: '3',
                                                           label: '3rd menu item',
                                                       },
-                                                  ]
+                                                  ],
+                                                  onClick: (e) => {
+                                                      e.domEvent.stopPropagation();
+                                                      switch (e.key) {
+                                                          case "add-new-schedule":
+                                                              dispatch(setAddScheduleModalVisible(true));
+                                                              break;
+                                                          case "sort-schedule":
+                                                              break;
+                                                          case "import-schedule":
+                                                              break;
+                                                          default:
+                                                              break;
+                                                      }
+                                                  }
                                               }}>
                                                   <Button type={"text"}
                                                           style={{width: 25, height: 25}}
@@ -157,153 +176,35 @@ export const ScheduleHome: React.FC = () => {
                                           children: <Menu className={"schedule-home-sider-workspace-collapse-menu"}
                                                           mode="vertical"
                                                           selectedKeys={selectedKeys}
-                                                          onClick={(e) => setSelectedKeys([e.key])}
-                                                          items={[
-                                                              {
-                                                                  key: 'schedule-1',
-                                                                  label: 'Schedule 1',
-                                                                  children: [
-                                                                      {key: 'schedule-1-1', label: 'Open in New Tab'},
-                                                                      {key: 'schedule-1-divider-1', type: 'divider'},
-                                                                      {key: 'schedule-1-2', label: 'Rename Schedule'},
-                                                                      {key: 'schedule-1-3', label: 'Add to favorites'},
-                                                                      {
-                                                                          key: 'schedule-1-4',
-                                                                          label: 'Save as a template'
-                                                                      },
-                                                                      {key: 'schedule-1-divider-2', type: 'divider'},
-                                                                      {key: 'schedule-1-5', label: 'Delete Schedule'},
-                                                                      {key: 'schedule-1-6', label: 'Export Schedule'},
-                                                                      {key: 'schedule-1-7', label: 'Share Schedule'},
-                                                                  ],
-                                                              },
-                                                              {
-                                                                  key: 'schedule-2',
-                                                                  label: 'Schedule 2',
-                                                                  children: [
-                                                                      {key: 'schedule-2-1', label: 'Open in New Tab'},
-                                                                      {key: 'schedule-2-divider-1', type: 'divider'},
-                                                                      {key: 'schedule-2-2', label: 'Rename Schedule'},
-                                                                      {key: 'schedule-2-3', label: 'Add to favorites'},
-                                                                      {
-                                                                          key: 'schedule-2-4',
-                                                                          label: 'Save as a template'
-                                                                      },
-                                                                      {key: 'schedule-2-divider-2', type: 'divider'},
-                                                                      {key: 'schedule-2-5', label: 'Delete Schedule'},
-                                                                      {key: 'schedule-2-6', label: 'Export Schedule'},
-                                                                      {key: 'schedule-2-7', label: 'Share Schedule'},
-                                                                  ],
-                                                              },
-                                                              {
-                                                                  key: 'schedule-3',
-                                                                  label: 'Schedule 3',
-                                                                  children: [
-                                                                      {key: 'schedule-3-1', label: 'Open in New Tab'},
-                                                                      {key: 'schedule-3-divider-1', type: 'divider'},
-                                                                      {key: 'schedule-3-2', label: 'Rename Schedule'},
-                                                                      {key: 'schedule-3-3', label: 'Add to favorites'},
-                                                                      {
-                                                                          key: 'schedule-3-4',
-                                                                          label: 'Save as a template'
-                                                                      },
-                                                                      {key: 'schedule-3-divider-2', type: 'divider'},
-                                                                      {key: 'schedule-3-5', label: 'Delete Schedule'},
-                                                                      {key: 'schedule-3-6', label: 'Export Schedule'},
-                                                                      {key: 'schedule-3-7', label: 'Share Schedule'},
-                                                                  ],
-                                                              },
-                                                              {
-                                                                  key: 'schedule-4',
-                                                                  label: 'Schedule 4',
-                                                                  children: [
-                                                                      {key: 'schedule-4-1', label: 'Open in New Tab'},
-                                                                      {key: 'schedule-4-divider-1', type: 'divider'},
-                                                                      {key: 'schedule-4-2', label: 'Rename Schedule'},
-                                                                      {key: 'schedule-4-3', label: 'Add to favorites'},
-                                                                      {
-                                                                          key: 'schedule-4-4',
-                                                                          label: 'Save as a template'
-                                                                      },
-                                                                      {key: 'schedule-4-divider-2', type: 'divider'},
-                                                                      {key: 'schedule-4-5', label: 'Delete Schedule'},
-                                                                      {key: 'schedule-4-6', label: 'Export Schedule'},
-                                                                      {key: 'schedule-4-7', label: 'Share Schedule'},
-                                                                  ],
-                                                              },
-                                                              {
-                                                                  key: 'schedule-5',
-                                                                  label: 'Schedule 5',
-                                                                  children: [
-                                                                      {key: 'schedule-5-1', label: 'Open in New Tab'},
-                                                                      {key: 'schedule-5-divider-1', type: 'divider'},
-                                                                      {key: 'schedule-5-2', label: 'Rename Schedule'},
-                                                                      {key: 'schedule-5-3', label: 'Add to favorites'},
-                                                                      {
-                                                                          key: 'schedule-5-4',
-                                                                          label: 'Save as a template'
-                                                                      },
-                                                                      {key: 'schedule-5-divider-2', type: 'divider'},
-                                                                      {key: 'schedule-5-5', label: 'Delete Schedule'},
-                                                                      {key: 'schedule-5-6', label: 'Export Schedule'},
-                                                                      {key: 'schedule-5-7', label: 'Share Schedule'},
-                                                                  ],
-                                                              },
-                                                              {
-                                                                  key: 'schedule-6',
-                                                                  label: 'Schedule 6',
-                                                                  children: [
-                                                                      {key: 'schedule-6-1', label: 'Open in New Tab'},
-                                                                      {key: 'schedule-6-divider-1', type: 'divider'},
-                                                                      {key: 'schedule-6-2', label: 'Rename Schedule'},
-                                                                      {key: 'schedule-6-3', label: 'Add to favorites'},
-                                                                      {
-                                                                          key: 'schedule-6-4',
-                                                                          label: 'Save as a template'
-                                                                      },
-                                                                      {key: 'schedule-6-divider-2', type: 'divider'},
-                                                                      {key: 'schedule-6-5', label: 'Delete Schedule'},
-                                                                      {key: 'schedule-6-6', label: 'Export Schedule'},
-                                                                      {key: 'schedule-6-7', label: 'Share Schedule'},
-                                                                  ],
-                                                              },
-                                                              {
-                                                                  key: 'schedule-7',
-                                                                  label: 'Schedule 7',
-                                                                  children: [
-                                                                      {key: 'schedule-7-1', label: 'Open in New Tab'},
-                                                                      {key: 'schedule-7-divider-1', type: 'divider'},
-                                                                      {key: 'schedule-7-2', label: 'Rename Schedule'},
-                                                                      {key: 'schedule-7-3', label: 'Add to favorites'},
-                                                                      {
-                                                                          key: 'schedule-7-4',
-                                                                          label: 'Save as a template'
-                                                                      },
-                                                                      {key: 'schedule-7-divider-2', type: 'divider'},
-                                                                      {key: 'schedule-7-5', label: 'Delete Schedule'},
-                                                                      {key: 'schedule-7-6', label: 'Export Schedule'},
-                                                                      {key: 'schedule-7-7', label: 'Share Schedule'},
-                                                                  ],
-                                                              },
-                                                              {
-                                                                  key: 'schedule-8',
-                                                                  label: 'Schedule 8',
-                                                                  children: [
-                                                                      {key: 'schedule-8-1', label: 'Open in New Tab'},
-                                                                      {key: 'schedule-8-divider-1', type: 'divider'},
-                                                                      {key: 'schedule-8-2', label: 'Rename Schedule'},
-                                                                      {key: 'schedule-8-3', label: 'Add to favorites'},
-                                                                      {
-                                                                          key: 'schedule-8-4',
-                                                                          label: 'Save as a template'
-                                                                      },
-                                                                      {key: 'schedule-8-divider-2', type: 'divider'},
-                                                                      {key: 'schedule-8-5', label: 'Delete Schedule'},
-                                                                      {key: 'schedule-8-6', label: 'Export Schedule'},
-                                                                      {key: 'schedule-8-7', label: 'Share Schedule'},
-                                                                  ],
-                                                              },
-                                                          ]}/>
+                                                          onClick={(e) => {
+                                                              const {key, keyPath, domEvent} = e;
+                                                              domEvent.stopPropagation();
+                                                              if (keyPath.length === 1) {
+                                                                  setSelectedKeys([key]);
+                                                              } else {
+                                                                  const projectId = keyPath[keyPath.length - 1];
+                                                                  switch (key) {
+                                                                      case `${projectId}-open-in-new-table`:
+                                                                          break;
+                                                                      case `${projectId}-rename-schedule`:
+                                                                          break;
+                                                                      case `${projectId}-add-to-favorites`:
+                                                                          break;
+                                                                      case `${projectId}-save-as-a-template`:
+                                                                          break;
+                                                                      case `${projectId}-delete-schedule`:
+                                                                          deleteSchedule(projectId);
+                                                                          break;
+                                                                      case `${projectId}-export-schedule`:
+                                                                          break;
+                                                                      case `${projectId}-share-schedule`:
+                                                                          break;
+                                                                      default:
+                                                                          break;
+                                                                  }
+                                                              }
+                                                          }}
+                                                          items={scheduleMenuItems}/>
                                       }
                                   ]}/>
                     </>
@@ -413,7 +314,7 @@ export const ScheduleHome: React.FC = () => {
                     </Flex>
                 </Content>
             </Layout>
-            <AddSchedule open={addScheduleOpen} onCancel={() => setAddScheduleOpen(false)}/>
+            <AddSchedule visible={addScheduleModalVisible}/>
         </Layout>
     )
 }

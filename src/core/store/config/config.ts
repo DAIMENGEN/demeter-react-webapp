@@ -11,3 +11,13 @@ export const employeePersistConfig = {
     storage: AsyncStorage,
 };
 
+export const schedulePersistConfig = {
+    key: "scheduleStore",
+    storage: AsyncStorage,
+};
+
+export const projectPersistConfig = {
+    key: "projectStore",
+    storage: AsyncStorage,
+};
+

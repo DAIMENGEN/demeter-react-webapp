@@ -27,6 +27,10 @@ export abstract class BaseService<T> implements Service<T> {
         return this.httpClient.post<T>(url, params);
     }
 
+    parseResponseError(error: Error): string {
+        return this.httpClient.parseResponseError(error);
+    }
+
     abstract create(partialFields: Omit<T, keyof EntityData>): T
 
     abstract update(oldEntity: T, partialFields: Omit<T, keyof EntityData>): T

@@ -1,15 +1,20 @@
 import "./add-schedule.scss";
+import dayjs from "dayjs";
 import React, {useState} from "react";
-import {Button, Flex, Form, Input} from "antd";
+import {Button, Flex, Form, Input, Select} from "antd";
 import {FullDraggableModal} from "full-flex-ui";
+import {useFormDateFieldRules} from "@D/common/hooks/form-field-rules/use-form-date-filed-rules";
+import {useScheduleStatus} from "@D/components/schedule/hooks/use-schedule-status";
+import {useAddSchedule} from "@D/components/schedule/hooks/use-add-schedule";
+import {setAddScheduleModalVisible} from "@D/core/store/features/schedule-slice";
+import {useDemeterDispatch} from "@D/core/store/demeter-hook";
 
-export const AddSchedule: React.FC<{
-    open: boolean,
-    onCancel: () => void
-}> = ({open, onCancel}) => {
-
+export const AddSchedule: React.FC<{ visible: boolean }> = ({visible}) => {
+    const {TextArea} = Input;
+    const [form] = Form.useForm();
+    const dispatch = useDemeterDispatch();
+    const addSchedule = useAddSchedule();
     const [scheduleName, setScheduleName] = useState<string>("New Schedule");
-
     return (
         <FullDraggableModal classNames={{content: "add-schedule-draggable-modal"}}
                             title={<div>
@@ -20,35 +25,39 @@ export const AddSchedule: React.FC<{
                                     </Button>
                                 </Flex>
                             </div>}
-                            open={open}
+                            open={visible}
                             closable={true}
-                            onCancel={onCancel}
+                            onCancel={() => dispatch(setAddScheduleModalVisible(false))}
+                            maskClosable={false}
                             cancelText={"Cancel"}
-                            okText={"Add schedule"}>
-            <Form name={"add-schedule"} layout={"horizontal"} initialValues={{
+                            okText={"Add schedule"}
+                            onOk={() => form.submit()}>
+            <Form name={"add-schedule"} layout={"vertical"} form={form} onFinish={addSchedule} initialValues={{
                 "name": "New Schedule",
+                "status": 3,
+                "startDateTime": dayjs().format("YYYY-MM-DD")
             }}>
                 <Form.Item layout={"vertical"} label="Schedule name" name="name" rules={[{required: true}]}>
                     <Input onChange={e => setScheduleName(e.target.value)}/>
                 </Form.Item>
-                <br/>
                 <Form.Item layout={"vertical"} label="Schedule status" name="status" rules={[{required: true}]}>
-                    <Input/>
+                    <Select showSearch options={useScheduleStatus()} filterOption={(input, option) => {
+                        return (option?.label?.toString() ?? "").toLowerCase().includes(input.toLowerCase());
+                    }}/>
                 </Form.Item>
-                <br/>
-                <Form.Item layout={"vertical"} label="Schedule description" name="description" rules={[{required: false}]}>
-                    <Input/>
-                </Form.Item>
-                <br/>
                 <Form.Item layout={"vertical"} label="Schedule startDate" name="startDateTime"
-                           rules={[{required: true}]}>
+                           rules={useFormDateFieldRules(true)}>
                     <Input/>
                 </Form.Item>
-                <br/>
-                <Form.Item layout={"vertical"} label="Schedule endDate" name="endDateTime" rules={[{required: false}]}>
+                <Form.Item layout={"vertical"} label="Schedule endDate" name="endDateTime"
+                           rules={useFormDateFieldRules(false)}>
                     <Input/>
                 </Form.Item>
-                <br/>
+                <Form.Item layout={"vertical"} label="Schedule description" name="description"
+                           rules={[{required: false}]}>
+                    <TextArea placeholder="Autosize height with minimum and maximum number of lines"
+                              autoSize={{minRows: 3, maxRows: 10}}/>
+                </Form.Item>
             </Form>
         </FullDraggableModal>
     )

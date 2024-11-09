@@ -90,4 +90,14 @@ export class HttpClient {
             throw new Error(`Response failed, URL: ${url}, status: ${status}, code: ${code}, data: ${data}, error: ${error}`);
         }
     }
+
+    parseResponseError(error: Error): string {
+        const errorPrefix = "error:";
+        const errorIndex = error.message.indexOf(errorPrefix);
+        if (errorIndex !== -1) {
+            return error.message.slice(errorIndex + errorPrefix.length).trim();
+        } else {
+            return error.message;
+        }
+    }
 }
