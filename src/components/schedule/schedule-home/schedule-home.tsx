@@ -28,6 +28,8 @@ import {useDeleteSchedule} from "@D/components/schedule/hooks/use-delete-schedul
 import {ProjectService} from "@D/core/service/project-service";
 import {setProjectEntities} from "@D/core/store/features/project-slice";
 import {useAddScheduleModalVisible} from "@D/components/schedule/hooks/use-add-schedule-modal-visible";
+import {useRenameScheduleModal} from "@D/components/schedule/hooks/use-rename-schedule-modal";
+import {RenameSchedule} from "@D/components/schedule/rename-schedule/rename-schedule";
 
 export const ScheduleHome: React.FC = () => {
     const {Sider, Header, Content} = Layout;
@@ -37,8 +39,9 @@ export const ScheduleHome: React.FC = () => {
     const [marginInlineStart, setMarginInlineStart] = useState(200);
     const [selectedKeys, setSelectedKeys] = useState<Array<string>>([]);
     const [siderActiveKeys, setSiderActiveKeys] = useState<Array<string>>([]);
+    const {setAddScheduleModalVisible} = useAddScheduleModalVisible();
+    const {setRenameScheduleModalVisible, setRenameScheduleId} = useRenameScheduleModal();
     const {deleteScheduleHolderMessage, deleteSchedule} = useDeleteSchedule();
-    const {addScheduleModalVisible, setAddScheduleModalVisible} = useAddScheduleModalVisible();
     const [contentActiveKeys, setContentActiveKeys] = useState<Array<string>>(["recently-visited", "update-feed"]);
     useEffect(() => {
         const projectService = ProjectService.getInstance();
@@ -194,6 +197,8 @@ export const ScheduleHome: React.FC = () => {
                                                                       case `${projectId}-open-in-new-table`:
                                                                           break;
                                                                       case `${projectId}-rename-schedule`:
+                                                                          setRenameScheduleId(projectId);
+                                                                          setRenameScheduleModalVisible(true);
                                                                           break;
                                                                       case `${projectId}-add-to-favorites`:
                                                                           break;
@@ -321,7 +326,8 @@ export const ScheduleHome: React.FC = () => {
                     </Flex>
                 </Content>
             </Layout>
-            <AddSchedule visible={addScheduleModalVisible}/>
+            <AddSchedule/>
+            <RenameSchedule/>
         </Layout>
     )
 }

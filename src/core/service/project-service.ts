@@ -44,12 +44,12 @@ export class ProjectService extends BaseService<ProjectEntity> {
 
     public updateProjectRequest(project: ProjectEntity, success: (updatedProject: ProjectEntity) => void, failure?: (error: Error) => void): void {
         const URL = "/updateProjectRoute";
-        this.post<ProjectEntity>(URL, project).then(success).catch(failure);
+        this.put<ProjectEntity>(URL, project).then(success).catch(failure);
     }
 
     public updateProjectsRequest(projects: Array<ProjectEntity>, success: (updatedProjects: Array<ProjectEntity>) => void, failure?: (error: Error) => void): void {
         const URL = "/updateProjectsRoute";
-        this.post<Array<ProjectEntity>>(URL, projects).then(success).catch(failure);
+        this.put<Array<ProjectEntity>>(URL, projects).then(success).catch(failure);
     }
 
     public getAllProjectsRequest(success: (projects: Array<ProjectEntity>) => void, failure?: (error: Error) => void): void {

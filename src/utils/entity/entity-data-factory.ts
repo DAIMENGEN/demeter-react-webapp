@@ -12,11 +12,15 @@ export abstract class EntityDataFactory {
             id: EntityDataFactory.generateId(),
         };
         const completeData = { ...defaultData, ...partialData };
-        return new entityType(...Object.values(completeData));
+        const instance = new entityType();
+        Object.assign(instance, completeData);
+        return instance;
     }
 
     public static update<T extends EntityData>(entityType: { new(...args: any[]): T }, oldEntity: T, updatedData: Partial<T>): T {
         const completeData = { ...oldEntity, ...updatedData };
-        return new entityType(...Object.values(completeData));
+        const instance = new entityType();
+        Object.assign(instance, completeData);
+        return instance;
     }
 }

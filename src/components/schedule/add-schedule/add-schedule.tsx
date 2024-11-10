@@ -6,14 +6,13 @@ import {FullDraggableModal} from "full-flex-ui";
 import {useFormDateFieldRules} from "@D/common/hooks/form-field-rules/use-form-date-filed-rules";
 import {useScheduleStatus} from "@D/components/schedule/hooks/use-schedule-status";
 import {useAddSchedule} from "@D/components/schedule/hooks/use-add-schedule";
-import {setAddScheduleModalVisible} from "@D/core/store/features/schedule-slice";
-import {useDemeterDispatch} from "@D/core/store/demeter-hook";
+import {useAddScheduleModalVisible} from "@D/components/schedule/hooks/use-add-schedule-modal-visible";
 
-export const AddSchedule: React.FC<{ visible: boolean }> = ({visible}) => {
+export const AddSchedule = () => {
     const {TextArea} = Input;
     const [form] = Form.useForm();
-    const dispatch = useDemeterDispatch();
     const {addScheduleHolderMessage, addSchedule} = useAddSchedule();
+    const {addScheduleModalVisible, setAddScheduleModalVisible} = useAddScheduleModalVisible();
     const [scheduleName, setScheduleName] = useState<string>("New Schedule");
     return (
         <FullDraggableModal classNames={{content: "add-schedule-draggable-modal"}}
@@ -25,9 +24,9 @@ export const AddSchedule: React.FC<{ visible: boolean }> = ({visible}) => {
                                     </Button>
                                 </Flex>
                             </div>}
-                            open={visible}
+                            open={addScheduleModalVisible}
                             closable={true}
-                            onCancel={() => dispatch(setAddScheduleModalVisible(false))}
+                            onCancel={() => setAddScheduleModalVisible(false)}
                             maskClosable={false}
                             cancelText={"Cancel"}
                             okText={"Add schedule"}
