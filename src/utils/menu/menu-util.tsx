@@ -2,11 +2,12 @@ import {MenuProps} from "antd";
 import {ProjectEntity} from "@D/core/entity/project-entity";
 
 export class MenuUtil {
-    static generateScheduleMenuItems(projects: Array<ProjectEntity>): MenuProps["items"] {
+    static generateScheduleMenuItems(projects: Array<ProjectEntity>, onClick: (projectId: string) => void): MenuProps["items"] {
         return projects.map(project => ({
             key: project.id,
-            label: project.name,
+            label: <div onClick={() => onClick(project.id)}>{project.name}</div>,
             children: [
+                {key: `${project.id}-open`, label: 'Open'},
                 {key: `${project.id}-open-in-new-table`, label: 'Open in New Tab'},
                 {key: `${project.id}-divider-1`, type: 'divider'},
                 {key: `${project.id}-rename-schedule`, label: 'Rename Schedule'},

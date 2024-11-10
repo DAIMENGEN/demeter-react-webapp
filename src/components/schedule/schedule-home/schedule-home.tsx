@@ -186,37 +186,38 @@ export const ScheduleHome: React.FC = () => {
                                           children: <Menu className={"schedule-home-sider-workspace-collapse-menu"}
                                                           mode="vertical"
                                                           selectedKeys={selectedKeys}
+                                                          items={useScheduleMenuItems(key => {
+                                                              setSelectedKeys([key, `${key}-open`]);
+                                                          })}
                                                           onClick={(e) => {
                                                               const {key, keyPath, domEvent} = e;
                                                               domEvent.stopPropagation();
-                                                              if (keyPath.length === 1) {
-                                                                  setSelectedKeys([key]);
-                                                              } else {
-                                                                  const projectId = keyPath[keyPath.length - 1];
-                                                                  switch (key) {
-                                                                      case `${projectId}-open-in-new-table`:
-                                                                          break;
-                                                                      case `${projectId}-rename-schedule`:
-                                                                          setRenameScheduleId(projectId);
-                                                                          setRenameScheduleModalVisible(true);
-                                                                          break;
-                                                                      case `${projectId}-add-to-favorites`:
-                                                                          break;
-                                                                      case `${projectId}-save-as-a-template`:
-                                                                          break;
-                                                                      case `${projectId}-delete-schedule`:
-                                                                          deleteSchedule(projectId);
-                                                                          break;
-                                                                      case `${projectId}-export-schedule`:
-                                                                          break;
-                                                                      case `${projectId}-share-schedule`:
-                                                                          break;
-                                                                      default:
-                                                                          break;
-                                                                  }
+                                                              setSelectedKeys(keyPath);
+                                                              const projectId = keyPath[keyPath.length - 1];
+                                                              switch (key) {
+                                                                  case `${projectId}-open`:
+                                                                      break;
+                                                                  case `${projectId}-open-in-new-table`:
+                                                                      break;
+                                                                  case `${projectId}-rename-schedule`:
+                                                                      setRenameScheduleId(projectId);
+                                                                      setRenameScheduleModalVisible(true);
+                                                                      break;
+                                                                  case `${projectId}-add-to-favorites`:
+                                                                      break;
+                                                                  case `${projectId}-save-as-a-template`:
+                                                                      break;
+                                                                  case `${projectId}-delete-schedule`:
+                                                                      deleteSchedule(projectId);
+                                                                      break;
+                                                                  case `${projectId}-export-schedule`:
+                                                                      break;
+                                                                  case `${projectId}-share-schedule`:
+                                                                      break;
+                                                                  default:
+                                                                      break;
                                                               }
-                                                          }}
-                                                          items={useScheduleMenuItems()}/>
+                                                          }}/>
                                       }
                                   ]}/>
                     </>
