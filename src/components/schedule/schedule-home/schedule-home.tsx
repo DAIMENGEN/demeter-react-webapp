@@ -36,7 +36,7 @@ export const ScheduleHome: React.FC = () => {
     const username = useUsername();
     const [collapsed, setCollapsed] = useState(false);
     const dispatch = useDemeterDispatch();
-    const [marginInlineStart, setMarginInlineStart] = useState(200);
+    const [marginInlineStart, setMarginInlineStart] = useState(190);
     const [selectedKeys, setSelectedKeys] = useState<Array<string>>([]);
     const [siderActiveKeys, setSiderActiveKeys] = useState<Array<string>>([]);
     const {setAddScheduleModalVisible} = useAddScheduleModalVisible();
@@ -53,11 +53,11 @@ export const ScheduleHome: React.FC = () => {
     return (
         <Layout className={"schedule-home"} hasSider>
             {deleteScheduleHolderMessage}
-            <Sider className={"schedule-home-sider"} width={200} trigger={null} collapsedWidth={50} collapsible
+            <Sider className={"schedule-home-sider"} width={200} trigger={null} collapsedWidth={30} collapsible
                    collapsed={collapsed}>
                 <div className={"schedule-home-sider-trigger"} onClick={(_) => {
                     setCollapsed(!collapsed);
-                    setMarginInlineStart(collapsed ? 200 : 50);
+                    setMarginInlineStart(collapsed ? 190 : 20);
                 }}>
                     {collapsed ? <RightOutlined/> : <LeftOutlined/>}
                 </div>
