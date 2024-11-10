@@ -1,5 +1,5 @@
 import "./schedule-home.scss";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Button, Card, Collapse, Dropdown, Flex, Image, Layout, Menu, Space} from "antd";
 import {StarIcon01} from "@D/common/icons/star-icon-01";
 import {StarIcon02} from "@D/common/icons/star-icon-02";
@@ -16,29 +16,36 @@ import fullScheduleDayPng from "@D/assets/images/schedule/full-schedule-day.png"
 import schedulerIllustrationSvg from "@D/assets/images/schedule/scheduler-illustration.svg"
 import {FeedbackIcon01} from "@D/common/icons/feedback-icon-01";
 import {QuickIcon01} from "@D/common/icons/quick-icon-01";
-import {useDemeterDispatch, useDemeterSelector} from "@D/core/store/demeter-hook";
+import {useDemeterDispatch} from "@D/core/store/demeter-hook";
 import {DateUtil} from "@D/utils/date/date-util";
 import {SortIcon01} from "@D/common/icons/sort-icon-01";
 import {AddIcon01} from "@D/common/icons/add-icon-01";
 import {ImportIcon01} from "@D/common/icons/import-icon-01";
 import {AddSchedule} from "@D/components/schedule/add-schedule/add-schedule";
-import {setAddScheduleModalVisible} from "@D/core/store/features/schedule-slice";
 import {useScheduleMenuItems} from "@D/components/schedule/hooks/use-schedule-menu-items";
 import {useUsername} from "@D/core/hooks/use-username";
 import {useDeleteSchedule} from "@D/components/schedule/hooks/use-delete-schedule";
+import {ProjectService} from "@D/core/service/project-service";
+import {setProjectEntities} from "@D/core/store/features/project-slice";
+import {useAddScheduleModalVisible} from "@D/components/schedule/hooks/use-add-schedule-modal-visible";
 
 export const ScheduleHome: React.FC = () => {
     const {Sider, Header, Content} = Layout;
-    const dispatch = useDemeterDispatch();
     const username = useUsername();
     const [collapsed, setCollapsed] = useState(false);
+    const dispatch = useDemeterDispatch();
     const [marginInlineStart, setMarginInlineStart] = useState(200);
     const [selectedKeys, setSelectedKeys] = useState<Array<string>>([]);
     const [siderActiveKeys, setSiderActiveKeys] = useState<Array<string>>([]);
     const {deleteScheduleHolderMessage, deleteSchedule} = useDeleteSchedule();
-    const scheduleMenuItems = useScheduleMenuItems();
+    const {addScheduleModalVisible, setAddScheduleModalVisible} = useAddScheduleModalVisible();
     const [contentActiveKeys, setContentActiveKeys] = useState<Array<string>>(["recently-visited", "update-feed"]);
-    const addScheduleModalVisible = useDemeterSelector(state => state.scheduleStore.addScheduleModalVisible);
+    useEffect(() => {
+        const projectService = ProjectService.getInstance();
+        projectService.getProjectsByEmployeeIdRequest(projects => {
+            dispatch(setProjectEntities(projects));
+        });
+    }, [dispatch]);
 
     return (
         <Layout className={"schedule-home"} hasSider>
@@ -151,7 +158,7 @@ export const ScheduleHome: React.FC = () => {
                                                       e.domEvent.stopPropagation();
                                                       switch (e.key) {
                                                           case "add-new-schedule":
-                                                              dispatch(setAddScheduleModalVisible(true));
+                                                              setAddScheduleModalVisible(true);
                                                               break;
                                                           case "sort-schedule":
                                                               break;
@@ -204,7 +211,7 @@ export const ScheduleHome: React.FC = () => {
                                                                   }
                                                               }
                                                           }}
-                                                          items={scheduleMenuItems}/>
+                                                          items={useScheduleMenuItems()}/>
                                       }
                                   ]}/>
                     </>

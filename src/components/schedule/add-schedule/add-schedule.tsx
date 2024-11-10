@@ -13,7 +13,7 @@ export const AddSchedule: React.FC<{ visible: boolean }> = ({visible}) => {
     const {TextArea} = Input;
     const [form] = Form.useForm();
     const dispatch = useDemeterDispatch();
-    const addSchedule = useAddSchedule();
+    const {addScheduleHolderMessage, addSchedule} = useAddSchedule();
     const [scheduleName, setScheduleName] = useState<string>("New Schedule");
     return (
         <FullDraggableModal classNames={{content: "add-schedule-draggable-modal"}}
@@ -32,6 +32,7 @@ export const AddSchedule: React.FC<{ visible: boolean }> = ({visible}) => {
                             cancelText={"Cancel"}
                             okText={"Add schedule"}
                             onOk={() => form.submit()}>
+            {addScheduleHolderMessage}
             <Form name={"add-schedule"} layout={"vertical"} form={form} onFinish={addSchedule} initialValues={{
                 "name": "New Schedule",
                 "status": 3,

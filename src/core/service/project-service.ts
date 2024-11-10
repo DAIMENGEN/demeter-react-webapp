@@ -67,6 +67,11 @@ export class ProjectService extends BaseService<ProjectEntity> {
         this.post<Array<ProjectEntity>>(URL, {projectIds}).then(success).catch(failure);
     }
 
+    public getProjectsByEmployeeIdRequest(success: (projects: Array<ProjectEntity>) => void, failure?: (error: Error) => void): void {
+        const URL = "/getProjectsByEmployeeIdRoute";
+        this.get<Array<ProjectEntity>>(URL).then(success).catch(failure);
+    }
+
     public getProjectStatusSelectOptionsRequest(success: (options: SelectProps["options"]) => void, failure?: (error: Error) => void): void {
         const URL = "/getProjectStatusSelectOptionsRoute";
         this.get<SelectProps["options"]>(URL).then(success).catch(failure);

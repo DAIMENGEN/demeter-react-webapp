@@ -4,10 +4,12 @@ import {useDemeterDispatch} from "@D/core/store/demeter-hook";
 import {ProjectService} from "@D/core/service/project-service";
 import {addProjectEntity} from "@D/core/store/features/project-slice";
 import {setAddScheduleModalVisible} from "@D/core/store/features/schedule-slice";
+import {useAntdMessage} from "@D/core/hooks/use-antd-message";
 
 export const useAddSchedule = () => {
     const dispatch = useDemeterDispatch();
-    return useCallback((value: {
+    const {contextHolderMessage, success, failure} = useAntdMessage();
+    const addSchedule = useCallback((value: {
         name: string,
         status: number,
         startDateTime: string,
@@ -19,6 +21,11 @@ export const useAddSchedule = () => {
         projectService.createProjectRequest(projectEntity, (project: ProjectEntity) => {
             dispatch(addProjectEntity(project));
             dispatch(setAddScheduleModalVisible(false));
-        });
-    }, [dispatch]);
+            success("Add project successfully").then();
+        }, (error: Error) => failure(projectService.parseResponseError(error)));
+    }, [dispatch, failure, success]);
+    return {
+        addScheduleHolderMessage: <>{contextHolderMessage}</>,
+        addSchedule
+    };
 }
