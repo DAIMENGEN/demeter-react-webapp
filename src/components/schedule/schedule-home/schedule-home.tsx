@@ -187,7 +187,7 @@ export const ScheduleHome: React.FC = () => {
                                                           mode="vertical"
                                                           selectedKeys={selectedKeys}
                                                           items={useScheduleMenuItems(key => {
-                                                              setSelectedKeys([key, `${key}-open`]);
+                                                              setSelectedKeys([key]);
                                                           })}
                                                           onClick={(e) => {
                                                               const {key, keyPath, domEvent} = e;
@@ -195,8 +195,6 @@ export const ScheduleHome: React.FC = () => {
                                                               setSelectedKeys(keyPath);
                                                               const projectId = keyPath[keyPath.length - 1];
                                                               switch (key) {
-                                                                  case `${projectId}-open`:
-                                                                      break;
                                                                   case `${projectId}-open-in-new-table`:
                                                                       break;
                                                                   case `${projectId}-rename-schedule`:

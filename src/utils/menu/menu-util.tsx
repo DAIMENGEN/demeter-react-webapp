@@ -3,11 +3,17 @@ import {ProjectEntity} from "@D/core/entity/project-entity";
 
 export class MenuUtil {
     static generateScheduleMenuItems(projects: Array<ProjectEntity>, onClick: (projectId: string) => void): MenuProps["items"] {
+        const truncateString = (str: string, maxLength: number) => {
+            if (str.length > maxLength) {
+                return str.substring(0, maxLength) + '...';
+            } else {
+                return str;
+            }
+        }
         return projects.map(project => ({
             key: project.id,
-            label: <div onClick={() => onClick(project.id)}>{project.name}</div>,
+            label: <div className={`schedule-menu-item-title`} title={project.name} onClick={() => onClick(project.id)}>{truncateString(project.name, 14)}</div>,
             children: [
-                {key: `${project.id}-open`, label: 'Open'},
                 {key: `${project.id}-open-in-new-table`, label: 'Open in New Tab'},
                 {key: `${project.id}-divider-1`, type: 'divider'},
                 {key: `${project.id}-rename-schedule`, label: 'Rename Schedule'},
