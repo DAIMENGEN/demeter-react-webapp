@@ -24,6 +24,7 @@ export const AddSchedule = () => {
                                     </Button>
                                 </Flex>
                             </div>}
+                            style={{top: 80}}
                             open={addScheduleModalVisible}
                             closable={true}
                             onCancel={() => setAddScheduleModalVisible(false)}
