@@ -1,7 +1,7 @@
-@use "@D/common/style/_variables" as *;
+$content-height: calc(100vh - 50px);
 
 .schedule-home {
-  min-height: $content-height;
+  min-height: calc(100vh - 50px);
 
   .schedule-home-sider {
     text-align: center;

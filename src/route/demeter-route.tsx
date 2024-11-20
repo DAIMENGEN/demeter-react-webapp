@@ -6,7 +6,7 @@ import {HomePage} from "@D/page/home-page/home-page";
 import {NavigationMenu} from "@D/components/navigation/navigation-menu/navigation-menu";
 import {ScheduleHome} from "@D/components/schedule/schedule-home/schedule-home";
 import {ScheduleHomeContent} from "@D/components/schedule/schedule-home/schedule-home-content";
-import {MaintainSchedule} from "@D/components/schedule/maintain-schedule/maintain-schedule";
+import {MaintenanceSchedule} from "@D/components/schedule/maintenance-schedule/maintenance-schedule";
 
 export const DemeterRoute: React.FC = () => {
     return (
@@ -17,7 +17,7 @@ export const DemeterRoute: React.FC = () => {
                 <Route index element={<NavigationMenu/>}/>
                 <Route path="/home-page/schedule-home" element={<ScheduleHome/>}>
                     <Route index element={<ScheduleHomeContent/>}/>
-                    <Route path="/home-page/schedule-home/maintain-schedule" element={<MaintainSchedule/>}/>
+                    <Route path="/home-page/schedule-home/maintain-schedule" element={<MaintenanceSchedule/>}/>
                 </Route>
             </Route>
         </Routes>

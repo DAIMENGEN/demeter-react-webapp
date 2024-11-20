@@ -1,17 +1,23 @@
-import "./maintain-schedule.scss";
+import "./maintenance-schedule.scss";
 import React, {useState} from "react";
 import {EditableProTable} from "@ant-design/pro-table";
 import {Button} from "antd";
 import {
     defaultTableRowData,
     MaintainScheduleTableRow
-} from "@D/components/schedule/maintain-schedule/maintain-schedule-helper";
+} from "@D/components/schedule/maintenance-schedule/maintenance-schedule-helper";
 import {
-    useMaintainScheduleTableColumns
-} from "@D/components/schedule/maintain-schedule/hooks/use-maintain-schedule-table-columns";
-import {useAddTaskViaShortcut} from "@D/components/schedule/maintain-schedule/hooks/use-add-task-via-shortcut";
+    useMaintenanceScheduleTableColumns
+} from "@D/components/schedule/maintenance-schedule/hooks/use-maintenance-schedule-table-columns";
+import {useAddTaskViaShortcut} from "@D/components/schedule/maintenance-schedule/hooks/use-add-task-via-shortcut";
+import {
+    useMaintenanceScheduleTableScroll
+} from "@D/components/schedule/maintenance-schedule/hooks/use-maintenance-schedule-table-scroll";
+import {SaveIcon01} from "@D/common/icons/save-icon-01";
+import {ColumnIcon01} from "@D/common/icons/column-icon-01";
 
-export const MaintainSchedule = () => {
+export const MaintenanceSchedule = () => {
+    const scroll = useMaintenanceScheduleTableScroll();
     const [dataSource, setDataSource] = useState<readonly MaintainScheduleTableRow[]>([]);
     const [editableKeys, setEditableRowKeys] = useState<Array<React.Key>>(dataSource.map((item) => item.id));
     const {actionRef, tableRef, expandedRowKeys, setExpandedRowKeys, setParentKey, parentKey} = useAddTaskViaShortcut();
@@ -20,9 +26,9 @@ export const MaintainSchedule = () => {
             <EditableProTable<MaintainScheduleTableRow>
                 actionRef={actionRef}
                 headerTitle="Maintain Schedule Task"
-                columns={useMaintainScheduleTableColumns()}
+                columns={useMaintenanceScheduleTableColumns()}
                 rowKey="id"
-                scroll={{x: 1500}}
+                scroll={scroll}
                 value={dataSource}
                 onChange={setDataSource}
                 expandable={{
@@ -33,7 +39,7 @@ export const MaintainSchedule = () => {
                     }
                 }}
                 rowSelection={{
-                    type: 'radio',
+                    type: "radio",
                     onChange: (selectedRowKeys, _) => {
                         console.log('selectedRowKeys changed:', selectedRowKeys)
                         setParentKey(selectedRowKeys[0] as string);
@@ -41,8 +47,8 @@ export const MaintainSchedule = () => {
                 }}
                 recordCreatorProps={{
                     icon: false,
-                    position: 'bottom',
-                    newRecordType: 'dataSource',
+                    position: "bottom",
+                    newRecordType: "dataSource",
                     parentKey: parentKey,
                     creatorButtonText: "Add Task",
                     onClick: () => parentKey! && setExpandedRowKeys(keys => [...keys, parentKey]),
@@ -50,17 +56,25 @@ export const MaintainSchedule = () => {
                 }}
                 toolBarRender={() => {
                     return [
-                        <Button type="primary" key="save"
+                        <Button key="column"
+                                type="primary"
+                                icon={<ColumnIcon01 width={20} height={20} color={"#fff"}/>}
+                                onClick={() => {
+                                    // column
+                                    console.log("column display");
+                                }}
+                        />,
+                        <Button key="save"
+                                type="primary"
+                                icon={<SaveIcon01 width={20} height={20} color={"#fff"}/>}
                                 onClick={() => {
                                     // dataSource 就是当前数据，可以调用 api 将其保存
                                     console.log(dataSource);
-                                }}>
-                            save
-                        </Button>,
+                                }}/>,
                     ];
                 }}
                 editable={{
-                    type: 'multiple',
+                    type: "multiple",
                     editableKeys,
                     actionRender: (row, config, defaultDomes) => {
                         return [defaultDomes.delete];

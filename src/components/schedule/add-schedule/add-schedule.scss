@@ -1,3 +1,5 @@
+@use "@D/common/style/_variables" as *;
+
 .add-schedule-draggable-modal {
   .ant-modal-header {
     .ant-modal-title {
@@ -12,7 +14,7 @@
           height: 80px;
           font-size: 50px;
           border-radius: 20px;
-          background-color: #91003c;
+          background-color: $primary-color;
         }
       }
     }

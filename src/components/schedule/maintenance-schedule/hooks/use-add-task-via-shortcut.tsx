@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import {ActionType} from "@ant-design/pro-table";
-import {defaultTableRowData} from "@D/components/schedule/maintain-schedule/maintain-schedule-helper";
+import {defaultTableRowData} from "@D/components/schedule/maintenance-schedule/maintenance-schedule-helper";
 
 export const useAddTaskViaShortcut = () => {
     const actionRef = useRef<ActionType>();
