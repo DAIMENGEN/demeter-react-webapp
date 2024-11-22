@@ -1,10 +1,10 @@
 import React from "react";
 import {Button, Card, Carousel, Flex, Image, Typography} from "antd";
-import full_schedule_day_png from "@D/assets/images/schedule/full-schedule-day.png";
-import full_schedule_week_png from "@D/assets/images/schedule/full-schedule-week.png";
-import full_schedule_month_png from "@D/assets/images/schedule/full-schedule-month.png";
-import full_schedule_quarter_png from "@D/assets/images/schedule/full-schedule-quarter.png";
-import full_schedule_year_png from "@D/assets/images/schedule/full-schedule-year.png";
+import full_schedule_day_png from "@D/assets/images/png/full-schedule-day.png";
+import full_schedule_week_png from "@D/assets/images/png/full-schedule-week.png";
+import full_schedule_month_png from "@D/assets/images/png/full-schedule-month.png";
+import full_schedule_quarter_png from "@D/assets/images/png/full-schedule-quarter.png";
+import full_schedule_year_png from "@D/assets/images/png/full-schedule-year.png";
 import {useNavigate} from "react-router-dom";
 
 export const NavigationScheduleMenu: React.FC = () => {

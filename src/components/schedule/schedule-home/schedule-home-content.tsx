@@ -1,14 +1,14 @@
 import "./schedule-home-content.scss";
 import {Button, Card, Collapse, Flex, Image, Layout} from "antd";
 import {DateUtil} from "@D/utils/date/date-util";
-import schedulerIllustrationSvg from "@D/assets/images/schedule/scheduler-illustration.svg";
+import schedulerIllustrationSvg from "@D/assets/images/svg/scheduler-illustration.svg";
 import {FeedbackIcon01} from "@D/common/icons/feedback-icon-01";
 import {QuickIcon01} from "@D/common/icons/quick-icon-01";
 import {CaretRightOutlined} from "@ant-design/icons";
-import scheduleTemplate from "@D/assets/images/schedule/schedule_template.svg";
-import fullScheduleDayPng from "@D/assets/images/schedule/full-schedule-day.png";
-import getStartedSvg from "@D/assets/images/common/get-started-svg.svg";
-import helpCenterSvg from "@D/assets/images/common/help-center-svg.svg";
+import scheduleTemplate from "@D/assets/images/svg/schedule_template.svg";
+import fullScheduleDayPng from "@D/assets/images/png/full-schedule-day.png";
+import getStartedSvg from "@D/assets/images/svg/get-started-svg.svg";
+import helpCenterSvg from "@D/assets/images/svg/help-center-svg.svg";
 import React, {useState} from "react";
 import {useUsername} from "@D/core/hooks/use-username";
 

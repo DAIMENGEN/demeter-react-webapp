@@ -2,7 +2,7 @@ import "./home-page.scss";
 import React, {useCallback} from "react";
 import {Layout, Menu, MenuProps, Space} from "antd";
 import {useDemeterSelector} from "@D/core/store/demeter-hook";
-import header_logo_white_image from "../../assets/images/logo/header_logo_white.png"
+import header_logo_white_image from "../../assets/images/png/header_logo_white.png"
 import {HomeOutlined, LogoutOutlined} from "@ant-design/icons";
 import {Outlet, useNavigate} from "react-router-dom";
 import {EmployeeService} from "@D/core/service/employee-service";
