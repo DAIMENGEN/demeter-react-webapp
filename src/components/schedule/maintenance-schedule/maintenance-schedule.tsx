@@ -1,7 +1,7 @@
 import "./maintenance-schedule.scss";
 import React, {useState} from "react";
 import {EditableProTable} from "@ant-design/pro-table";
-import {Button} from "antd";
+import {Button, Checkbox, Flex, Popover} from "antd";
 import {
     defaultTableRowData,
     MaintainScheduleTableRow
@@ -18,15 +18,17 @@ import {ColumnIcon01} from "@D/common/icons/column-icon-01";
 
 export const MaintenanceSchedule = () => {
     const scroll = useMaintenanceScheduleTableScroll();
+    const {columns, showColumns, setShowColumns} = useMaintenanceScheduleTableColumns();
     const [dataSource, setDataSource] = useState<readonly MaintainScheduleTableRow[]>([]);
     const [editableKeys, setEditableRowKeys] = useState<Array<React.Key>>(dataSource.map((item) => item.id));
     const {actionRef, tableRef, expandedRowKeys, setExpandedRowKeys, setParentKey, parentKey} = useAddTaskViaShortcut();
+
     return (
         <div ref={tableRef}>
             <EditableProTable<MaintainScheduleTableRow>
                 actionRef={actionRef}
                 headerTitle="Maintain Schedule Task"
-                columns={useMaintenanceScheduleTableColumns()}
+                columns={columns}
                 rowKey="id"
                 scroll={scroll}
                 value={dataSource}
@@ -56,14 +58,24 @@ export const MaintenanceSchedule = () => {
                 }}
                 toolBarRender={() => {
                     return [
-                        <Button key="column"
-                                type="primary"
-                                icon={<ColumnIcon01 width={20} height={20} color={"#fff"}/>}
-                                onClick={() => {
-                                    // column
-                                    console.log("column display");
-                                }}
-                        />,
+                        <Popover title={"Column"}
+                                 trigger="click"
+                                 placement="leftTop"
+                                 content={<Checkbox.Group style={{width: "100%"}}
+                                                          defaultValue={showColumns}
+                                                          onChange={(checkedValues) => setShowColumns(checkedValues)}>
+                                     <Flex vertical={true} gap={"small"}>
+                                         {
+                                             columns.map(column =>
+                                                 <Checkbox key={column.key}
+                                                           value={column.key}>{column.title as string}</Checkbox>)
+                                         }
+                                     </Flex>
+                                 </Checkbox.Group>}>
+                            <Button key="column"
+                                    type="primary"
+                                    icon={<ColumnIcon01 width={20} height={20} color={"#fff"}/>}/>
+                        </Popover>,
                         <Button key="save"
                                 type="primary"
                                 icon={<SaveIcon01 width={20} height={20} color={"#fff"}/>}

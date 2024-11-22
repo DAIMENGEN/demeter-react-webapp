@@ -85,7 +85,8 @@ export const useMaintenanceScheduleTableColumns = () => {
             width: 100,
         },
         {
-            title: "操作",
+            key: "operation",
+            title: "Operation",
             valueType: "option",
             width: 100,
             render: () => {
@@ -93,10 +94,18 @@ export const useMaintenanceScheduleTableColumns = () => {
             },
         },
     ], [taskStatusOptions, taskTypeOptions]);
+    const [showColumns, setShowColumns] = useState(columns.map(column => column.key));
     useEffect(() => {
         const projectTaskService = ProjectTaskService.getInstance();
         projectTaskService.getProjectTaskTypeSelectOptionsRequest(setTaskTypeOptions);
         projectTaskService.getProjectTaskStatusSelectOptionsRequest(setTaskStatusOptions);
     }, []);
-    return columns
+    return {
+        columns: columns.map(column => ({
+            ...column,
+            hidden: !showColumns.includes(column.key),
+        })),
+        showColumns,
+        setShowColumns,
+    }
 }
