@@ -3,7 +3,7 @@ import {EntityData} from "@D/utils/entity/entity-data";
 export interface IEmployeeEntity extends EntityData {
     account: string;
     password: string;
-    username: string;
+    employeeName: string;
     email: string;
     phone: string;
     isActive: boolean;
@@ -13,7 +13,7 @@ export class EmployeeEntity implements IEmployeeEntity {
     id: string;
     account: string;
     password: string;
-    username: string;
+    employeeName: string;
     email: string;
     phone: string;
     isActive: boolean;
@@ -22,7 +22,7 @@ export class EmployeeEntity implements IEmployeeEntity {
         id: string,
         account: string,
         password: string,
-        username: string,
+        employeeName: string,
         email: string,
         phone: string,
         isActive: boolean,
@@ -30,7 +30,7 @@ export class EmployeeEntity implements IEmployeeEntity {
         this.id = id;
         this.account = account;
         this.password = password;
-        this.username = username;
+        this.employeeName = employeeName;
         this.email = email;
         this.phone = phone;
         this.isActive = isActive;

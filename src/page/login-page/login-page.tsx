@@ -22,7 +22,7 @@ export const LoginPage: React.FC = () => {
             (token: string) => {
                 success("Login Successfully").then(() => {
                     localStorage.setItem("token", token);
-                    employeeService.getUsernameRequest(
+                    employeeService.getCurrentEmployeeNameRequest(
                         (username: string) => dispatch(setUsernameAction(username)),
                         (error: Error) => console.error(error)
                     );
