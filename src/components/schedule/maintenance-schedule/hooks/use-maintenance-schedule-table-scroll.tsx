@@ -1,7 +1,7 @@
 import {useEffect, useMemo, useState} from "react";
 
 export const useMaintenanceScheduleTableScroll = () => {
-    const otherHeight = useMemo(() => 295, []);
+    const otherHeight = useMemo(() => 230, []);
     const [scroll, setScroll] = useState({x: "max-content", y: window.innerHeight - otherHeight});
     useEffect(() => {
         const resize = () => {

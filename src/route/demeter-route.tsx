@@ -17,7 +17,7 @@ export const DemeterRoute: React.FC = () => {
                 <Route index element={<NavigationMenu/>}/>
                 <Route path="/home-page/schedule-home" element={<ScheduleHome/>}>
                     <Route index element={<ScheduleHomeContent/>}/>
-                    <Route path="/home-page/schedule-home/maintain-schedule" element={<MaintenanceSchedule/>}/>
+                    <Route path="/home-page/schedule-home/maintenance-schedule" element={<MaintenanceSchedule/>}/>
                 </Route>
             </Route>
         </Routes>
