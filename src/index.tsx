@@ -6,7 +6,7 @@ import {Provider} from "react-redux";
 import ReactDOM from "react-dom/client";
 import {PersistGate} from "redux-persist/integration/react";
 import {demeterStore, persistor} from "@D/core/store/demeter-store";
-import {PRIMARY_COLOR} from "@D/common/style/color";
+import {PRIMARY_COLOR} from "@D/common/style/theme";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
