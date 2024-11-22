@@ -2,6 +2,7 @@ import {BaseService} from "@D/core/service/service";
 import {EmployeeEntity} from "@D/core/entity/employee-entity";
 import {EntityData} from "@D/utils/entity/entity-data";
 import {EntityDataFactory} from "@D/utils/entity/entity-data-factory";
+import {SelectProps} from "antd";
 
 export class EmployeeService extends BaseService<EmployeeEntity> {
 
@@ -50,5 +51,10 @@ export class EmployeeService extends BaseService<EmployeeEntity> {
     public getUsernameRequest(success: (username: string) => void, failure?: (error: Error) => void): void {
         const URL = "/getUsernameRoute";
         this.get<string>(URL).then(success).catch(failure);
+    }
+
+    public getEmployeeSelectOptionsRequest(employeeName: string, success: (options: SelectProps["options"]) => void, failure?: (error: Error) => void): void {
+        const URL = "/getEmployeeSelectOptionsRoute";
+        this.post<SelectProps["options"]>(URL, {employeeName}).then(success).catch(failure);
     }
 }

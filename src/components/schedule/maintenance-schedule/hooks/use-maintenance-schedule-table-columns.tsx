@@ -1,17 +1,76 @@
 import {ProColumns} from "@ant-design/pro-table";
 import {MaintainScheduleTableRow} from "@D/components/schedule/maintenance-schedule/maintenance-schedule-helper";
-import {useEffect, useMemo, useState} from "react";
+import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {ProjectTaskService} from "@D/core/service/project-task-service";
-import {SelectProps} from "antd";
+import {SelectProps, Spin} from "antd";
+import {debounce} from "lodash";
+import {EmployeeService} from "@D/core/service/employee-service";
+import {useDemeterSelector} from "@D/core/store/demeter-hook";
 
 export const useMaintenanceScheduleTableColumns = () => {
+    const fetchEmployeeRef = useRef(0);
+
+    const [fetchingEmployee, setFetchingEmployee] = useState(false);
+    const [employeeOptions, setEmployeeOptions] = useState<SelectProps["options"]>();
     const [taskTypeOptions, setTaskTypeOptions] = useState<SelectProps["options"]>();
     const [taskStatusOptions, setTaskStatusOptions] = useState<SelectProps["options"]>();
+    const employeeName = useDemeterSelector(state => state.employeeStore.username);
+
+    const employeeService = useMemo(() => EmployeeService.getInstance(), []);
+    const projectTaskService = useMemo(() => ProjectTaskService.getInstance(), []);
+
+    const getEmployeeOptions = useCallback((employeeName: string, success: (options: SelectProps["options"]) => void) => {
+        employeeService.getEmployeeSelectOptionsRequest(employeeName, options => success(options));
+    }, [employeeService]);
+
+    const debounceFetcher = useMemo(() => {
+        const loadOptions = (value: string) => {
+            fetchEmployeeRef.current += 1;
+            const fetchId = fetchEmployeeRef.current;
+            setEmployeeOptions([]);
+            setFetchingEmployee(true);
+            getEmployeeOptions(value, options => {
+                if (fetchId !== fetchEmployeeRef.current) return;
+                options && setEmployeeOptions(options);
+                setFetchingEmployee(false);
+            });
+        };
+        return debounce(loadOptions, 800);
+    }, [getEmployeeOptions]);
+
     const columns: Array<ProColumns<MaintainScheduleTableRow>> = useMemo(() => [
         {
             key: "name",
             title: "TaskName",
             dataIndex: "name",
+        },
+        {
+            key: "taskOwner",
+            title: "TaskOwner",
+            dataIndex: "taskOwner",
+            valueType: "select",
+            minWidth: 180,
+            fieldProps: {
+                options: employeeOptions,
+                showSearch: true,
+                filterOption: false,
+                onSearch: debounceFetcher,
+                notFoundContent: fetchingEmployee ? <Spin size="small"/> : "Not Found",
+            }
+        },
+        {
+            key: "taskAssigner",
+            title: "TaskAssigner",
+            dataIndex: "taskAssigner",
+            valueType: "select",
+            minWidth: 180,
+            fieldProps: {
+                options: employeeOptions,
+                showSearch: true,
+                filterOption: false,
+                onSearch: debounceFetcher,
+                notFoundContent: fetchingEmployee ? <Spin size="small"/> : "Not Found",
+            }
         },
         {
             key: "taskType",
@@ -21,6 +80,7 @@ export const useMaintenanceScheduleTableColumns = () => {
             minWidth: 180,
             fieldProps: {
                 options: taskTypeOptions,
+                showSearch: true,
             },
         },
         {
@@ -31,6 +91,7 @@ export const useMaintenanceScheduleTableColumns = () => {
             minWidth: 180,
             fieldProps: {
                 options: taskStatusOptions,
+                showSearch: true,
             },
         },
         {
@@ -93,13 +154,15 @@ export const useMaintenanceScheduleTableColumns = () => {
                 return null;
             },
         },
-    ], [taskStatusOptions, taskTypeOptions]);
+    ], [debounceFetcher, employeeOptions, fetchingEmployee, taskStatusOptions, taskTypeOptions]);
     const [showColumns, setShowColumns] = useState(columns.map(column => column.key));
+
     useEffect(() => {
-        const projectTaskService = ProjectTaskService.getInstance();
         projectTaskService.getProjectTaskTypeSelectOptionsRequest(setTaskTypeOptions);
         projectTaskService.getProjectTaskStatusSelectOptionsRequest(setTaskStatusOptions);
-    }, []);
+        getEmployeeOptions(employeeName, options => setEmployeeOptions(options));
+    }, [employeeName, getEmployeeOptions, projectTaskService]);
+
     return {
         columns: columns.map(column => ({
             ...column,
