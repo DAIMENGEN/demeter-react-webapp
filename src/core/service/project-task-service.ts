@@ -1,7 +1,7 @@
 import {BaseService} from "@D/core/service/service";
 import {ProjectTaskEntity} from "@D/core/entity/project-task-entity";
-import {EntityDataFactory} from "@D/utils/entity/entity-data-factory";
 import {SelectProps} from "antd";
+import {EntityData, EntityDataFactory} from "@D/core/entity/entity-data";
 
 export class ProjectTaskService extends BaseService<ProjectTaskEntity> {
 
@@ -14,7 +14,7 @@ export class ProjectTaskService extends BaseService<ProjectTaskEntity> {
         return ProjectTaskService.instance;
     }
 
-    public create(partialFields: Omit<ProjectTaskEntity, keyof ProjectTaskEntity>): ProjectTaskEntity {
+    public create(partialFields: Omit<ProjectTaskEntity, keyof EntityData>): ProjectTaskEntity {
         return EntityDataFactory.create<ProjectTaskEntity>(ProjectTaskEntity, partialFields);
     }
 

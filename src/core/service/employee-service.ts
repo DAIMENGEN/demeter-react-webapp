@@ -1,7 +1,6 @@
 import {BaseService} from "@D/core/service/service";
 import {EmployeeEntity} from "@D/core/entity/employee-entity";
-import {EntityData} from "@D/utils/entity/entity-data";
-import {EntityDataFactory} from "@D/utils/entity/entity-data-factory";
+import {EntityData, EntityDataFactory} from "@D/core/entity/entity-data";
 import {SelectProps} from "antd";
 
 export class EmployeeService extends BaseService<EmployeeEntity> {

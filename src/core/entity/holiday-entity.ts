@@ -1,4 +1,4 @@
-import {EntityData} from "@D/utils/entity/entity-data";
+import {EntityData} from "@D/core/entity/entity-data";
 import {HolidayType} from "@D/core/constant/holiday-type";
 import {CountryCode} from "@D/core/constant/country-code";
 

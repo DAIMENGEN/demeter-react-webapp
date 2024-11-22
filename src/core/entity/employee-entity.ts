@@ -1,4 +1,4 @@
-import {EntityData} from "@D/utils/entity/entity-data";
+import {EntityData} from "@D/core/entity/entity-data";
 
 export interface IEmployeeEntity extends EntityData {
     account: string;

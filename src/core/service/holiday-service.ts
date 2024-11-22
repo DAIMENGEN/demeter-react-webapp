@@ -1,7 +1,6 @@
 import {BaseService} from "@D/core/service/service";
 import {HolidayEntity} from "@D/core/entity/holiday-entity";
-import {EntityData} from "@D/utils/entity/entity-data";
-import {EntityDataFactory} from "@D/utils/entity/entity-data-factory";
+import {EntityData, EntityDataFactory} from "@D/core/entity/entity-data";
 
 export class HolidayService extends BaseService<HolidayEntity> {
 

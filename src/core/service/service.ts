@@ -1,5 +1,5 @@
 import {HttpClient} from "@D/http/http-client";
-import {EntityData} from "@D/utils/entity/entity-data";
+import {EntityData} from "@D/core/entity/entity-data";
 
 export interface Service<T> {
 

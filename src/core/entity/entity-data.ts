@@ -1,5 +1,11 @@
 import {SnowflakeIdUtil} from "@D/utils/snowflake/snowflake-id-util";
-import {EntityData} from "@D/utils/entity/entity-data";
+
+/**
+ * Defines the common data structure for an entity.
+ */
+export type EntityData = {
+    id: string; // The unique identifier of the entity
+}
 
 export abstract class EntityDataFactory {
 
