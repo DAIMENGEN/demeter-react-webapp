@@ -7,7 +7,7 @@ import {useDemeterDispatch} from "@D/core/store/demeter-hook";
 import login_bg_image from "../../assets/images/jpeg/login-bg-image.jpeg";
 import login_logo_wr_image from "../../assets/images/jpg/login_logo_wr.jpg";
 import {EmployeeService} from "@D/core/service/employee-service";
-import {setUsernameAction} from "@D/core/store/features/employee-slice";
+import {setEmployeeNameAction} from "@D/core/store/features/employee-slice";
 
 export const LoginPage: React.FC = () => {
     const {Content} = Layout;
@@ -23,7 +23,7 @@ export const LoginPage: React.FC = () => {
                 success("Login Successfully").then(() => {
                     localStorage.setItem("token", token);
                     employeeService.getCurrentEmployeeNameRequest(
-                        (username: string) => dispatch(setUsernameAction(username)),
+                        (username: string) => dispatch(setEmployeeNameAction(username)),
                         (error: Error) => console.error(error)
                     );
                     navigate("/home-page");

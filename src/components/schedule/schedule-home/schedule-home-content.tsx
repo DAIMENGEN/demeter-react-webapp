@@ -10,11 +10,11 @@ import fullScheduleDayPng from "@D/assets/images/png/full-schedule-day.png";
 import getStartedSvg from "@D/assets/images/svg/get-started-svg.svg";
 import helpCenterSvg from "@D/assets/images/svg/help-center-svg.svg";
 import React, {useState} from "react";
-import {useUsername} from "@D/core/hooks/use-username";
+import {useEmployeeName} from "@D/core/hooks/use-employee-name";
 
 export const ScheduleHomeContent = () => {
     const {Header, Content} = Layout;
-    const username = useUsername();
+    const username = useEmployeeName();
     const [contentActiveKeys, setContentActiveKeys] = useState<Array<string>>(["recently-visited", "update-feed"]);
     return (
         <div className={`schedule-home-content`}>

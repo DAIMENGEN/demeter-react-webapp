@@ -5,16 +5,16 @@ import {ProjectTaskService} from "@D/core/service/project-task-service";
 import {SelectProps, Spin} from "antd";
 import {debounce} from "lodash";
 import {EmployeeService} from "@D/core/service/employee-service";
-import {useDemeterSelector} from "@D/core/store/demeter-hook";
+import {useEmployeeName} from "@D/core/hooks/use-employee-name";
 
 export const useMaintenanceScheduleTableColumns = () => {
     const fetchEmployeeRef = useRef(0);
 
+    const employeeName = useEmployeeName();
     const [fetchingEmployee, setFetchingEmployee] = useState(false);
     const [employeeOptions, setEmployeeOptions] = useState<SelectProps["options"]>();
     const [taskTypeOptions, setTaskTypeOptions] = useState<SelectProps["options"]>();
     const [taskStatusOptions, setTaskStatusOptions] = useState<SelectProps["options"]>();
-    const employeeName = useDemeterSelector(state => state.employeeStore.username);
 
     const employeeService = useMemo(() => EmployeeService.getInstance(), []);
     const projectTaskService = useMemo(() => ProjectTaskService.getInstance(), []);

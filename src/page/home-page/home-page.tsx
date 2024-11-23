@@ -1,16 +1,16 @@
 import "./home-page.scss";
 import React, {useCallback} from "react";
 import {Layout, Menu, MenuProps, Space} from "antd";
-import {useDemeterSelector} from "@D/core/store/demeter-hook";
 import header_logo_white_image from "../../assets/images/png/header_logo_white.png"
 import {HomeOutlined, LogoutOutlined} from "@ant-design/icons";
 import {Outlet, useNavigate} from "react-router-dom";
 import {EmployeeService} from "@D/core/service/employee-service";
+import {useEmployeeName} from "@D/core/hooks/use-employee-name";
 
 export const HomePage: React.FC = () => {
     const {Header, Content} = Layout;
     const navigate = useNavigate();
-    const username = useDemeterSelector(state => state.employeeStore.username);
+    const employeeName = useEmployeeName();
     const onClick: MenuProps["onClick"] = useCallback((e: any) => {
         const {key} = e;
         switch (key) {
@@ -48,7 +48,7 @@ export const HomePage: React.FC = () => {
                 </Space>
                 <Space className="header-right">
                     <Space>
-                        <span style={{color: "white", fontSize: "16px"}}>{username}</span>
+                        <span style={{color: "white", fontSize: "16px"}}>{employeeName}</span>
                     </Space>
                     <Menu className="header-right-menu"
                           onClick={onClick}
