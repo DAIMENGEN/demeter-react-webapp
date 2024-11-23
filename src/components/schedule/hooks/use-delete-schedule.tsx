@@ -4,7 +4,7 @@ import {useDemeterDispatch} from "@D/core/store/demeter-hook";
 import {ProjectService} from "@D/core/service/project-service";
 import {ProjectEntity} from "@D/core/entity/project-entity";
 import {deleteProjectEntity} from "@D/core/store/features/project-slice";
-import {useAntdMessage} from "@D/core/hooks/use-antd-message";
+import {useAntdMessage} from "@D/common/hooks/message/use-antd-message";
 
 export const useDeleteSchedule = () => {
     const [modal, contextHolder] = Modal.useModal();
