@@ -1,6 +1,6 @@
 import "./schedule-home-content.scss";
 import {Button, Card, Collapse, Flex, Image, Layout} from "antd";
-import {DateUtil} from "@D/utils/date/date-util";
+import {DateUtils} from "@D/utils/date/date-utils";
 import schedulerIllustrationSvg from "@D/assets/images/svg/scheduler-illustration.svg";
 import {FeedbackIcon01} from "@D/icons/feedback-icon-01";
 import {QuickIcon01} from "@D/icons/quick-icon-01";
@@ -22,7 +22,7 @@ export const ScheduleHomeContent = () => {
                 <Flex vertical={false} justify={"space-between"}>
                     <Flex vertical={false}>
                         <div className={"title"}>
-                            <div>{DateUtil.getGreeting()}, {username} !</div>
+                            <div>{DateUtils.getGreeting()}, {username} !</div>
                             <div>Quickly access your recent boards, Inbox and workspaces</div>
                         </div>
                         <div className={"background"}>

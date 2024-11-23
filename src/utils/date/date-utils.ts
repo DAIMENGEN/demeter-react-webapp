@@ -1,4 +1,4 @@
-export class DateUtil {
+export class DateUtils {
     static getGreeting(): string {
         const currentHour = new Date().getHours();
         if (currentHour < 6) {
