@@ -10,7 +10,7 @@ import fullScheduleDayPng from "@D/assets/images/png/full-schedule-day.png";
 import getStartedSvg from "@D/assets/images/svg/get-started-svg.svg";
 import helpCenterSvg from "@D/assets/images/svg/help-center-svg.svg";
 import React, {useState} from "react";
-import {useEmployeeName} from "@D/core/hooks/use-employee-name";
+import {useEmployeeName} from "@D/core/hooks/employee/use-employee-name";
 
 export const ScheduleHomeContent = () => {
     const {Header, Content} = Layout;

@@ -5,7 +5,7 @@ import {ProjectTaskService} from "@D/core/service/project-task-service";
 import {SelectProps, Spin} from "antd";
 import {debounce} from "lodash";
 import {EmployeeService} from "@D/core/service/employee-service";
-import {useEmployeeName} from "@D/core/hooks/use-employee-name";
+import {useEmployeeName} from "@D/core/hooks/employee/use-employee-name";
 
 export const useMaintenanceScheduleTableColumns = () => {
     const fetchEmployeeRef = useRef(0);

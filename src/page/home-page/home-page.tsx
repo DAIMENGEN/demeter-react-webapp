@@ -5,7 +5,7 @@ import header_logo_white_image from "../../assets/images/png/header_logo_white.p
 import {HomeOutlined, LogoutOutlined} from "@ant-design/icons";
 import {Outlet, useNavigate} from "react-router-dom";
 import {EmployeeService} from "@D/core/service/employee-service";
-import {useEmployeeName} from "@D/core/hooks/use-employee-name";
+import {useEmployeeName} from "@D/core/hooks/employee/use-employee-name";
 
 export const HomePage: React.FC = () => {
     const {Header, Content} = Layout;

@@ -4,7 +4,7 @@ import {useDemeterDispatch} from "@D/core/store/demeter-hook";
 import {ProjectService} from "@D/core/service/project-service";
 import {addProjectEntity} from "@D/core/store/features/project-slice";
 import {setAddScheduleModalVisible} from "@D/core/store/features/schedule-slice";
-import {useAntdMessage} from "@D/common/hooks/message/use-antd-message";
+import {useAntdMessage} from "@D/core/hooks/message/use-antd-message";
 
 export const useAddSchedule = () => {
     const dispatch = useDemeterDispatch();

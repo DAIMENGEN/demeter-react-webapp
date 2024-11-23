@@ -2,7 +2,7 @@ import "./login-page.scss";
 import React, {useCallback} from "react";
 import {useNavigate} from "react-router-dom";
 import {Button, Form, Input, Layout, Space} from "antd";
-import {useAntdMessage} from "@D/common/hooks/message/use-antd-message";
+import {useAntdMessage} from "@D/core/hooks/message/use-antd-message";
 import {useDemeterDispatch} from "@D/core/store/demeter-hook";
 import login_bg_image from "../../assets/images/jpeg/login-bg-image.jpeg";
 import login_logo_wr_image from "../../assets/images/jpg/login_logo_wr.jpg";

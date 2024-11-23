@@ -3,7 +3,7 @@ import {setRenameScheduleId, setRenameScheduleModalVisible} from "@D/core/store/
 import {ProjectEntity} from "@D/core/entity/project-entity";
 import {useCallback} from "react";
 import {ProjectService} from "@D/core/service/project-service";
-import {useAntdMessage} from "@D/common/hooks/message/use-antd-message";
+import {useAntdMessage} from "@D/core/hooks/message/use-antd-message";
 import {updateProjectEntity} from "@D/core/store/features/project-slice";
 
 export const useRenameScheduleModal = () => {
