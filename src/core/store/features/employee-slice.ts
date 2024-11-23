@@ -1,22 +1,29 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 export type EmployeeStore = {
-    employeeName: string;
+    employeeId?: string;
+    employeeName?: string;
 };
 
 const initialState: EmployeeStore = {
-    employeeName: "",
+    employeeId: undefined,
+    employeeName: undefined,
 };
 
 const employeeStoreSlice = createSlice({
     name: "employee",
     initialState,
     reducers: {
+        setEmployeeIdAction: (state, action: PayloadAction<string>) => {
+            state.employeeId = action.payload;
+        },
         setEmployeeNameAction: (state, action: PayloadAction<string>) => {
             state.employeeName = action.payload;
         }
     }
 });
 
-export const {setEmployeeNameAction} = employeeStoreSlice.actions;
+export const {
+    setEmployeeIdAction,
+    setEmployeeNameAction} = employeeStoreSlice.actions;
 export default employeeStoreSlice.reducer;

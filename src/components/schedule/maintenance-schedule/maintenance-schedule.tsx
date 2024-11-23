@@ -3,22 +3,24 @@ import React, {useState} from "react";
 import {EditableProTable} from "@ant-design/pro-table";
 import {Button, Checkbox, Flex, Popover} from "antd";
 import {
-    defaultTableRowData,
+    createDefaultRecord,
     MaintainScheduleTableRow
 } from "@D/components/schedule/maintenance-schedule/maintenance-schedule-helper";
 import {
-    useMaintenanceScheduleTableColumns
-} from "@D/components/schedule/maintenance-schedule/hooks/use-maintenance-schedule-table-columns";
+    useMaintenanceScheduleTableConfigs
+} from "@D/components/schedule/maintenance-schedule/hooks/use-maintenance-schedule-table-configs";
 import {useAddTaskViaShortcut} from "@D/components/schedule/maintenance-schedule/hooks/use-add-task-via-shortcut";
 import {
     useMaintenanceScheduleTableScroll
 } from "@D/components/schedule/maintenance-schedule/hooks/use-maintenance-schedule-table-scroll";
 import {SaveIcon01} from "@D/icons/save-icon-01";
 import {ColumnIcon01} from "@D/icons/column-icon-01";
+import {useEmployeeId} from "@D/core/hooks/employee/use-employee-id";
 
 export const MaintenanceSchedule = () => {
+    const employeeId = useEmployeeId();
     const scroll = useMaintenanceScheduleTableScroll();
-    const {columns, showColumns, setShowColumns} = useMaintenanceScheduleTableColumns();
+    const {columns, showColumns, setShowColumns} = useMaintenanceScheduleTableConfigs();
     const [dataSource, setDataSource] = useState<readonly MaintainScheduleTableRow[]>([]);
     const [editableKeys, setEditableRowKeys] = useState<Array<React.Key>>(dataSource.map((item) => item.id));
     const {actionRef, tableRef, expandedRowKeys, setExpandedRowKeys, setParentKey, parentKey} = useAddTaskViaShortcut();
@@ -54,7 +56,7 @@ export const MaintenanceSchedule = () => {
                     parentKey: parentKey,
                     creatorButtonText: "Add Task",
                     onClick: () => parentKey! && setExpandedRowKeys(keys => [...keys, parentKey]),
-                    record: () => (defaultTableRowData(parentKey)),
+                    record: () => createDefaultRecord(employeeId, parentKey),
                 }}
                 toolBarRender={() => {
                     return [

@@ -1,8 +1,10 @@
 import React, {useEffect, useRef, useState} from "react";
 import {ActionType} from "@ant-design/pro-table";
-import {defaultTableRowData} from "@D/components/schedule/maintenance-schedule/maintenance-schedule-helper";
+import {createDefaultRecord} from "@D/components/schedule/maintenance-schedule/maintenance-schedule-helper";
+import {useEmployeeId} from "@D/core/hooks/employee/use-employee-id";
 
 export const useAddTaskViaShortcut = () => {
+    const employeeId = useEmployeeId();
     const actionRef = useRef<ActionType>();
     const tableRef = useRef<HTMLDivElement>(null);
     const [parentKey, setParentKey] = useState<string | undefined>(undefined);
@@ -14,7 +16,7 @@ export const useAddTaskViaShortcut = () => {
                 if (event.ctrlKey && event.key === 'd') {
                     event.preventDefault();
                     event.stopPropagation();
-                    actionRef.current?.addEditRecord(defaultTableRowData(parentKey), {
+                    actionRef.current?.addEditRecord(createDefaultRecord(employeeId, parentKey), {
                         parentKey: parentKey,
                         newRecordType: "dataSource",
                     });
@@ -28,6 +30,6 @@ export const useAddTaskViaShortcut = () => {
                 window.removeEventListener("keydown", handleKeyDown);
             };
         }
-    }, [parentKey]);
+    }, [employeeId, parentKey]);
     return {actionRef, tableRef, parentKey, expandedRowKeys, setParentKey, setExpandedRowKeys};
 }

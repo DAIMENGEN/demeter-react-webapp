@@ -8,11 +8,11 @@ export type MaintainScheduleTableRow = ProjectTaskEntity & {
     children?: Array<MaintainScheduleTableRow>;
 }
 
-export const defaultTableRowData = (parentKey?: string) => ({
+export const createDefaultRecord = (employeeId: string, parentKey?: string) => ({
     id: SnowflakeIdUtil.nextId().toString(),
     name: "New Schedule",
-    taskOwner: "1891390000000000000",
-    taskAssigner: "1891390000000000000",
+    taskOwner: employeeId,
+    taskAssigner: employeeId,
     taskType: 1,
     taskStatus: 3,
     startDateTime: dayjs().format("YYYY-MM-DD"),

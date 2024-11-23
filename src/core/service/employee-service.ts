@@ -47,6 +47,11 @@ export class EmployeeService extends BaseService<EmployeeEntity> {
         this.post<EmployeeEntity>(URL, {newPassword, oldPassword}).then(success).catch(failure);
     }
 
+    public getCurrentEmployeeIdRequest(success: (employeeId: string) => void, failure?: (error: Error) => void): void {
+        const URL = "/getCurrentEmployeeIdRoute";
+        this.get<string>(URL).then(success).catch(failure);
+    }
+
     public getCurrentEmployeeNameRequest(success: (username: string) => void, failure?: (error: Error) => void): void {
         const URL = "/getCurrentEmployeeNameRoute";
         this.get<string>(URL).then(success).catch(failure);

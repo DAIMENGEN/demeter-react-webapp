@@ -6,10 +6,11 @@ import {SelectProps, Spin} from "antd";
 import {debounce} from "lodash";
 import {EmployeeService} from "@D/core/service/employee-service";
 import {useEmployeeName} from "@D/core/hooks/employee/use-employee-name";
+import {useEmployeeId} from "@D/core/hooks/employee/use-employee-id";
 
-export const useMaintenanceScheduleTableColumns = () => {
+export const useMaintenanceScheduleTableConfigs = () => {
     const fetchEmployeeRef = useRef(0);
-
+    const employeeId = useEmployeeId();
     const employeeName = useEmployeeName();
     const [fetchingEmployee, setFetchingEmployee] = useState(false);
     const [employeeOptions, setEmployeeOptions] = useState<SelectProps["options"]>();
@@ -24,19 +25,24 @@ export const useMaintenanceScheduleTableColumns = () => {
     }, [employeeService]);
 
     const debounceFetcher = useMemo(() => {
+        const defaultOptions = [{label: employeeName, value: employeeId}];
         const loadOptions = (value: string) => {
             fetchEmployeeRef.current += 1;
             const fetchId = fetchEmployeeRef.current;
-            setEmployeeOptions([]);
             setFetchingEmployee(true);
-            getEmployeeOptions(value, options => {
-                if (fetchId !== fetchEmployeeRef.current) return;
-                options && setEmployeeOptions(options);
-                setFetchingEmployee(false);
-            });
+            if (value) {
+                getEmployeeOptions(value, options => {
+                    if (fetchId !== fetchEmployeeRef.current) return;
+                    if (options) {
+                        const find = options.find(option => option.value === employeeId);
+                        setEmployeeOptions(find ? options : [...options, ...defaultOptions]);
+                    }
+                    setFetchingEmployee(false);
+                });
+            }
         };
         return debounce(loadOptions, 800);
-    }, [getEmployeeOptions]);
+    }, [employeeId, employeeName, getEmployeeOptions]);
 
     const columns: Array<ProColumns<MaintainScheduleTableRow>> = useMemo(() => [
         {
@@ -169,6 +175,6 @@ export const useMaintenanceScheduleTableColumns = () => {
             hidden: !showColumns.includes(column.key),
         })),
         showColumns,
-        setShowColumns,
+        setShowColumns
     }
 }
