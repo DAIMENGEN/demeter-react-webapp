@@ -1,12 +1,12 @@
-import "./rename-schedule.scss";
+import "./schedule-rename.scss";
 import React, {useCallback, useEffect, useState} from "react";
 import {Form, Input} from "antd";
 import {FullDraggableModal} from "full-flex-ui";
-import {useRenameScheduleModal} from "@D/components/schedule/rename-schedule/hooks/use-rename-schedule-modal";
+import {useRenameScheduleModal} from "@D/components/schedule/schedule-rename/hooks/use-rename-schedule-modal";
 import {ProjectEntity} from "@D/core/entity/project-entity";
 import {ProjectService} from "@D/core/service/project-service";
 
-export const RenameSchedule = () => {
+export const ScheduleRename = () => {
     const [form] = Form.useForm();
     const [project, setProject] = useState<ProjectEntity>();
     const {
@@ -24,7 +24,7 @@ export const RenameSchedule = () => {
             renameSchedule(updateProject);
             setRenameScheduleModalVisible(false);
         } else {
-            console.error("RenameSchedule: Project is undefined");
+            console.error("ScheduleRename: Project is undefined");
         }
     }, [project, renameSchedule, setRenameScheduleModalVisible]);
 
@@ -38,7 +38,7 @@ export const RenameSchedule = () => {
         }
     }, [form, renameScheduleId, renameScheduleModalVisible]);
     return (
-        <FullDraggableModal classNames={{content: "rename-schedule-draggable-modal"}}
+        <FullDraggableModal classNames={{content: "schedule-rename-draggable-modal"}}
                             open={renameScheduleModalVisible}
                             title={"Rename schedule"}
                             closable={true}

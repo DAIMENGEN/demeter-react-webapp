@@ -1,23 +1,23 @@
-import "./add-schedule.scss";
+import "./schedule-create.scss";
 import dayjs from "dayjs";
 import React, {useState} from "react";
 import {Button, Flex, Form, Input, Select} from "antd";
 import {FullDraggableModal} from "full-flex-ui";
 import {useFormDateFieldRules} from "@D/core/hooks/form/form-field/use-form-date-filed-rules";
-import {useScheduleStatus} from "@D/components/schedule/add-schedule/hooks/use-schedule-status";
-import {useAddSchedule} from "@D/components/schedule/add-schedule/hooks/use-add-schedule";
+import {useScheduleStatus} from "@D/components/schedule/schedule-create/hooks/use-schedule-status";
+import {useCreateSchedule} from "@D/components/schedule/schedule-create/hooks/use-create-schedule";
 import {useDemeterDispatch, useDemeterSelector} from "@D/core/store/demeter-hook";
 import {setAddScheduleModalVisible} from "@D/core/store/features/schedule-slice";
 
-export const AddSchedule = () => {
+export const ScheduleCreate = () => {
     const {TextArea} = Input;
     const [form] = Form.useForm();
     const dispatch = useDemeterDispatch();
-    const {addScheduleHolderMessage, addSchedule} = useAddSchedule();
+    const {addScheduleHolderMessage, addSchedule} = useCreateSchedule();
     const [scheduleName, setScheduleName] = useState<string>("New Schedule");
     const addScheduleModalVisible = useDemeterSelector(state => state.scheduleStore.addScheduleModalVisible);
     return (
-        <FullDraggableModal classNames={{content: "add-schedule-draggable-modal"}}
+        <FullDraggableModal classNames={{content: "schedule-create-draggable-modal"}}
                             title={<div>
                                 <div>Add schedule</div>
                                 <Flex justify={"center"}>
@@ -35,7 +35,7 @@ export const AddSchedule = () => {
                             okText={"Add schedule"}
                             onOk={() => form.submit()}>
             {addScheduleHolderMessage}
-            <Form name={"add-schedule"} layout={"vertical"} form={form} onFinish={addSchedule} initialValues={{
+            <Form name={"schedule-create"} layout={"vertical"} form={form} onFinish={addSchedule} initialValues={{
                 "name": "New Schedule",
                 "status": 3,
                 "startDateTime": dayjs().format("YYYY-MM-DD")

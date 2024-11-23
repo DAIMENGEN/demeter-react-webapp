@@ -1,5 +1,5 @@
 import {ProColumns} from "@ant-design/pro-table";
-import {MaintainScheduleTableRow} from "@D/components/schedule/maintenance-schedule/maintenance-schedule-types";
+import {MaintainScheduleTableRow} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-types";
 import {useCallback, useEffect, useMemo, useRef, useState} from "react";
 import {ProjectTaskService} from "@D/core/service/project-task-service";
 import {SelectProps, Spin} from "antd";

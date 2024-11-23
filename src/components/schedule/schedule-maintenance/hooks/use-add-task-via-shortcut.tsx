@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import {ActionType} from "@ant-design/pro-table";
 import {useEmployeeId} from "@D/core/hooks/employee/use-employee-id";
-import {MaintenanceScheduleUtils} from "@D/components/schedule/maintenance-schedule/maintenance-schedule-utils";
+import {ScheduleMaintenanceUtils} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-utils";
 
 export const useAddTaskViaShortcut = () => {
     const employeeId = useEmployeeId();
@@ -16,7 +16,7 @@ export const useAddTaskViaShortcut = () => {
                 if (event.ctrlKey && event.key === 'd') {
                     event.preventDefault();
                     event.stopPropagation();
-                    actionRef.current?.addEditRecord(MaintenanceScheduleUtils.createDefaultRecord(employeeId, parentKey), {
+                    actionRef.current?.addEditRecord(ScheduleMaintenanceUtils.createDefaultRecord(employeeId, parentKey), {
                         parentKey: parentKey,
                         newRecordType: "dataSource",
                     });

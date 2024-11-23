@@ -13,12 +13,12 @@ import {useDemeterDispatch} from "@D/core/store/demeter-hook";
 import {SortIcon01} from "@D/icons/sort-icon-01";
 import {AddIcon01} from "@D/icons/add-icon-01";
 import {ImportIcon01} from "@D/icons/import-icon-01";
-import {AddSchedule} from "@D/components/schedule/add-schedule/add-schedule";
+import {ScheduleCreate} from "@D/components/schedule/schedule-create/schedule-create";
 import {useScheduleMenuItems} from "@D/components/schedule/schedule-home/hooks/use-schedule-menu-items";
 import {useDeleteSchedule} from "@D/components/schedule/schedule-home/hooks/use-delete-schedule";
 import {ProjectService} from "@D/core/service/project-service";
 import {setProjectEntities} from "@D/core/store/features/project-slice";
-import {RenameSchedule} from "@D/components/schedule/rename-schedule/rename-schedule";
+import {ScheduleRename} from "@D/components/schedule/schedule-rename/schedule-rename";
 import {Outlet} from "react-router-dom";
 import {
     setAddScheduleModalVisible,
@@ -216,8 +216,8 @@ export const ScheduleHome: React.FC = () => {
             <Layout className={"schedule-home-body"} style={{marginInlineStart: marginInlineStart}}>
                 <Outlet/>
             </Layout>
-            <AddSchedule/>
-            <RenameSchedule/>
+            <ScheduleCreate/>
+            <ScheduleRename/>
         </Layout>
     )
 }

@@ -1,8 +1,8 @@
 import dayjs from "dayjs";
 import {SnowflakeIdUtil} from "@D/utils/snowflake/snowflake-id-util";
-import {MaintainScheduleTableRow} from "@D/components/schedule/maintenance-schedule/maintenance-schedule-types";
+import {MaintainScheduleTableRow} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-types";
 
-export class MaintenanceScheduleUtils {
+export class ScheduleMaintenanceUtils {
     public static createDefaultRecord(employeeId: string, parentKey?: string): MaintainScheduleTableRow {
         return {
             id: SnowflakeIdUtil.nextId().toString(),

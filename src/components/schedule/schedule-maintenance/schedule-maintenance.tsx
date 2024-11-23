@@ -1,21 +1,21 @@
-import "./maintenance-schedule.scss";
+import "./schedule-maintenance.scss";
 import React, {useState} from "react";
 import {EditableProTable} from "@ant-design/pro-table";
 import {Button, Checkbox, Flex, Popover} from "antd";
 import {
     useMaintenanceScheduleTableConfigs
-} from "@D/components/schedule/maintenance-schedule/hooks/use-maintenance-schedule-table-configs";
-import {useAddTaskViaShortcut} from "@D/components/schedule/maintenance-schedule/hooks/use-add-task-via-shortcut";
+} from "@D/components/schedule/schedule-maintenance/hooks/use-maintenance-schedule-table-configs";
+import {useAddTaskViaShortcut} from "@D/components/schedule/schedule-maintenance/hooks/use-add-task-via-shortcut";
 import {
     useMaintenanceScheduleTableScroll
-} from "@D/components/schedule/maintenance-schedule/hooks/use-maintenance-schedule-table-scroll";
+} from "@D/components/schedule/schedule-maintenance/hooks/use-maintenance-schedule-table-scroll";
 import {SaveIcon01} from "@D/icons/save-icon-01";
 import {ColumnIcon01} from "@D/icons/column-icon-01";
 import {useEmployeeId} from "@D/core/hooks/employee/use-employee-id";
-import {MaintainScheduleTableRow} from "@D/components/schedule/maintenance-schedule/maintenance-schedule-types";
-import {MaintenanceScheduleUtils} from "@D/components/schedule/maintenance-schedule/maintenance-schedule-utils";
+import {MaintainScheduleTableRow} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-types";
+import {ScheduleMaintenanceUtils} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-utils";
 
-export const MaintenanceSchedule = () => {
+export const ScheduleMaintenance = () => {
     const employeeId = useEmployeeId();
     const scroll = useMaintenanceScheduleTableScroll();
     const {columns, showColumns, setShowColumns} = useMaintenanceScheduleTableConfigs();
@@ -54,7 +54,7 @@ export const MaintenanceSchedule = () => {
                     parentKey: parentKey,
                     creatorButtonText: "Add Task",
                     onClick: () => parentKey! && setExpandedRowKeys(keys => [...keys, parentKey]),
-                    record: () => MaintenanceScheduleUtils.createDefaultRecord(employeeId, parentKey),
+                    record: () => ScheduleMaintenanceUtils.createDefaultRecord(employeeId, parentKey),
                 }}
                 toolBarRender={() => {
                     return [
