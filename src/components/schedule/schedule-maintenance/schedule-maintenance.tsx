@@ -1,7 +1,7 @@
 import "./schedule-maintenance.scss";
 import React, {useState} from "react";
 import {EditableProTable} from "@ant-design/pro-table";
-import {Button, Checkbox, Flex, Popover} from "antd";
+import {Button, Checkbox, Flex, Popconfirm, Popover} from "antd";
 import {
     useMaintenanceScheduleTableConfigs
 } from "@D/components/schedule/schedule-maintenance/hooks/use-maintenance-schedule-table-configs";
@@ -14,17 +14,31 @@ import {ColumnIcon01} from "@D/icons/column-icon-01";
 import {useEmployeeId} from "@D/core/hooks/employee/use-employee-id";
 import {MaintainScheduleTableRow} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-types";
 import {ScheduleMaintenanceUtils} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-utils";
+import {DeleteIcon01} from "@D/icons/delete-icon-01";
+import {PRIMARY_COLOR} from "@D/core/style/theme";
+import {CopyIcon01} from "@D/icons/copy-icon-01";
+import {useAntdMessage} from "@D/core/hooks/message/use-antd-message";
 
 export const ScheduleMaintenance = () => {
     const employeeId = useEmployeeId();
+    const {contextHolderMessage, success} = useAntdMessage();
     const scroll = useMaintenanceScheduleTableScroll();
     const {columns, showColumns, setShowColumns} = useMaintenanceScheduleTableConfigs();
+    const [copyTableRow, setCopyTableRow] = useState<MaintainScheduleTableRow>();
     const [dataSource, setDataSource] = useState<readonly MaintainScheduleTableRow[]>([]);
     const [editableKeys, setEditableRowKeys] = useState<Array<React.Key>>(dataSource.map((item) => item.id));
-    const {actionRef, tableRef, expandedRowKeys, setExpandedRowKeys, setParentKey, parentKey} = useAddTaskViaShortcut();
+    const {
+        actionRef,
+        tableRef,
+        expandedRowKeys,
+        setExpandedRowKeys,
+        setParentKey,
+        parentKey
+    } = useAddTaskViaShortcut(copyTableRow);
 
     return (
         <div ref={tableRef}>
+            {contextHolderMessage}
             <EditableProTable<MaintainScheduleTableRow>
                 actionRef={actionRef}
                 headerTitle="Maintain Schedule Task"
@@ -32,7 +46,6 @@ export const ScheduleMaintenance = () => {
                 rowKey="id"
                 scroll={scroll}
                 value={dataSource}
-                onChange={setDataSource}
                 expandable={{
                     defaultExpandAllRows: true,
                     expandedRowKeys: expandedRowKeys,
@@ -54,7 +67,7 @@ export const ScheduleMaintenance = () => {
                     parentKey: parentKey,
                     creatorButtonText: "Add Task",
                     onClick: () => parentKey! && setExpandedRowKeys(keys => [...keys, parentKey]),
-                    record: () => ScheduleMaintenanceUtils.createDefaultRecord(employeeId, parentKey),
+                    record: () => ScheduleMaintenanceUtils.createRecord(employeeId, parentKey, copyTableRow),
                 }}
                 toolBarRender={() => {
                     return [
@@ -88,11 +101,34 @@ export const ScheduleMaintenance = () => {
                 editable={{
                     type: "multiple",
                     editableKeys,
-                    actionRender: (row, config, defaultDomes) => {
-                        return [defaultDomes.delete];
+                    actionRender: (row, config) => {
+                        return [
+                            <Button key={"copy"}
+                                    title={"Copy"}
+                                    icon={<CopyIcon01 width={20} height={20} color={PRIMARY_COLOR}/>}
+                                    onClick={() => {
+                                        setCopyTableRow(row)
+                                        success("Copy Successfully", 0.5).then();
+                                    }}/>,
+                            <Popconfirm key={"delete"}
+                                        placement={"left"}
+                                        title={`Delete the ${row.name}`}
+                                        description={"Are you sure to delete this row?"}
+                                        okText={"Yes"}
+                                        cancelText={"No"}
+                                        onConfirm={() => setDataSource(dataSource.filter(item => item.id !== row.id))}>
+                                <Button title={"Delete"}
+                                        icon={<DeleteIcon01 width={20} height={20} color={PRIMARY_COLOR}/>}/>
+                            </Popconfirm>,
+                        ];
                     },
                     onValuesChange: (record, recordList) => {
+                        // console.log('record:', record, 'recordList:', recordList);
                         setDataSource(recordList);
+                        if (!record && copyTableRow) {
+                            setCopyTableRow(undefined);
+                            success("Paste Successfully", 0.5).then();
+                        }
                     },
                     onChange: setEditableRowKeys,
                 }}

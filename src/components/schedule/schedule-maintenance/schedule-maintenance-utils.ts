@@ -3,7 +3,13 @@ import {SnowflakeIdUtil} from "@D/utils/snowflake/snowflake-id-util";
 import {MaintainScheduleTableRow} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-types";
 
 export class ScheduleMaintenanceUtils {
-    public static createDefaultRecord(employeeId: string, parentKey?: string): MaintainScheduleTableRow {
+    public static createRecord(employeeId: string, parentKey?: string, copyTableRow?: MaintainScheduleTableRow): MaintainScheduleTableRow {
+        if (copyTableRow) {
+            return {
+                ...copyTableRow,
+                id: SnowflakeIdUtil.nextId().toString()
+            }
+        }
         return {
             id: SnowflakeIdUtil.nextId().toString(),
             name: "New Schedule",

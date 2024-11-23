@@ -152,8 +152,8 @@ export const useMaintenanceScheduleTableConfigs = () => {
             width: 100,
         },
         {
-            key: "operation",
-            title: "Operation",
+            key: "action",
+            title: "Action",
             valueType: "option",
             width: 100,
             render: () => {
