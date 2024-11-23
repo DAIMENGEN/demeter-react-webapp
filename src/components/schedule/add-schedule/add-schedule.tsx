@@ -4,8 +4,8 @@ import React, {useState} from "react";
 import {Button, Flex, Form, Input, Select} from "antd";
 import {FullDraggableModal} from "full-flex-ui";
 import {useFormDateFieldRules} from "@D/core/hooks/form/form-field/use-form-date-filed-rules";
-import {useScheduleStatus} from "@D/components/schedule/hooks/use-schedule-status";
-import {useAddSchedule} from "@D/components/schedule/hooks/use-add-schedule";
+import {useScheduleStatus} from "@D/components/schedule/add-schedule/hooks/use-schedule-status";
+import {useAddSchedule} from "@D/components/schedule/add-schedule/hooks/use-add-schedule";
 import {useAddScheduleModalVisible} from "@D/components/schedule/hooks/use-add-schedule-modal-visible";
 
 export const AddSchedule = () => {
