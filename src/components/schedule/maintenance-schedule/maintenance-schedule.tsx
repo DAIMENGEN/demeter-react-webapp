@@ -3,10 +3,6 @@ import React, {useState} from "react";
 import {EditableProTable} from "@ant-design/pro-table";
 import {Button, Checkbox, Flex, Popover} from "antd";
 import {
-    createDefaultRecord,
-    MaintainScheduleTableRow
-} from "@D/components/schedule/maintenance-schedule/maintenance-schedule-helper";
-import {
     useMaintenanceScheduleTableConfigs
 } from "@D/components/schedule/maintenance-schedule/hooks/use-maintenance-schedule-table-configs";
 import {useAddTaskViaShortcut} from "@D/components/schedule/maintenance-schedule/hooks/use-add-task-via-shortcut";
@@ -16,6 +12,8 @@ import {
 import {SaveIcon01} from "@D/icons/save-icon-01";
 import {ColumnIcon01} from "@D/icons/column-icon-01";
 import {useEmployeeId} from "@D/core/hooks/employee/use-employee-id";
+import {MaintainScheduleTableRow} from "@D/components/schedule/maintenance-schedule/maintenance-schedule-types";
+import {MaintenanceScheduleUtils} from "@D/components/schedule/maintenance-schedule/maintenance-schedule-utils";
 
 export const MaintenanceSchedule = () => {
     const employeeId = useEmployeeId();
@@ -56,7 +54,7 @@ export const MaintenanceSchedule = () => {
                     parentKey: parentKey,
                     creatorButtonText: "Add Task",
                     onClick: () => parentKey! && setExpandedRowKeys(keys => [...keys, parentKey]),
-                    record: () => createDefaultRecord(employeeId, parentKey),
+                    record: () => MaintenanceScheduleUtils.createDefaultRecord(employeeId, parentKey),
                 }}
                 toolBarRender={() => {
                     return [
