@@ -13,8 +13,8 @@ import {useAddTaskViaShortcut} from "@D/components/schedule/maintenance-schedule
 import {
     useMaintenanceScheduleTableScroll
 } from "@D/components/schedule/maintenance-schedule/hooks/use-maintenance-schedule-table-scroll";
-import {SaveIcon01} from "@D/common/icons/save-icon-01";
-import {ColumnIcon01} from "@D/common/icons/column-icon-01";
+import {SaveIcon01} from "@D/icons/save-icon-01";
+import {ColumnIcon01} from "@D/icons/column-icon-01";
 
 export const MaintenanceSchedule = () => {
     const scroll = useMaintenanceScheduleTableScroll();
