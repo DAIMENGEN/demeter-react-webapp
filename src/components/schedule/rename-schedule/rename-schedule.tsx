@@ -2,7 +2,7 @@ import "./rename-schedule.scss";
 import React, {useCallback, useEffect, useState} from "react";
 import {Form, Input} from "antd";
 import {FullDraggableModal} from "full-flex-ui";
-import {useRenameScheduleModal} from "@D/components/schedule/hooks/use-rename-schedule-modal";
+import {useRenameScheduleModal} from "@D/components/schedule/rename-schedule/hooks/use-rename-schedule-modal";
 import {ProjectEntity} from "@D/core/entity/project-entity";
 import {ProjectService} from "@D/core/service/project-service";
 

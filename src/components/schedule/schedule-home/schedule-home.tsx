@@ -18,10 +18,13 @@ import {useScheduleMenuItems} from "@D/components/schedule/schedule-home/hooks/u
 import {useDeleteSchedule} from "@D/components/schedule/schedule-home/hooks/use-delete-schedule";
 import {ProjectService} from "@D/core/service/project-service";
 import {setProjectEntities} from "@D/core/store/features/project-slice";
-import {useAddScheduleModalVisible} from "@D/components/schedule/hooks/use-add-schedule-modal-visible";
-import {useRenameScheduleModal} from "@D/components/schedule/hooks/use-rename-schedule-modal";
 import {RenameSchedule} from "@D/components/schedule/rename-schedule/rename-schedule";
 import {Outlet} from "react-router-dom";
+import {
+    setAddScheduleModalVisible,
+    setRenameScheduleId,
+    setRenameScheduleModalVisible
+} from "@D/core/store/features/schedule-slice";
 
 export const ScheduleHome: React.FC = () => {
     const {Sider} = Layout;
@@ -30,8 +33,6 @@ export const ScheduleHome: React.FC = () => {
     const [marginInlineStart, setMarginInlineStart] = useState(200);
     const [selectedKeys, setSelectedKeys] = useState<Array<string>>([]);
     const [siderActiveKeys, setSiderActiveKeys] = useState<Array<string>>([]);
-    const {setAddScheduleModalVisible} = useAddScheduleModalVisible();
-    const {setRenameScheduleModalVisible, setRenameScheduleId} = useRenameScheduleModal();
     const {deleteScheduleHolderMessage, deleteSchedule} = useDeleteSchedule();
 
     useEffect(() => {
@@ -152,7 +153,7 @@ export const ScheduleHome: React.FC = () => {
                                                       e.domEvent.stopPropagation();
                                                       switch (e.key) {
                                                           case "add-new-schedule":
-                                                              setAddScheduleModalVisible(true);
+                                                              dispatch(setAddScheduleModalVisible(true));
                                                               break;
                                                           case "sort-schedule":
                                                               break;
@@ -189,8 +190,8 @@ export const ScheduleHome: React.FC = () => {
                                                                   case `${projectId}-open-in-new-table`:
                                                                       break;
                                                                   case `${projectId}-rename-schedule`:
-                                                                      setRenameScheduleId(projectId);
-                                                                      setRenameScheduleModalVisible(true);
+                                                                      dispatch(setRenameScheduleId(projectId));
+                                                                      dispatch(setRenameScheduleModalVisible(true));
                                                                       break;
                                                                   case `${projectId}-add-to-favorites`:
                                                                       break;
