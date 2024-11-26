@@ -1,7 +1,7 @@
 import "./schedule-maintenance.scss";
 import React, {useState} from "react";
 import {EditableProTable} from "@ant-design/pro-table";
-import {Button, Checkbox, Flex, Popconfirm, Popover} from "antd";
+import {Button, Popconfirm} from "antd";
 import {
     useMaintenanceScheduleTableConfigs
 } from "@D/components/schedule/schedule-maintenance/hooks/use-maintenance-schedule-table-configs";
@@ -10,7 +10,6 @@ import {
     useMaintenanceScheduleTableScroll
 } from "@D/components/schedule/schedule-maintenance/hooks/use-maintenance-schedule-table-scroll";
 import {SaveIcon01} from "@D/icons/save-icon-01";
-import {ColumnIcon01} from "@D/icons/column-icon-01";
 import {useEmployeeId} from "@D/core/hooks/employee/use-employee-id";
 import {MaintainScheduleTableRow} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-types";
 import {ScheduleMaintenanceUtils} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-utils";
@@ -18,6 +17,9 @@ import {DeleteIcon01} from "@D/icons/delete-icon-01";
 import {PRIMARY_COLOR} from "@D/core/style/theme";
 import {CopyIcon01} from "@D/icons/copy-icon-01";
 import {useAntdMessage} from "@D/core/hooks/message/use-antd-message";
+import {
+    TableHeaderTitle
+} from "@D/components/schedule/schedule-maintenance/segments/table-header-title/table-header-title";
 
 export const ScheduleMaintenance = () => {
     const employeeId = useEmployeeId();
@@ -41,7 +43,8 @@ export const ScheduleMaintenance = () => {
             {contextHolderMessage}
             <EditableProTable<MaintainScheduleTableRow>
                 actionRef={actionRef}
-                headerTitle="Maintain Schedule Task"
+                headerTitle={<TableHeaderTitle columns={columns} showColumns={showColumns}
+                                               setShowColumns={setShowColumns}/>}
                 columns={columns}
                 rowKey="id"
                 scroll={scroll}
@@ -71,24 +74,6 @@ export const ScheduleMaintenance = () => {
                 }}
                 toolBarRender={() => {
                     return [
-                        <Popover title={"Column"}
-                                 trigger="click"
-                                 placement="leftTop"
-                                 content={<Checkbox.Group style={{width: "100%"}}
-                                                          defaultValue={showColumns}
-                                                          onChange={(checkedValues) => setShowColumns(checkedValues)}>
-                                     <Flex vertical={true} gap={"small"}>
-                                         {
-                                             columns.map(column =>
-                                                 <Checkbox key={column.key}
-                                                           value={column.key}>{column.title as string}</Checkbox>)
-                                         }
-                                     </Flex>
-                                 </Checkbox.Group>}>
-                            <Button key="column"
-                                    type="primary"
-                                    icon={<ColumnIcon01 width={20} height={20} color={"#fff"}/>}/>
-                        </Popover>,
                         <Button key="save"
                                 type="primary"
                                 icon={<SaveIcon01 width={20} height={20} color={"#fff"}/>}
