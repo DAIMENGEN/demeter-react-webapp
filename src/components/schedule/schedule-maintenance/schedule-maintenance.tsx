@@ -1,11 +1,10 @@
 import "./schedule-maintenance.scss";
-import React, {useState} from "react";
-import {EditableProTable} from "@ant-design/pro-table";
+import React, {useEffect, useRef, useState} from "react";
+import {ActionType, EditableProTable} from "@ant-design/pro-table";
 import {Button, Popconfirm} from "antd";
 import {
     useMaintenanceScheduleTableConfigs
 } from "@D/components/schedule/schedule-maintenance/hooks/use-maintenance-schedule-table-configs";
-import {useAddTaskViaShortcut} from "@D/components/schedule/schedule-maintenance/hooks/use-add-task-via-shortcut";
 import {
     useMaintenanceScheduleTableScroll
 } from "@D/components/schedule/schedule-maintenance/hooks/use-maintenance-schedule-table-scroll";
@@ -24,19 +23,40 @@ import {
 export const ScheduleMaintenance = () => {
     const employeeId = useEmployeeId();
     const {contextHolderMessage, success} = useAntdMessage();
+    const actionRef = useRef<ActionType>();
+    const tableRef = useRef<HTMLDivElement>(null);
+    const [parentKey, setParentKey] = useState<string | undefined>(undefined);
+    const [expandedRowKeys, setExpandedRowKeys] = useState<Array<React.Key>>([]);
+
     const scroll = useMaintenanceScheduleTableScroll();
     const {columns, showColumns, setShowColumns} = useMaintenanceScheduleTableConfigs();
     const [copyTableRow, setCopyTableRow] = useState<MaintainScheduleTableRow>();
     const [dataSource, setDataSource] = useState<readonly MaintainScheduleTableRow[]>([]);
     const [editableKeys, setEditableRowKeys] = useState<Array<React.Key>>(dataSource.map((item) => item.id));
-    const {
-        actionRef,
-        tableRef,
-        expandedRowKeys,
-        setExpandedRowKeys,
-        setParentKey,
-        parentKey
-    } = useAddTaskViaShortcut(copyTableRow);
+
+    // shortcut: ctrl + d
+    useEffect(() => {
+        const current = tableRef.current;
+        if (current) {
+            const handleKeyDown = (event: KeyboardEvent) => {
+                if (event.ctrlKey && event.key === "d") {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    actionRef.current?.addEditRecord(ScheduleMaintenanceUtils.createRecord(employeeId, parentKey, copyTableRow), {
+                        parentKey: parentKey,
+                        newRecordType: "dataSource",
+                    });
+                    if (parentKey) {
+                        setExpandedRowKeys(keys => [...keys, parentKey])
+                    }
+                }
+            };
+            window.addEventListener("keydown", handleKeyDown);
+            return () => {
+                window.removeEventListener("keydown", handleKeyDown);
+            };
+        }
+    }, [tableRef, actionRef, copyTableRow, employeeId, parentKey]);
 
     return (
         <div ref={tableRef}>
