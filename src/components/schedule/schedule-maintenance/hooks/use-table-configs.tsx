@@ -8,7 +8,7 @@ import {EmployeeService} from "@D/core/service/employee-service";
 import {useEmployeeName} from "@D/core/hooks/employee/use-employee-name";
 import {useEmployeeId} from "@D/core/hooks/employee/use-employee-id";
 
-export const useMaintenanceScheduleTableConfigs = () => {
+export const useTableConfigs = () => {
     const fetchEmployeeRef = useRef(0);
     const employeeId = useEmployeeId();
     const employeeName = useEmployeeName();
