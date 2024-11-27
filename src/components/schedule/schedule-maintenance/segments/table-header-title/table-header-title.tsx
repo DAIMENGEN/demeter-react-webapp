@@ -1,4 +1,3 @@
-import "./table-header-title.scss";
 import React, {MutableRefObject, useState} from "react";
 import {Button, Flex, Popover} from "antd";
 import {HideIcon01} from "@D/icons/hide-icon-01";

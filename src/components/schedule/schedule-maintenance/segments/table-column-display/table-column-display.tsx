@@ -1,4 +1,3 @@
-import "./table-column-display.scss";
 import React from "react";
 import {Checkbox, Flex} from "antd";
 import {ProColumns} from "@ant-design/pro-table";

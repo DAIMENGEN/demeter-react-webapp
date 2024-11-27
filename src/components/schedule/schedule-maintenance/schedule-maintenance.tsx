@@ -1,7 +1,7 @@
 import "./schedule-maintenance.scss";
 import React, {useEffect, useRef, useState} from "react";
 import {ActionType, EditableProTable} from "@ant-design/pro-table";
-import {Button, Popconfirm} from "antd";
+import {Button, Popconfirm, Tabs} from "antd";
 import {useTableConfigs} from "@D/components/schedule/schedule-maintenance/hooks/use-table-configs";
 import {useTableScroll} from "@D/components/schedule/schedule-maintenance/hooks/use-table-scroll";
 import {SaveIcon01} from "@D/icons/save-icon-01";
@@ -15,6 +15,9 @@ import {useAntdMessage} from "@D/core/hooks/message/use-antd-message";
 import {
     TableHeaderTitle
 } from "@D/components/schedule/schedule-maintenance/segments/table-header-title/table-header-title";
+import {CardTitle} from "@D/components/schedule/schedule-maintenance/segments/card-title/card-title";
+import {HouseIcon01} from "@D/icons/house-icon-01";
+import {GanttIcon01} from "@D/icons/gantt-icon-01";
 
 export const ScheduleMaintenance = () => {
     const employeeId = useEmployeeId();
@@ -53,82 +56,99 @@ export const ScheduleMaintenance = () => {
     }, [tableRef, actionRef, copyTableRow, employeeId, parentKey]);
 
     return (
-        <div ref={tableRef}>
+        <div ref={tableRef} style={{backgroundColor: "#ffffff"}} className={"schedule-maintenance"}>
             {contextHolderMessage}
-            <EditableProTable<MaintainScheduleTableRow>
-                rowKey="id"
-                actionRef={actionRef}
-                headerTitle={<TableHeaderTitle actionRef={actionRef}
-                                               columns={columns}
-                                               parentKey={parentKey}
-                                               copyTableRow={copyTableRow}
-                                               showColumns={showColumns}
-                                               setShowColumns={setShowColumns}
-                                               setExpandedRowKeys={setExpandedRowKeys}/>}
-                columns={columns}
-                scroll={useTableScroll()}
-                value={dataSource}
-                expandable={{
-                    defaultExpandAllRows: true,
-                    expandedRowKeys: expandedRowKeys,
-                    onExpandedRowsChange: (expandedRowKeys) => {
-                        setExpandedRowKeys([...expandedRowKeys]);
-                    }
-                }}
-                rowSelection={{
-                    type: "radio",
-                    onChange: (selectedRowKeys, _) => {
-                        console.log('selectedRowKeys changed:', selectedRowKeys)
-                        setParentKey(selectedRowKeys[0] as string);
-                    }
-                }}
-                recordCreatorProps={false}
-                toolBarRender={() => {
-                    return [
-                        <Button key="save"
-                                type="primary"
-                                icon={<SaveIcon01 width={20} height={20} color={"#fff"}/>}
-                                onClick={() => {
-                                    // dataSource 就是当前数据，可以调用 api 将其保存
-                                    console.log(dataSource);
-                                }}/>,
-                    ];
-                }}
-                editable={{
-                    type: "multiple",
-                    editableKeys,
-                    actionRender: (row, config) => {
-                        return [
-                            <Button key={"copy"}
-                                    title={"Copy"}
-                                    icon={<CopyIcon01 width={20} height={20} color={PRIMARY_COLOR}/>}
-                                    onClick={() => {
-                                        setCopyTableRow(row)
-                                        success("Copy Successfully", 0.5).then();
-                                    }}/>,
-                            <Popconfirm key={"delete"}
-                                        placement={"left"}
-                                        title={`Delete the ${row.name}`}
-                                        description={"Are you sure to delete this row?"}
-                                        okText={"Yes"}
-                                        cancelText={"No"}
-                                        onConfirm={() => setDataSource(dataSource.filter(item => item.id !== row.id))}>
-                                <Button title={"Delete"}
-                                        icon={<DeleteIcon01 width={20} height={20} color={PRIMARY_COLOR}/>}/>
-                            </Popconfirm>,
-                        ];
+            <div className={"schedule-maintenance-title"}>
+                <CardTitle/>
+                <Tabs items={[
+                    {
+                        key: "main-table",
+                        label: <Button type={"text"} icon={<HouseIcon01 width={15} height={15} color={"#000000"}/>}>Main
+                            Table</Button>,
                     },
-                    onValuesChange: (record, recordList) => {
-                        // console.log('record:', record, 'recordList:', recordList);
-                        setDataSource(recordList);
-                        if (!record && copyTableRow) {
-                            setCopyTableRow(undefined);
-                            success("Paste Successfully", 0.5).then();
+                    {
+                        key: "main-gantt",
+                        label: <Button type={"text"} icon={<GanttIcon01 width={15} height={15} color={"#000000"}/>}>Main
+                            Gantt</Button>,
+                    }
+                ]} tabBarGutter={0}/>
+            </div>
+            <div className={"schedule-maintenance-body"}>
+                <EditableProTable<MaintainScheduleTableRow>
+                    rowKey="id"
+                    actionRef={actionRef}
+                    headerTitle={<TableHeaderTitle actionRef={actionRef}
+                                                   columns={columns}
+                                                   parentKey={parentKey}
+                                                   copyTableRow={copyTableRow}
+                                                   showColumns={showColumns}
+                                                   setShowColumns={setShowColumns}
+                                                   setExpandedRowKeys={setExpandedRowKeys}/>}
+                    columns={columns}
+                    scroll={useTableScroll()}
+                    value={dataSource}
+                    expandable={{
+                        defaultExpandAllRows: true,
+                        expandedRowKeys: expandedRowKeys,
+                        onExpandedRowsChange: (expandedRowKeys) => {
+                            setExpandedRowKeys([...expandedRowKeys]);
                         }
-                    },
-                    onChange: setEditableRowKeys,
-                }}
-            />
+                    }}
+                    rowSelection={{
+                        type: "radio",
+                        onChange: (selectedRowKeys, _) => {
+                            console.log('selectedRowKeys changed:', selectedRowKeys)
+                            setParentKey(selectedRowKeys[0] as string);
+                        }
+                    }}
+                    recordCreatorProps={false}
+                    toolBarRender={() => {
+                        return [
+                            <Button key="save"
+                                    type="primary"
+                                    icon={<SaveIcon01 width={20} height={20} color={"#fff"}/>}
+                                    onClick={() => {
+                                        // dataSource 就是当前数据，可以调用 api 将其保存
+                                        console.log(dataSource);
+                                    }}/>,
+                        ];
+                    }}
+                    editable={{
+                        type: "multiple",
+                        editableKeys,
+                        actionRender: (row, config) => {
+                            return [
+                                <Button key={"copy"}
+                                        title={"Copy"}
+                                        icon={<CopyIcon01 width={20} height={20} color={PRIMARY_COLOR}/>}
+                                        onClick={() => {
+                                            setCopyTableRow(row)
+                                            success("Copy Successfully", 0.5).then();
+                                        }}/>,
+                                <Popconfirm key={"delete"}
+                                            placement={"left"}
+                                            title={`Delete the ${row.name}`}
+                                            description={"Are you sure to delete this row?"}
+                                            okText={"Yes"}
+                                            cancelText={"No"}
+                                            onConfirm={() => setDataSource(dataSource.filter(item => item.id !== row.id))}>
+                                    <Button title={"Delete"}
+                                            icon={<DeleteIcon01 width={20} height={20} color={PRIMARY_COLOR}/>}/>
+                                </Popconfirm>,
+                            ];
+                        },
+                        onValuesChange: (record, recordList) => {
+                            // console.log('record:', record, 'recordList:', recordList);
+                            setDataSource(recordList);
+                            if (!record && copyTableRow) {
+                                setCopyTableRow(undefined);
+                                success("Paste Successfully", 0.5).then();
+                            }
+                        },
+                        onChange: setEditableRowKeys,
+                    }}
+                />
+            </div>
         </div>
     );
 }
