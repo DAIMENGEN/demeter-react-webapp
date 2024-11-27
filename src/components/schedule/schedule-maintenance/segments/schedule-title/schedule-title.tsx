@@ -2,11 +2,11 @@ import React, {useState} from "react";
 import {Button, Popover} from "antd";
 import {DownIcon01} from "@D/icons/down-icon-01";
 
-export const CardTitle: React.FC = () => {
+export const ScheduleTitle: React.FC = () => {
     const [titleButtonId, setTitleButtonId] = useState<string | undefined>(undefined);
 
     return (
-        <Popover title={"CardTitle"}
+        <Popover title={"ScheduleTitle"}
                  trigger="click"
                  arrow={false}
                  placement="bottomLeft"

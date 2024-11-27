@@ -1,7 +1,7 @@
 import "./schedule-maintenance.scss";
 import React, {useEffect, useRef, useState} from "react";
 import {ActionType, EditableProTable} from "@ant-design/pro-table";
-import {Button, Popconfirm, Tabs} from "antd";
+import {Button, Flex, Popconfirm, Tabs} from "antd";
 import {useTableConfigs} from "@D/components/schedule/schedule-maintenance/hooks/use-table-configs";
 import {useTableScroll} from "@D/components/schedule/schedule-maintenance/hooks/use-table-scroll";
 import {SaveIcon01} from "@D/icons/save-icon-01";
@@ -15,9 +15,12 @@ import {useAntdMessage} from "@D/core/hooks/message/use-antd-message";
 import {
     TableHeaderTitle
 } from "@D/components/schedule/schedule-maintenance/segments/table-header-title/table-header-title";
-import {CardTitle} from "@D/components/schedule/schedule-maintenance/segments/card-title/card-title";
+import {ScheduleTitle} from "@D/components/schedule/schedule-maintenance/segments/schedule-title/schedule-title";
 import {HouseIcon01} from "@D/icons/house-icon-01";
 import {GanttIcon01} from "@D/icons/gantt-icon-01";
+import {MoreIcon01} from "@D/icons/more-icon-01";
+import {PeopleIcon01} from "@D/icons/people-icon-01";
+import {MessageIcon01} from "@D/icons/message-icon-01";
 
 export const ScheduleMaintenance = () => {
     const employeeId = useEmployeeId();
@@ -59,7 +62,14 @@ export const ScheduleMaintenance = () => {
         <div ref={tableRef} style={{backgroundColor: "#ffffff"}} className={"schedule-maintenance"}>
             {contextHolderMessage}
             <div className={"schedule-maintenance-title"}>
-                <CardTitle/>
+                <Flex justify={"space-between"}>
+                    <ScheduleTitle/>
+                    <Flex gap={10} justify={"flex-end"} style={{paddingRight: 10}}>
+                        <Button type={"text"} icon={<MessageIcon01 width={20} height={20} color={"#000000"}/>}/>
+                        <Button type={"text"} icon={<PeopleIcon01 width={20} height={20} color={"#000000"}/>}/>
+                        <Button type={"text"} icon={<MoreIcon01 width={20} height={20} color={"#000000"}/>}/>
+                    </Flex>
+                </Flex>
                 <Tabs items={[
                     {
                         key: "main-table",
