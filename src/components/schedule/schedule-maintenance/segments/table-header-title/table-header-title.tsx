@@ -8,6 +8,7 @@ import {
 import {AddIcon01} from "@D/icons/add-icon/add-icon-01";
 import {ScheduleMaintenanceUtils} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-utils";
 import {useEmployeeId} from "@D/core/hooks/employee/use-employee-id";
+import {AddTableColumn} from "@D/components/schedule/schedule-maintenance/segments/add-table-column/add-table-column";
 
 export const TableHeaderTitle: React.FC<{
     actionRef: MutableRefObject<ActionType | undefined>;
@@ -22,7 +23,7 @@ export const TableHeaderTitle: React.FC<{
 
     return (
         <div className={"table-header-title"}>
-            <Flex gap={20}>
+            <Flex gap={15}>
                 <Button type="primary"
                         iconPosition={"end"}
                         icon={<AddIcon01 width={16} height={16} color={"#fff"}/>}
@@ -40,6 +41,7 @@ export const TableHeaderTitle: React.FC<{
                 <TableColumnHide columns={columns}
                                  showColumns={showColumns}
                                  setShowColumns={setShowColumns}/>
+                <AddTableColumn/>
             </Flex>
         </div>
     );
