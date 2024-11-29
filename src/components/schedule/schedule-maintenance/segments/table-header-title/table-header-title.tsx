@@ -1,11 +1,10 @@
-import React, {MutableRefObject, useState} from "react";
-import {Button, Flex, Popover} from "antd";
-import {HideIcon01} from "@D/icons/hide-icon-01";
+import React, {MutableRefObject} from "react";
+import {Button, Flex} from "antd";
 import {ActionType, ProColumns} from "@ant-design/pro-table";
 import {MaintainScheduleTableRow} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-types";
 import {
-    TableColumnDisplay
-} from "@D/components/schedule/schedule-maintenance/segments/table-column-display/table-column-display";
+    TableColumnHide
+} from "@D/components/schedule/schedule-maintenance/segments/table-column-hide/table-column-hide";
 import {AddIcon01} from "@D/icons/add-icon-01";
 import {ScheduleMaintenanceUtils} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-utils";
 import {useEmployeeId} from "@D/core/hooks/employee/use-employee-id";
@@ -20,7 +19,6 @@ export const TableHeaderTitle: React.FC<{
     setExpandedRowKeys: (value: React.SetStateAction<React.Key[]>) => void;
 }> = ({actionRef, parentKey, copyTableRow, columns, showColumns, setShowColumns, setExpandedRowKeys}) => {
     const employeeId = useEmployeeId();
-    const [hideBtnId, setHideBtnId] = useState<string | undefined>(undefined);
 
     return (
         <div className={"table-header-title"}>
@@ -39,22 +37,9 @@ export const TableHeaderTitle: React.FC<{
                         }}>
                     Add task
                 </Button>
-                <Popover title={"Display columns"}
-                         trigger="click"
-                         arrow={false}
-                         onOpenChange={open => {
-                             setHideBtnId(open ? "highlight-button" : undefined);
-                         }}
-                         placement="bottomLeft"
-                         content={<TableColumnDisplay columns={columns}
-                                                      showColumns={showColumns}
-                                                      setShowColumns={setShowColumns}/>}>
-                    <Button type="text"
-                            id={hideBtnId}
-                            icon={<HideIcon01 width={16} height={16} color={"#000000"}/>}>
-                        Hide
-                    </Button>
-                </Popover>
+                <TableColumnHide columns={columns}
+                                 showColumns={showColumns}
+                                 setShowColumns={setShowColumns}/>
             </Flex>
         </div>
     );
