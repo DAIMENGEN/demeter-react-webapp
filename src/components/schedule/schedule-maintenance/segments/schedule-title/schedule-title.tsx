@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Button, Popover} from "antd";
-import {DownIcon01} from "@D/icons/down-icon-01";
+import {DownIcon01} from "@D/icons/down-icon/down-icon-01";
 import {HIGHLIGHT_COLOR} from "@D/core/style/theme";
 
 export const ScheduleTitle: React.FC = () => {

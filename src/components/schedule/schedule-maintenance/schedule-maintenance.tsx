@@ -4,23 +4,23 @@ import {ActionType, EditableProTable} from "@ant-design/pro-table";
 import {Button, Flex, Popconfirm, Tabs} from "antd";
 import {useTableConfigs} from "@D/components/schedule/schedule-maintenance/hooks/use-table-configs";
 import {useTableScroll} from "@D/components/schedule/schedule-maintenance/hooks/use-table-scroll";
-import {SaveIcon01} from "@D/icons/save-icon-01";
+import {SaveIcon01} from "@D/icons/save-icon/save-icon-01";
 import {useEmployeeId} from "@D/core/hooks/employee/use-employee-id";
 import {MaintainScheduleTableRow} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-types";
 import {ScheduleMaintenanceUtils} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-utils";
-import {DeleteIcon01} from "@D/icons/delete-icon-01";
+import {DeleteIcon01} from "@D/icons/delete-icon/delete-icon-01";
 import {PRIMARY_COLOR} from "@D/core/style/theme";
-import {CopyIcon01} from "@D/icons/copy-icon-01";
+import {CopyIcon01} from "@D/icons/copy-icon/copy-icon-01";
 import {useAntdMessage} from "@D/core/hooks/message/use-antd-message";
 import {
     TableHeaderTitle
 } from "@D/components/schedule/schedule-maintenance/segments/table-header-title/table-header-title";
 import {ScheduleTitle} from "@D/components/schedule/schedule-maintenance/segments/schedule-title/schedule-title";
-import {HouseIcon01} from "@D/icons/house-icon-01";
-import {GanttIcon01} from "@D/icons/gantt-icon-01";
-import {MoreIcon01} from "@D/icons/more-icon-01";
-import {PeopleIcon01} from "@D/icons/people-icon-01";
-import {MessageIcon01} from "@D/icons/message-icon-01";
+import {HouseIcon01} from "@D/icons/house-icon/house-icon-01";
+import {GanttIcon01} from "@D/icons/gantt-icon/gantt-icon-01";
+import {MoreIcon01} from "@D/icons/more-icon/more-icon-01";
+import {PeopleIcon01} from "@D/icons/people-icon/people-icon-01";
+import {MessageIcon01} from "@D/icons/message-icon/message-icon-01";
 
 export const ScheduleMaintenance = () => {
     const employeeId = useEmployeeId();

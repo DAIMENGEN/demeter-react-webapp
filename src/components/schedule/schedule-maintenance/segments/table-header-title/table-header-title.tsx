@@ -5,7 +5,7 @@ import {MaintainScheduleTableRow} from "@D/components/schedule/schedule-maintena
 import {
     TableColumnHide
 } from "@D/components/schedule/schedule-maintenance/segments/table-column-hide/table-column-hide";
-import {AddIcon01} from "@D/icons/add-icon-01";
+import {AddIcon01} from "@D/icons/add-icon/add-icon-01";
 import {ScheduleMaintenanceUtils} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-utils";
 import {useEmployeeId} from "@D/core/hooks/employee/use-employee-id";
 

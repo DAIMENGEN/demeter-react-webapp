@@ -2,9 +2,9 @@ import React, {useState} from "react";
 import {Button, Checkbox, Flex, Input, Popover, Space} from "antd";
 import {ProColumns} from "@ant-design/pro-table";
 import {MaintainScheduleTableRow} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-types";
-import {HideIcon01} from "@D/icons/hide-icon-01";
+import {HideIcon01} from "@D/icons/hide-icon/hide-icon-01";
 import {HIGHLIGHT_COLOR} from "@D/core/style/theme";
-import {SearchIcon01} from "@D/icons/search-icon-01";
+import {SearchIcon01} from "@D/icons/search-icon/search-icon-01";
 
 export const TableColumnHide: React.FC<{
     columns: Array<ProColumns<MaintainScheduleTableRow>>;
