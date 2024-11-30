@@ -23,7 +23,7 @@ export const TableColumnHide: React.FC<{
                  destroyTooltipOnHide={true}
                  onOpenChange={open => {
                      setHighlight(open);
-                     open && setOptions(columns);
+                     if (open) setOptions(columns);
                  }}
                  content={<Space direction={"vertical"} size={"small"} style={{width: 300}}>
                      <Input placeholder="Find columns to show/hide"

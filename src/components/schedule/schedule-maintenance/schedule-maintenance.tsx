@@ -104,7 +104,7 @@ export const ScheduleMaintenance = () => {
                             setExpandedRowKeys([...expandedRowKeys]);
                         }
                     }}
-                    rowSelection={{
+                    rowSelection={dataSource.length > 0 && {
                         type: "radio",
                         onChange: (selectedRowKeys) => {
                             console.log('selectedRowKeys changed:', selectedRowKeys)

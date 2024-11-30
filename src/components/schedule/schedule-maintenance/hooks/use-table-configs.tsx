@@ -49,6 +49,15 @@ export const useTableConfigs = () => {
             key: "name",
             title: "TaskName",
             dataIndex: "name",
+            fieldProps: {
+                placeholder: "This field is required.",
+            },
+            formItemProps: {
+                rules: [
+                    {required: true, message: "This field is required."},
+                ],
+            },
+            minWidth: 200,
         },
         {
             key: "taskOwner",
