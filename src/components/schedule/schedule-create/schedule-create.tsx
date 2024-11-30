@@ -1,6 +1,6 @@
 import "./schedule-create.scss";
 import dayjs from "dayjs";
-import React, {useState} from "react";
+import {useState} from "react";
 import {Button, Flex, Form, Input, Select} from "antd";
 import {FullDraggableModal} from "full-flex-ui";
 import {useFormDateFieldRules} from "@D/core/hooks/form/form-field/use-form-date-filed-rules";

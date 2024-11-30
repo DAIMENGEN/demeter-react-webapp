@@ -106,7 +106,7 @@ export const ScheduleMaintenance = () => {
                     }}
                     rowSelection={{
                         type: "radio",
-                        onChange: (selectedRowKeys, _) => {
+                        onChange: (selectedRowKeys) => {
                             console.log('selectedRowKeys changed:', selectedRowKeys)
                             setParentKey(selectedRowKeys[0] as string);
                         }
@@ -126,7 +126,7 @@ export const ScheduleMaintenance = () => {
                     editable={{
                         type: "multiple",
                         editableKeys,
-                        actionRender: (row, config) => {
+                        actionRender: (row) => {
                             return [
                                 <Button key={"copy"}
                                         title={"Copy"}

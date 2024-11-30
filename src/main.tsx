@@ -1,19 +1,15 @@
 import "./index.css";
 import App from "@D/App";
-import React from "react";
+import {StrictMode} from "react"
+import {createRoot} from "react-dom/client"
 import {ConfigProvider} from "antd";
 import {Provider} from "react-redux";
-import ReactDOM from "react-dom/client";
 import {PersistGate} from "redux-persist/integration/react";
 import {demeterStore, persistor} from "@D/core/store/demeter-store";
 import {PRIMARY_COLOR} from "@D/core/style/theme";
 
-const root = ReactDOM.createRoot(
-    document.getElementById('root') as HTMLElement
-);
-
-root.render(
-    <React.StrictMode>
+createRoot(document.getElementById('root')!).render(
+    <StrictMode>
         <ConfigProvider theme={{
             token: {
                 colorPrimary: PRIMARY_COLOR,
@@ -25,5 +21,5 @@ root.render(
                 </PersistGate>
             </Provider>
         </ConfigProvider>
-    </React.StrictMode>
-);
+    </StrictMode>,
+)

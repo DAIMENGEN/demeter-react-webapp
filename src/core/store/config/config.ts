@@ -1,23 +1,24 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+// import localStorage from "redux-persist/lib/storage";
+import sessionStorage from "redux-persist/lib/storage/session"
 
 export const persistConfig = {
     key: "root",
-    storage: AsyncStorage,
-    whitelist: ["employeeStore"],
+    storage: sessionStorage,
+    blacklist: ["employeeStore"],
 };
 
 export const employeePersistConfig = {
     key: "employeeStore",
-    storage: AsyncStorage,
+    storage: sessionStorage,
 };
 
 export const schedulePersistConfig = {
     key: "scheduleStore",
-    storage: AsyncStorage,
+    storage: sessionStorage,
 };
 
 export const projectPersistConfig = {
     key: "projectStore",
-    storage: AsyncStorage,
+    storage: sessionStorage,
 };
 

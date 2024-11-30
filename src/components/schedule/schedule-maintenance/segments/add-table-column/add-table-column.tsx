@@ -1,6 +1,6 @@
 import {Button, Input, Popover, Space} from "antd";
 import {AddColumnIcon01} from "@D/icons/column-icon/add-column-icon-01";
-import React, {useState} from "react";
+import {useState} from "react";
 import {HIGHLIGHT_COLOR} from "@D/core/style/theme";
 import {SearchIcon01} from "@D/icons/search-icon/search-icon-01";
 
