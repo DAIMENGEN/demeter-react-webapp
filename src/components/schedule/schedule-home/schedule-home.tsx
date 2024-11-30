@@ -6,7 +6,7 @@ import {StarIcon02} from "@D/icons/star-icon/star-icon-02";
 import {FavoritesEmptyIcon} from "@D/icons/favorites-empty/favorites-empty-icon";
 import {CarryOutOutlined, HomeOutlined, LeftOutlined, RightOutlined} from "@ant-design/icons";
 import {WorkspaceIcon01} from "@D/icons/workspace-icon/workspace-icon-01";
-import {ConditionalRender} from "@D/utils/ConditionalRender";
+import {ConditionalRender} from "@D/utils/conditional-render.tsx";
 import {MoreIcon01} from "@D/icons/more-icon/more-icon-01";
 import {SearchIcon01} from "@D/icons/search-icon/search-icon-01";
 import {useDemeterDispatch} from "@D/core/store/demeter-hook";

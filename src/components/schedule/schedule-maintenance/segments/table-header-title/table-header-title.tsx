@@ -1,7 +1,7 @@
 import React, {MutableRefObject} from "react";
 import {Button, Flex} from "antd";
 import {ActionType, ProColumns} from "@ant-design/pro-table";
-import {MaintainScheduleTableRow} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-types";
+import {DataSourceType} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-types";
 import {
     TableColumnHide
 } from "@D/components/schedule/schedule-maintenance/segments/table-column-hide/table-column-hide";
@@ -12,13 +12,29 @@ import {AddTableColumn} from "@D/components/schedule/schedule-maintenance/segmen
 
 export const TableHeaderTitle: React.FC<{
     actionRef: MutableRefObject<ActionType | undefined>;
+    columns: ProColumns<DataSourceType>[];
     parentKey: string | undefined;
-    copyTableRow: MaintainScheduleTableRow | undefined;
-    columns: Array<ProColumns<MaintainScheduleTableRow>>;
-    showColumns: (React.Key | undefined)[];
-    setShowColumns: React.Dispatch<React.SetStateAction<(React.Key | undefined)[]>>;
+    addColumn: (column: ProColumns<DataSourceType>) => void;
+    showColumn: (columnKey: React.Key) => void;
+    hideColumn: (columnKey: React.Key) => void;
+    updateColumn: (column: ProColumns<DataSourceType>) => void;
+    copyTableRow: DataSourceType | undefined;
+    displayColumns: React.Key[];
     setExpandedRowKeys: (value: React.SetStateAction<React.Key[]>) => void;
-}> = ({actionRef, parentKey, copyTableRow, columns, showColumns, setShowColumns, setExpandedRowKeys}) => {
+    isAllColumnsVisible: boolean,
+}> = ({
+          actionRef,
+          columns,
+          parentKey,
+          addColumn,
+          showColumn,
+          hideColumn,
+          updateColumn,
+          copyTableRow,
+          displayColumns,
+          setExpandedRowKeys,
+          isAllColumnsVisible
+      }) => {
     const employeeId = useEmployeeId();
 
     return (
@@ -39,9 +55,11 @@ export const TableHeaderTitle: React.FC<{
                     Add task
                 </Button>
                 <TableColumnHide columns={columns}
-                                 showColumns={showColumns}
-                                 setShowColumns={setShowColumns}/>
-                <AddTableColumn/>
+                                 showColumn={showColumn}
+                                 hideColumn={hideColumn}
+                                 displayColumns={displayColumns}
+                                 isAllColumnsVisible={isAllColumnsVisible}/>
+                <AddTableColumn addColumn={addColumn} showColumn={showColumn} updateColumn={updateColumn}/>
             </Flex>
         </div>
     );

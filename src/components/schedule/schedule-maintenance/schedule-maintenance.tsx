@@ -2,11 +2,10 @@ import "./schedule-maintenance.scss";
 import React, {useEffect, useRef, useState} from "react";
 import {ActionType, EditableProTable} from "@ant-design/pro-table";
 import {Button, Flex, Popconfirm, Tabs} from "antd";
-import {useTableConfigs} from "@D/components/schedule/schedule-maintenance/hooks/use-table-configs";
 import {useTableScroll} from "@D/components/schedule/schedule-maintenance/hooks/use-table-scroll";
 import {SaveIcon01} from "@D/icons/save-icon/save-icon-01";
 import {useEmployeeId} from "@D/core/hooks/employee/use-employee-id";
-import {MaintainScheduleTableRow} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-types";
+import {DataSourceType} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-types";
 import {ScheduleMaintenanceUtils} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-utils";
 import {DeleteIcon01} from "@D/icons/delete-icon/delete-icon-01";
 import {PRIMARY_COLOR} from "@D/core/style/theme";
@@ -21,6 +20,7 @@ import {GanttIcon01} from "@D/icons/gantt-icon/gantt-icon-01";
 import {MoreIcon01} from "@D/icons/more-icon/more-icon-01";
 import {PeopleIcon01} from "@D/icons/people-icon/people-icon-01";
 import {MessageIcon01} from "@D/icons/message-icon/message-icon-01";
+import {useTableColumns} from "@D/components/schedule/schedule-maintenance/hooks/use-table-columns.tsx";
 
 export const ScheduleMaintenance = () => {
     const employeeId = useEmployeeId();
@@ -29,9 +29,9 @@ export const ScheduleMaintenance = () => {
     const tableRef = useRef<HTMLDivElement>(null);
     const [parentKey, setParentKey] = useState<string | undefined>(undefined);
     const [expandedRowKeys, setExpandedRowKeys] = useState<Array<React.Key>>([]);
-    const {columns, showColumns, setShowColumns} = useTableConfigs();
-    const [copyTableRow, setCopyTableRow] = useState<MaintainScheduleTableRow>();
-    const [dataSource, setDataSource] = useState<readonly MaintainScheduleTableRow[]>([]);
+    const [copyTableRow, setCopyTableRow] = useState<DataSourceType>();
+    const [dataSource, setDataSource] = useState<readonly DataSourceType[]>([]);
+    const {columns, addColumn, showColumn, hideColumn, updateColumn, displayColumns, addColumnMessage, isAllColumnsVisible} = useTableColumns();
     const [editableKeys, setEditableRowKeys] = useState<Array<React.Key>>(dataSource.map((item) => item.id));
 
     // shortcut: ctrl + d
@@ -60,7 +60,8 @@ export const ScheduleMaintenance = () => {
 
     return (
         <div ref={tableRef} style={{backgroundColor: "#ffffff"}} className={"schedule-maintenance"}>
-            {contextHolderMessage}
+            <span>{addColumnMessage}</span>
+            <span>{contextHolderMessage}</span>
             <div className={"schedule-maintenance-title"}>
                 <Flex justify={"space-between"}>
                     <ScheduleTitle/>
@@ -84,16 +85,20 @@ export const ScheduleMaintenance = () => {
                 ]} tabBarGutter={0}/>
             </div>
             <div className={"schedule-maintenance-body"}>
-                <EditableProTable<MaintainScheduleTableRow>
+                <EditableProTable<DataSourceType>
                     rowKey="id"
                     actionRef={actionRef}
                     headerTitle={<TableHeaderTitle actionRef={actionRef}
                                                    columns={columns}
                                                    parentKey={parentKey}
+                                                   addColumn={addColumn}
+                                                   showColumn={showColumn}
+                                                   hideColumn={hideColumn}
+                                                   updateColumn={updateColumn}
                                                    copyTableRow={copyTableRow}
-                                                   showColumns={showColumns}
-                                                   setShowColumns={setShowColumns}
-                                                   setExpandedRowKeys={setExpandedRowKeys}/>}
+                                                   displayColumns={displayColumns}
+                                                   setExpandedRowKeys={setExpandedRowKeys}
+                                                   isAllColumnsVisible={isAllColumnsVisible}/>}
                     columns={columns}
                     scroll={useTableScroll()}
                     value={dataSource}

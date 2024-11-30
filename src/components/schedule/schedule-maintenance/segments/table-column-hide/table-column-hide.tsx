@@ -1,20 +1,20 @@
 import React, {useState} from "react";
 import {Button, Checkbox, Flex, Input, Popover, Space} from "antd";
 import {ProColumns} from "@ant-design/pro-table";
-import {MaintainScheduleTableRow} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-types";
+import {DataSourceType} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-types";
 import {HideIcon01} from "@D/icons/hide-icon/hide-icon-01";
 import {HIGHLIGHT_COLOR} from "@D/core/style/theme";
 import {SearchIcon01} from "@D/icons/search-icon/search-icon-01";
 
 export const TableColumnHide: React.FC<{
-    columns: Array<ProColumns<MaintainScheduleTableRow>>;
-    showColumns: (React.Key | undefined)[];
-    setShowColumns: React.Dispatch<React.SetStateAction<(React.Key | undefined)[]>>;
-}> = ({columns, showColumns, setShowColumns}) => {
+    columns: ProColumns<DataSourceType>[];
+    showColumn: (columnKey: string) => void;
+    hideColumn: (columnKey: string) => void;
+    displayColumns: (React.Key | undefined)[];
+    isAllColumnsVisible: boolean;
+}> = ({columns, showColumn, hideColumn, displayColumns, isAllColumnsVisible}) => {
     const [options, setOptions] = useState(columns);
     const [highlight, setHighlight] = useState<boolean>();
-    const checkAll = columns.length === showColumns.length;
-    const indeterminate = showColumns.length > 0 && showColumns.length < columns.length;
     return (
         <Popover title={<span style={{fontWeight: "bold", fontSize: "18px"}}>Display columns</span>}
                  arrow={false}
@@ -33,21 +33,23 @@ export const TableColumnHide: React.FC<{
                                 setOptions(columns.filter(column => regex.test(column.title as string)));
                             }}
                             suffix={<SearchIcon01 width={16} height={16} color={"#bfbfbf"}/>}/>
-                     <Checkbox indeterminate={indeterminate} onChange={e => {
-                         setShowColumns(e.target.checked ? columns.map(column => column.key) : []);
-                     }} checked={checkAll}>
+                     <Checkbox indeterminate={!isAllColumnsVisible} onChange={e => {
+                         const checked = e.target.checked;
+                         if (checked) showColumn("*"); else hideColumn("*");
+                     }} checked={isAllColumnsVisible}>
                          <span style={{fontWeight: "bold"}}>All columns</span>
                          <span>&nbsp;&nbsp;&nbsp;</span>
-                         <span style={{color: "#7e7f8d"}}>{showColumns.length} selected</span>
+                         <span style={{color: "#7e7f8d"}}>{displayColumns.length} selected</span>
                      </Checkbox>
                      <Flex vertical={true} gap={"small"}>
                          {
                              options.map(column =>
                                  <Checkbox key={column.key}
                                            value={column.key}
-                                           checked={showColumns.includes(column.key)}
+                                           checked={displayColumns.includes(column.key)}
                                            onChange={e => {
-                                               setShowColumns(e.target.checked ? [...showColumns, column.key] : showColumns.filter(key => key !== column.key));
+                                               const checked = e.target.checked;
+                                               if (checked) showColumn(column.key as string); else hideColumn(column.key as string);
                                            }}
                                  >{column.title as string}</Checkbox>)
                          }

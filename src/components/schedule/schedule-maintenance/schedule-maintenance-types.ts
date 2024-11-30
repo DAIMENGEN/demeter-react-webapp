@@ -1,3 +1,4 @@
+import {Dictionary} from "@D/utils/dictionary.ts";
 import {ProjectTaskEntity} from "@D/core/entity/project-task-entity";
 
 export type MaintainScheduleTableRow = ProjectTaskEntity & {
@@ -5,3 +6,5 @@ export type MaintainScheduleTableRow = ProjectTaskEntity & {
     taskAssigner: string;
     children?: Array<MaintainScheduleTableRow>;
 }
+
+export type DataSourceType = ProjectTaskEntity & Dictionary;

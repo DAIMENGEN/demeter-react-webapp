@@ -1,9 +1,9 @@
 import dayjs from "dayjs";
 import {SnowflakeIdUtil} from "@D/utils/snowflake/snowflake-id-util";
-import {MaintainScheduleTableRow} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-types";
+import {DataSourceType} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-types";
 
 export class ScheduleMaintenanceUtils {
-    public static createRecord(employeeId: string, parentKey?: string, copyTableRow?: MaintainScheduleTableRow): MaintainScheduleTableRow {
+    public static createRecord(employeeId: string, parentKey?: string, copyTableRow?: DataSourceType): DataSourceType {
         if (copyTableRow) {
             return {
                 ...copyTableRow,
