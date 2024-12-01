@@ -1,7 +1,7 @@
 import {EntityData} from "@D/core/entity/entity-data";
 
 export interface IProjectTaskEntity extends EntityData {
-    name: string;
+    taskName: string;
     taskType: number;
     taskStatus: number;
     startDateTime: string;
@@ -14,7 +14,7 @@ export interface IProjectTaskEntity extends EntityData {
 
 export class ProjectTaskEntity implements IProjectTaskEntity {
     id: string;
-    name: string;
+    taskName: string;
     taskType: number;
     taskStatus: number;
     startDateTime: string;
@@ -26,7 +26,7 @@ export class ProjectTaskEntity implements IProjectTaskEntity {
 
     constructor(
         id: string,
-        name: string,
+        taskName: string,
         taskType: number,
         taskStatus: number,
         startDateTime: string,
@@ -37,7 +37,7 @@ export class ProjectTaskEntity implements IProjectTaskEntity {
         order?: number
     ) {
         this.id = id;
-        this.name = name;
+        this.taskName = taskName;
         this.taskType = taskType;
         this.taskStatus = taskStatus;
         this.startDateTime = startDateTime;

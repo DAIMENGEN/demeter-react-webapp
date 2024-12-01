@@ -112,9 +112,9 @@ export const useTableColumns = () => {
     useEffect(() => {
         const defaultColumns: Array<ProColumns<DataSourceType>> = [
             {
-                key: "name",
+                key: "taskName",
                 title: "TaskName",
-                dataIndex: "name",
+                dataIndex: "taskName",
                 fieldProps: {
                     placeholder: "This field is required.",
                 },

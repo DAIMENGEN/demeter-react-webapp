@@ -33,7 +33,7 @@ export const ScheduleRename = () => {
             const projectService = ProjectService.getInstance();
             projectService.getProjectByIdRequest(renameScheduleId!, project => {
                 setProject(project);
-                form.setFieldValue("name", project.name);
+                form.setFieldValue("name", project.projectName);
             });
         }
     }, [form, renameScheduleId, renameScheduleModalVisible]);

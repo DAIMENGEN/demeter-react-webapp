@@ -36,14 +36,14 @@ export const ScheduleCreate = () => {
                             onOk={() => form.submit()}>
             {addScheduleHolderMessage}
             <Form name={"schedule-create"} layout={"vertical"} form={form} onFinish={addSchedule} initialValues={{
-                "name": "New Schedule",
-                "status": 3,
+                "projectName": "New Schedule",
+                "projectStatus": 3,
                 "startDateTime": dayjs().format("YYYY-MM-DD")
             }}>
-                <Form.Item layout={"vertical"} label="Schedule name" name="name" rules={[{required: true}]}>
+                <Form.Item layout={"vertical"} label="Schedule name" name="projectName" rules={[{required: true}]}>
                     <Input onChange={e => setScheduleName(e.target.value)}/>
                 </Form.Item>
-                <Form.Item layout={"vertical"} label="Schedule status" name="status" rules={[{required: true}]}>
+                <Form.Item layout={"vertical"} label="Schedule status" name="projectStatus" rules={[{required: true}]}>
                     <Select showSearch options={useScheduleStatus()} filterOption={(input, option) => {
                         return (option?.label?.toString() ?? "").toLowerCase().includes(input.toLowerCase());
                     }}/>

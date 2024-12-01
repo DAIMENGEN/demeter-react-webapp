@@ -12,7 +12,7 @@ export class ScheduleMaintenanceUtils {
         }
         return {
             id: SnowflakeIdUtil.nextId().toString(),
-            name: "New Schedule",
+            taskName: "New Schedule",
             taskOwner: employeeId,
             taskAssigner: employeeId,
             taskType: 1,

@@ -10,8 +10,8 @@ export const useCreateSchedule = () => {
     const dispatch = useDemeterDispatch();
     const {contextHolderMessage, success, failure} = useAntdMessage();
     const addSchedule = useCallback((value: {
-        name: string,
-        status: number,
+        projectName: string,
+        projectStatus: number,
         startDateTime: string,
         endDateTime?: string,
         description?: string

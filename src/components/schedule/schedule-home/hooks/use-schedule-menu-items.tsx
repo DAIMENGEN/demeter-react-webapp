@@ -12,8 +12,8 @@ export const useScheduleMenuItems = (onClick: (projectId: string) => void) => {
     }, []);
     return projectEntities.map(project => ({
         key: project.id,
-        label: <div className={`schedule-menu-item-title`} title={project.name}
-                    onClick={() => onClick(project.id)}>{truncateString(project.name, 14)}</div>,
+        label: <div className={`schedule-menu-item-title`} title={project.projectName}
+                    onClick={() => onClick(project.id)}>{truncateString(project.projectName, 14)}</div>,
         children: [
             {key: `${project.id}-open-in-new-table`, label: 'Open in New Tab'},
             {key: `${project.id}-divider-1`, type: 'divider'},
