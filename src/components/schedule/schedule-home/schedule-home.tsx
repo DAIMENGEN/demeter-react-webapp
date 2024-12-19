@@ -47,7 +47,7 @@ export const ScheduleHome: React.FC = () => {
             {deleteScheduleHolderMessage}
             <Sider className={"schedule-home-sider"} width={200} trigger={null} collapsedWidth={30} collapsible
                    collapsed={collapsed}>
-                <div className={"schedule-home-sider-trigger"} onClick={(_) => {
+                <div className={"schedule-home-sider-trigger"} onClick={() => {
                     setCollapsed(!collapsed);
                     setMarginInlineStart(collapsed ? 200 : 30);
                 }}>
@@ -68,7 +68,7 @@ export const ScheduleHome: React.FC = () => {
                                   {
                                       key: 'schedule-home',
                                       icon: <HomeOutlined/>,
-                                      label: 'Schedule home'
+                                      label: <div style={{textAlign: "left"}}>Schedule home</div>
                                   },
                                   {
                                       key: 'my-work-divider_1',
@@ -77,7 +77,7 @@ export const ScheduleHome: React.FC = () => {
                                   {
                                       key: 'my-work',
                                       icon: <CarryOutOutlined/>,
-                                      label: 'My work'
+                                      label: <div style={{textAlign: "left"}}>My work</div>
                                   },
                                   {
                                       key: 'my-work-divider_2',
@@ -113,7 +113,7 @@ export const ScheduleHome: React.FC = () => {
                                       }
                                   ]}/>
                         <Collapse className={"schedule-home-sider-workspace-collapse"}
-                                  expandIcon={(_) => <WorkspaceIcon01 width={15} height={15} color={"2c2c2c"}/>}
+                                  expandIcon={() => <WorkspaceIcon01 width={15} height={15} color={"2c2c2c"}/>}
                                   onChange={(key) => setSiderActiveKeys(key)}
                                   activeKey={siderActiveKeys}
                                   accordion
@@ -188,6 +188,7 @@ export const ScheduleHome: React.FC = () => {
                                                               const projectId = keyPath[keyPath.length - 1];
                                                               switch (key) {
                                                                   case `${projectId}-open-in-new-table`:
+                                                                      window.open("http://127.0.0.1:3000/home-page/schedule-home/maintenance-schedule", "_blank")
                                                                       break;
                                                                   case `${projectId}-rename-schedule`:
                                                                       dispatch(setRenameScheduleId(projectId));

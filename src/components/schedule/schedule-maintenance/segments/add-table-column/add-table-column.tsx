@@ -29,7 +29,7 @@ export const AddTableColumn: React.FC<{
                                 console.log(searchValue);
                             }}
                             suffix={<SearchIcon01 width={16} height={16} color={"#bfbfbf"}/>}/>
-                     <Flex gap={10}>
+                     <Flex gap={10} wrap={true}>
                          <Button onClick={() => {
                              const key = SnowflakeIdUtil.nextId().toString();
                              addColumn({
@@ -50,6 +50,36 @@ export const AddTableColumn: React.FC<{
                              showColumn(key);
                          }}>
                              Text
+                         </Button>
+                         <Button>
+                             TaskName
+                         </Button>
+                         <Button>
+                             TaskOwner
+                         </Button>
+                         <Button>
+                             TaskAssigner
+                         </Button>
+                         <Button>
+                             TaskType
+                         </Button>
+                         <Button>
+                             TaskStatus
+                         </Button>
+                         <Button>
+                             TaskRule
+                         </Button>
+                         <Button>
+                             StartDate
+                         </Button>
+                         <Button>
+                             EndDate
+                         </Button>
+                         <Button>
+                             Description
+                         </Button>
+                         <Button>
+                             Order
                          </Button>
                      </Flex>
                  </Space>}>
