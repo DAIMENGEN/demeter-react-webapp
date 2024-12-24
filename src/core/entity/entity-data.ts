@@ -1,4 +1,5 @@
 import {SnowflakeIdUtil} from "@D/utils/snowflake/snowflake-id-util";
+import {AnyType} from "@D/global-types";
 
 /**
  * Defines the common data structure for an entity.
@@ -13,7 +14,7 @@ export abstract class EntityDataFactory {
         return SnowflakeIdUtil.nextId().toString();
     }
 
-    public static create<T extends EntityData>(entityType: { new(...args: any[]): T }, partialData: Partial<T>): T {
+    public static create<T extends EntityData>(entityType: { new(...args: AnyType[]): T }, partialData: Partial<T>): T {
         const defaultData: EntityData = {
             id: EntityDataFactory.generateId(),
         };
@@ -23,7 +24,7 @@ export abstract class EntityDataFactory {
         return instance;
     }
 
-    public static update<T extends EntityData>(entityType: { new(...args: any[]): T }, oldEntity: T, updatedData: Partial<T>): T {
+    public static update<T extends EntityData>(entityType: { new(...args: AnyType[]): T }, oldEntity: T, updatedData: Partial<T>): T {
         const completeData = { ...oldEntity, ...updatedData };
         const instance = new entityType();
         Object.assign(instance, completeData);
