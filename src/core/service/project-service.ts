@@ -1,9 +1,9 @@
 import {SelectProps} from "antd";
-import {BaseService} from "@D/core/service/service";
+import {HttpService} from "@D/http/http-service.ts";
+import {HttpPayload} from "@D/http/http-payload.ts";
 import {ProjectEntity} from "@D/core/entity/project-entity";
-import {EntityData, EntityDataFactory} from "@D/core/entity/entity-data";
 
-export class ProjectService extends BaseService<ProjectEntity> {
+export class ProjectService extends HttpService<ProjectEntity> {
 
     private static instance: ProjectService;
 
@@ -14,22 +14,28 @@ export class ProjectService extends BaseService<ProjectEntity> {
         return ProjectService.instance;
     }
 
-    public create(partialFields: Omit<ProjectEntity, keyof EntityData>): ProjectEntity {
-        return EntityDataFactory.create<ProjectEntity>(ProjectEntity, partialFields);
-    }
-
-    public update(oldProject: ProjectEntity, partialFields: Omit<ProjectEntity, keyof ProjectEntity>): ProjectEntity {
-        return EntityDataFactory.update<ProjectEntity>(ProjectEntity, oldProject, partialFields);
+    public create(partialFields: Omit<ProjectEntity, keyof HttpPayload>): ProjectEntity {
+        const args: ConstructorParameters<typeof ProjectEntity> = [
+            this.generateId(),
+            partialFields.projectName,
+            partialFields.projectStatus,
+            partialFields.startDateTime,
+            partialFields.description,
+            partialFields.endDateTime,
+            partialFields.version,
+            partialFields.order,
+        ];
+        return new ProjectEntity(...args);
     }
 
     public createProjectRequest(project: ProjectEntity, success: (project: ProjectEntity) => void, failure?: (error: Error) => void): void {
         const URL = "/createProjectRoute";
-        this.post<ProjectEntity>(URL, project).then(success).catch(failure);
+        this.post<ProjectEntity>(URL, {project}).then(success).catch(failure);
     }
 
     public createProjectsRequest(projects: Array<ProjectEntity>, success: (projects: Array<ProjectEntity>) => void, failure?: (error: Error) => void): void {
         const URL = "/createProjectsRoute";
-        this.post<Array<ProjectEntity>>(URL, projects).then(success).catch(failure);
+        this.post<Array<ProjectEntity>>(URL, {projects}).then(success).catch(failure);
     }
 
     public deleteProjectByIdRequest(projectId: string, success: (deletedProject: ProjectEntity) => void, failure?: (error: Error) => void): void {
@@ -44,12 +50,12 @@ export class ProjectService extends BaseService<ProjectEntity> {
 
     public updateProjectRequest(project: ProjectEntity, success: (updatedProject: ProjectEntity) => void, failure?: (error: Error) => void): void {
         const URL = "/updateProjectRoute";
-        this.put<ProjectEntity>(URL, project).then(success).catch(failure);
+        this.put<ProjectEntity>(URL, {project}).then(success).catch(failure);
     }
 
     public updateProjectsRequest(projects: Array<ProjectEntity>, success: (updatedProjects: Array<ProjectEntity>) => void, failure?: (error: Error) => void): void {
         const URL = "/updateProjectsRoute";
-        this.put<Array<ProjectEntity>>(URL, projects).then(success).catch(failure);
+        this.put<Array<ProjectEntity>>(URL, {projects}).then(success).catch(failure);
     }
 
     public getAllProjectsRequest(success: (projects: Array<ProjectEntity>) => void, failure?: (error: Error) => void): void {

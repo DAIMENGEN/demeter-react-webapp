@@ -1,8 +1,8 @@
-import {BaseService} from "@D/core/service/service";
 import {HolidayEntity} from "@D/core/entity/holiday-entity";
-import {EntityData, EntityDataFactory} from "@D/core/entity/entity-data";
+import {HttpService} from "@D/http/http-service.ts";
+import {HttpPayload} from "@D/http/http-payload.ts";
 
-export class HolidayService extends BaseService<HolidayEntity> {
+export class HolidayService extends HttpService<HolidayEntity> {
 
     private static instance: HolidayService;
 
@@ -13,22 +13,27 @@ export class HolidayService extends BaseService<HolidayEntity> {
         return HolidayService.instance;
     }
 
-    public create(partialFields: Omit<HolidayEntity, keyof EntityData>): HolidayEntity {
-        return EntityDataFactory.create<HolidayEntity>(HolidayEntity, partialFields);
-    }
-
-    public update(oldHoliday: HolidayEntity, partialFields: Omit<HolidayEntity, keyof EntityData>): HolidayEntity {
-        return EntityDataFactory.update(HolidayEntity, oldHoliday, partialFields);
+    public create(partialFields: Omit<HolidayEntity, keyof HttpPayload>): HolidayEntity {
+        const args: ConstructorParameters<typeof HolidayEntity> = [
+            this.generateId(),
+            partialFields.title,
+            partialFields.holidayDate,
+            partialFields.holidayType,
+            partialFields.isRecurring,
+            partialFields.countryCode,
+            partialFields.description,
+        ];
+        return new HolidayEntity(...args);
     }
 
     public createHolidayRequest(holiday: HolidayEntity, success: (holiday: HolidayEntity) => void, failure?: (error: Error) => void): void {
         const URL = "/createHolidayRoute";
-        this.post<HolidayEntity>(URL, holiday).then(success).catch(failure);
+        this.post<HolidayEntity>(URL, {holiday}).then(success).catch(failure);
     }
 
     public createHolidaysRequest(holidays: Array<HolidayEntity>, success: (holidays: Array<HolidayEntity>) => void, failure?: (error: Error) => void): void {
         const URL = "/createHolidaysRoute";
-        this.post<Array<HolidayEntity>>(URL, holidays).then(success).catch(failure);
+        this.post<Array<HolidayEntity>>(URL, {holidays}).then(success).catch(failure);
     }
 
     public deleteHolidaysRequest(success: (deletedHolidays: Array<HolidayEntity>) => void, failure?: (error: Error) => void): void {
@@ -49,12 +54,12 @@ export class HolidayService extends BaseService<HolidayEntity> {
 
     public updateHolidayRequest(holiday: HolidayEntity, success: (updatedHoliday: HolidayEntity) => void, failure?: (error: Error) => void): void {
         const URL = "/updateHolidayRoute";
-        this.put<HolidayEntity>(URL, holiday).then(success).catch(failure);
+        this.put<HolidayEntity>(URL, {holiday}).then(success).catch(failure);
     }
 
     public updateHolidaysRequest(holidays: Array<HolidayEntity>, success: (updatedHoliday: Array<HolidayEntity>) => void, failure?: (error: Error) => void): void {
         const URL = "/updateHolidaysRoute";
-        this.put<Array<HolidayEntity>>(URL, holidays).then(success).catch(failure);
+        this.put<Array<HolidayEntity>>(URL, {holidays}).then(success).catch(failure);
     }
 
     public getHolidaysRequest(success: (holidays: Array<HolidayEntity>) => void, failure?: (error: Error) => void): void {

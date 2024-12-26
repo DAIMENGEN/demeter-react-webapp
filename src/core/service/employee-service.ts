@@ -1,9 +1,9 @@
-import {BaseService} from "@D/core/service/service";
-import {EmployeeEntity} from "@D/core/entity/employee-entity";
-import {EntityData, EntityDataFactory} from "@D/core/entity/entity-data";
 import {SelectProps} from "antd";
+import {HttpService} from "@D/http/http-service.ts";
+import {EmployeeEntity} from "@D/core/entity/employee-entity";
+import {HttpPayload} from "@D/http/http-payload.ts";
 
-export class EmployeeService extends BaseService<EmployeeEntity> {
+export class EmployeeService extends HttpService<EmployeeEntity> {
 
     private static instance: EmployeeService;
 
@@ -14,12 +14,17 @@ export class EmployeeService extends BaseService<EmployeeEntity> {
         return EmployeeService.instance;
     }
 
-    public create(partialFields: Omit<EmployeeEntity, keyof EntityData>): EmployeeEntity {
-        return EntityDataFactory.create<EmployeeEntity>(EmployeeEntity, partialFields);
-    }
-
-    public update(oldUser: EmployeeEntity, partialFields: Omit<EmployeeEntity, keyof EntityData>): EmployeeEntity {
-        return EntityDataFactory.update(EmployeeEntity, oldUser, partialFields);
+    public create(partialFields: Omit<EmployeeEntity, keyof HttpPayload>): EmployeeEntity {
+        const args: ConstructorParameters<typeof EmployeeEntity> = [
+            this.generateId(),
+            partialFields.account,
+            partialFields.password,
+            partialFields.employeeName,
+            partialFields.email,
+            partialFields.phone,
+            partialFields.isActive,
+        ];
+        return new EmployeeEntity(...args);
     }
 
     public loginRequest(account: string, password: string, success: (token: string) => void, failure?: (error: Error) => void): void {
@@ -32,14 +37,14 @@ export class EmployeeService extends BaseService<EmployeeEntity> {
         this.post<string>(URL, {account}).then(success).catch(failure);
     }
 
-    public registerRequest(user: EmployeeEntity, success: (user: EmployeeEntity) => void, failure?: (error: Error) => void): void {
+    public registerRequest(employee: EmployeeEntity, success: (user: EmployeeEntity) => void, failure?: (error: Error) => void): void {
         const URL = "/registerRoute";
-        this.post<EmployeeEntity>(URL, user).then(success).catch(failure);
+        this.post<EmployeeEntity>(URL, {employee}).then(success).catch(failure);
     }
 
-    public batchRegisterRequest(users: Array<EmployeeEntity>, success: (users: Array<EmployeeEntity>) => void, failure?: (error: Error) => void): void {
+    public batchRegisterRequest(employees: Array<EmployeeEntity>, success: (employees: Array<EmployeeEntity>) => void, failure?: (error: Error) => void): void {
         const URL = "/batchRegisterRoute";
-        this.post<Array<EmployeeEntity>>(URL, users).then(success).catch(failure);
+        this.post<Array<EmployeeEntity>>(URL, {employees}).then(success).catch(failure);
     }
 
     public resetPasswordRequest(newPassword: string, oldPassword: string, success: (employee: EmployeeEntity) => void, failure?: (error: Error) => void): void {

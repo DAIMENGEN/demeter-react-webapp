@@ -1,8 +1,8 @@
-import {EntityData} from "@D/core/entity/entity-data";
 import {HolidayType} from "@D/core/constant/holiday-type";
 import {CountryCode} from "@D/core/constant/country-code";
+import {HttpPayload} from "@D/http/http-payload.ts";
 
-export interface IHolidayEntity extends EntityData {
+export interface IHolidayEntity extends HttpPayload {
     title: string;
     holidayDate: string;
     holidayType: HolidayType;

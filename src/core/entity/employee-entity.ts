@@ -1,6 +1,6 @@
-import {EntityData} from "@D/core/entity/entity-data";
+import {HttpPayload} from "@D/http/http-payload.ts";
 
-export interface IEmployeeEntity extends EntityData {
+export interface IEmployeeEntity extends HttpPayload {
     account: string;
     password: string;
     employeeName: string;
