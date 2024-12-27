@@ -1,9 +1,9 @@
-import {BaseService} from "@D/core/service/service";
 import {ProjectTaskEntity} from "@D/core/entity/project-task-entity";
 import {SelectProps} from "antd";
-import {EntityData, EntityDataFactory} from "@D/core/entity/entity-data";
+import {HttpService} from "@D/http/http-service.ts";
+import {HttpPayload} from "@D/http/http-payload.ts";
 
-export class ProjectTaskService extends BaseService<ProjectTaskEntity> {
+export class ProjectTaskService extends HttpService<ProjectTaskEntity> {
 
     private static instance: ProjectTaskService;
 
@@ -14,12 +14,20 @@ export class ProjectTaskService extends BaseService<ProjectTaskEntity> {
         return ProjectTaskService.instance;
     }
 
-    public create(partialFields: Omit<ProjectTaskEntity, keyof EntityData>): ProjectTaskEntity {
-        return EntityDataFactory.create<ProjectTaskEntity>(ProjectTaskEntity, partialFields);
-    }
-
-    public update(oldProjectTask: ProjectTaskEntity, partialFields: Omit<ProjectTaskEntity, keyof ProjectTaskEntity>): ProjectTaskEntity {
-        return EntityDataFactory.update<ProjectTaskEntity>(ProjectTaskEntity, oldProjectTask, partialFields);
+    public create(partialFields: Omit<ProjectTaskEntity, keyof HttpPayload>): ProjectTaskEntity {
+        const args: ConstructorParameters<typeof ProjectTaskEntity> = [
+            this.generateId(),
+            partialFields.taskName,
+            partialFields.taskType,
+            partialFields.taskStatus,
+            partialFields.startDateTime,
+            partialFields.endDateTime,
+            partialFields.description,
+            partialFields.taskRule,
+            partialFields.parentId,
+            partialFields.order,
+        ];
+        return new ProjectTaskEntity(...args);
     }
 
     public getProjectTaskTypeSelectOptionsRequest(success: (options: SelectProps["options"]) => void, failure?: (error: Error) => void): void {
