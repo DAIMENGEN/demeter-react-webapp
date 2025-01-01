@@ -1,4 +1,4 @@
-import {ProjectTaskEntity} from "@D/core/entity/project-task-entity";
+import {ProjectTaskEntity} from "@D/core/entity/project-task-entity.ts";
 import {SelectProps} from "antd";
 import {HttpService} from "@D/http/http-service.ts";
 import {HttpPayload} from "@D/http/http-payload.ts";

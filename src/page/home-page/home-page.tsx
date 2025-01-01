@@ -4,7 +4,7 @@ import {Layout, Menu, MenuProps, Space} from "antd";
 import header_logo_white_image from "../../assets/images/png/header_logo_white.png"
 import {HomeOutlined, LogoutOutlined} from "@ant-design/icons";
 import {Outlet, useNavigate} from "react-router-dom";
-import {EmployeeService} from "@D/core/service/employee-service";
+import {EmployeeService} from "@D/http/service/employee-service";
 import {useEmployeeName} from "@D/core/hooks/employee/use-employee-name";
 
 export const HomePage: React.FC = () => {

@@ -4,7 +4,7 @@ import {Form, Input} from "antd";
 import {FullDraggableModal} from "full-flex-ui";
 import {useRenameScheduleModal} from "@D/components/schedule/schedule-rename/hooks/use-rename-schedule-modal";
 import {ProjectPayload} from "@D/http/payload/project-payload.ts";
-import {ProjectService} from "@D/core/service/project-service";
+import {ProjectService} from "@D/http/service/project-service";
 
 export const ScheduleRename = () => {
     const [form] = Form.useForm();

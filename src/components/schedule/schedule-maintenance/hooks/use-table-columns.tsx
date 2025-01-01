@@ -5,8 +5,8 @@ import {useAntdMessage} from "@D/core/hooks/message/use-antd-message.tsx";
 import {useEmployeeId} from "@D/core/hooks/employee/use-employee-id.tsx";
 import {useEmployeeName} from "@D/core/hooks/employee/use-employee-name.tsx";
 import {debounce} from "lodash";
-import {EmployeeService} from "@D/core/service/employee-service.ts";
-import {ProjectTaskService} from "@D/core/service/project-task-service.ts";
+import {EmployeeService} from "@D/http/service/employee-service.ts";
+import {ProjectTaskService} from "@D/http/service/project-task-service.ts";
 import {SelectProps, Spin} from "antd";
 
 export const useTableColumns = () => {

@@ -6,7 +6,7 @@ import {useAntdMessage} from "@D/core/hooks/message/use-antd-message";
 import {useDemeterDispatch} from "@D/core/store/demeter-hook";
 import login_bg_image from "../../assets/images/jpeg/login-bg-image.jpeg";
 import login_logo_wr_image from "../../assets/images/jpg/login_logo_wr.jpg";
-import {EmployeeService} from "@D/core/service/employee-service";
+import {EmployeeService} from "@D/http/service/employee-service";
 import {setEmployeeIdAction, setEmployeeNameAction} from "@D/core/store/features/employee-slice";
 
 export const LoginPage: React.FC = () => {

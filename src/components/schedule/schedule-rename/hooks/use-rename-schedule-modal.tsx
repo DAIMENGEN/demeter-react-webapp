@@ -2,7 +2,7 @@ import {useDemeterDispatch, useDemeterSelector} from "@D/core/store/demeter-hook
 import {setRenameScheduleId, setRenameScheduleModalVisible} from "@D/core/store/features/schedule-slice";
 import {ProjectPayload} from "@D/http/payload/project-payload.ts";
 import {useCallback} from "react";
-import {ProjectService} from "@D/core/service/project-service";
+import {ProjectService} from "@D/http/service/project-service";
 import {useAntdMessage} from "@D/core/hooks/message/use-antd-message";
 import {updateProjectEntity} from "@D/core/store/features/project-slice";
 

@@ -16,7 +16,7 @@ import {ImportIcon01} from "@D/icons/import-icon/import-icon-01";
 import {ScheduleCreate} from "@D/components/schedule/schedule-create/schedule-create";
 import {useScheduleMenuItems} from "@D/components/schedule/schedule-home/hooks/use-schedule-menu-items";
 import {useDeleteSchedule} from "@D/components/schedule/schedule-home/hooks/use-delete-schedule";
-import {ProjectService} from "@D/core/service/project-service";
+import {ProjectService} from "@D/http/service/project-service";
 import {setProjectEntities} from "@D/core/store/features/project-slice";
 import {ScheduleRename} from "@D/components/schedule/schedule-rename/schedule-rename";
 import {Outlet} from "react-router-dom";
