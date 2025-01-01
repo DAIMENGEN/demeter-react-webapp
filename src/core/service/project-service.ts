@@ -1,9 +1,9 @@
 import {SelectProps} from "antd";
 import {HttpService} from "@D/http/http-service.ts";
 import {HttpPayload} from "@D/http/http-payload.ts";
-import {ProjectEntity} from "@D/core/entity/project-entity";
+import {ProjectPayload} from "@D/http/payload/project-payload.ts";
 
-export class ProjectService extends HttpService<ProjectEntity> {
+export class ProjectService extends HttpService<ProjectPayload> {
 
     private static instance: ProjectService;
 
@@ -14,8 +14,8 @@ export class ProjectService extends HttpService<ProjectEntity> {
         return ProjectService.instance;
     }
 
-    public create(partialFields: Omit<ProjectEntity, keyof HttpPayload>): ProjectEntity {
-        const args: ConstructorParameters<typeof ProjectEntity> = [
+    public create(partialFields: Omit<ProjectPayload, keyof HttpPayload>): ProjectPayload {
+        const args: ConstructorParameters<typeof ProjectPayload> = [
             this.generateId(),
             partialFields.projectName,
             partialFields.projectStatus,
@@ -25,57 +25,57 @@ export class ProjectService extends HttpService<ProjectEntity> {
             partialFields.version,
             partialFields.order,
         ];
-        return new ProjectEntity(...args);
+        return new ProjectPayload(...args);
     }
 
-    public createProjectRequest(project: ProjectEntity, success: (project: ProjectEntity) => void, failure?: (error: Error) => void): void {
+    public createProjectRequest(project: ProjectPayload, success: (project: ProjectPayload) => void, failure?: (error: Error) => void): void {
         const URL = "/createProjectRoute";
-        this.post<ProjectEntity>(URL, {project}).then(success).catch(failure);
+        this.post<ProjectPayload>(URL, {project}).then(success).catch(failure);
     }
 
-    public createProjectsRequest(projects: Array<ProjectEntity>, success: (projects: Array<ProjectEntity>) => void, failure?: (error: Error) => void): void {
+    public createProjectsRequest(projects: Array<ProjectPayload>, success: (projects: Array<ProjectPayload>) => void, failure?: (error: Error) => void): void {
         const URL = "/createProjectsRoute";
-        this.post<Array<ProjectEntity>>(URL, {projects}).then(success).catch(failure);
+        this.post<Array<ProjectPayload>>(URL, {projects}).then(success).catch(failure);
     }
 
-    public deleteProjectByIdRequest(projectId: string, success: (deletedProject: ProjectEntity) => void, failure?: (error: Error) => void): void {
+    public deleteProjectByIdRequest(projectId: string, success: (deletedProject: ProjectPayload) => void, failure?: (error: Error) => void): void {
         const URL = "/deleteProjectByIdRoute";
-        this.post<ProjectEntity>(URL, {projectId}).then(success).catch(failure);
+        this.post<ProjectPayload>(URL, {projectId}).then(success).catch(failure);
     }
 
-    public deleteProjectsByIdsRequest(projectIds: Array<string>, success: (deletedProjects: Array<ProjectEntity>) => void, failure?: (error: Error) => void): void {
+    public deleteProjectsByIdsRequest(projectIds: Array<string>, success: (deletedProjects: Array<ProjectPayload>) => void, failure?: (error: Error) => void): void {
         const URL = "/deleteProjectsByIdsRoute";
-        this.post<Array<ProjectEntity>>(URL, {projectIds}).then(success).catch(failure);
+        this.post<Array<ProjectPayload>>(URL, {projectIds}).then(success).catch(failure);
     }
 
-    public updateProjectRequest(project: ProjectEntity, success: (updatedProject: ProjectEntity) => void, failure?: (error: Error) => void): void {
+    public updateProjectRequest(project: ProjectPayload, success: (updatedProject: ProjectPayload) => void, failure?: (error: Error) => void): void {
         const URL = "/updateProjectRoute";
-        this.put<ProjectEntity>(URL, {project}).then(success).catch(failure);
+        this.put<ProjectPayload>(URL, {project}).then(success).catch(failure);
     }
 
-    public updateProjectsRequest(projects: Array<ProjectEntity>, success: (updatedProjects: Array<ProjectEntity>) => void, failure?: (error: Error) => void): void {
+    public updateProjectsRequest(projects: Array<ProjectPayload>, success: (updatedProjects: Array<ProjectPayload>) => void, failure?: (error: Error) => void): void {
         const URL = "/updateProjectsRoute";
-        this.put<Array<ProjectEntity>>(URL, {projects}).then(success).catch(failure);
+        this.put<Array<ProjectPayload>>(URL, {projects}).then(success).catch(failure);
     }
 
-    public getAllProjectsRequest(success: (projects: Array<ProjectEntity>) => void, failure?: (error: Error) => void): void {
+    public getAllProjectsRequest(success: (projects: Array<ProjectPayload>) => void, failure?: (error: Error) => void): void {
         const URL = "/getAllProjectsRoute";
-        this.get<Array<ProjectEntity>>(URL).then(success).catch(failure);
+        this.get<Array<ProjectPayload>>(URL).then(success).catch(failure);
     }
 
-    public getProjectByIdRequest(projectId: string, success: (project: ProjectEntity) => void, failure?: (error: Error) => void): void {
+    public getProjectByIdRequest(projectId: string, success: (project: ProjectPayload) => void, failure?: (error: Error) => void): void {
         const URL = "/getProjectByIdRoute";
-        this.post<ProjectEntity>(URL, {projectId}).then(success).catch(failure);
+        this.post<ProjectPayload>(URL, {projectId}).then(success).catch(failure);
     }
 
-    public getProjectsByIdsRequest(projectIds: Array<string>, success: (projects: Array<ProjectEntity>) => void, failure?: (error: Error) => void): void {
+    public getProjectsByIdsRequest(projectIds: Array<string>, success: (projects: Array<ProjectPayload>) => void, failure?: (error: Error) => void): void {
         const URL = "/getProjectsByIdsRoute";
-        this.post<Array<ProjectEntity>>(URL, {projectIds}).then(success).catch(failure);
+        this.post<Array<ProjectPayload>>(URL, {projectIds}).then(success).catch(failure);
     }
 
-    public getProjectsByEmployeeIdRequest(success: (projects: Array<ProjectEntity>) => void, failure?: (error: Error) => void): void {
+    public getProjectsByEmployeeIdRequest(success: (projects: Array<ProjectPayload>) => void, failure?: (error: Error) => void): void {
         const URL = "/getProjectsByEmployeeIdRoute";
-        this.get<Array<ProjectEntity>>(URL).then(success).catch(failure);
+        this.get<Array<ProjectPayload>>(URL).then(success).catch(failure);
     }
 
     public getProjectStatusSelectOptionsRequest(success: (options: SelectProps["options"]) => void, failure?: (error: Error) => void): void {

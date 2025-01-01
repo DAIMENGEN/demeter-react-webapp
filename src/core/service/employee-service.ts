@@ -1,9 +1,9 @@
 import {SelectProps} from "antd";
 import {HttpService} from "@D/http/http-service.ts";
-import {EmployeeEntity} from "@D/core/entity/employee-entity";
+import {EmployeePayload} from "@D/http/payload/employee-payload.ts";
 import {HttpPayload} from "@D/http/http-payload.ts";
 
-export class EmployeeService extends HttpService<EmployeeEntity> {
+export class EmployeeService extends HttpService<EmployeePayload> {
 
     private static instance: EmployeeService;
 
@@ -14,8 +14,8 @@ export class EmployeeService extends HttpService<EmployeeEntity> {
         return EmployeeService.instance;
     }
 
-    public create(partialFields: Omit<EmployeeEntity, keyof HttpPayload>): EmployeeEntity {
-        const args: ConstructorParameters<typeof EmployeeEntity> = [
+    public create(partialFields: Omit<EmployeePayload, keyof HttpPayload>): EmployeePayload {
+        const args: ConstructorParameters<typeof EmployeePayload> = [
             this.generateId(),
             partialFields.account,
             partialFields.password,
@@ -24,7 +24,7 @@ export class EmployeeService extends HttpService<EmployeeEntity> {
             partialFields.phone,
             partialFields.isActive,
         ];
-        return new EmployeeEntity(...args);
+        return new EmployeePayload(...args);
     }
 
     public loginRequest(account: string, password: string, success: (token: string) => void, failure?: (error: Error) => void): void {
@@ -37,19 +37,19 @@ export class EmployeeService extends HttpService<EmployeeEntity> {
         this.post<string>(URL, {account}).then(success).catch(failure);
     }
 
-    public registerRequest(employee: EmployeeEntity, success: (user: EmployeeEntity) => void, failure?: (error: Error) => void): void {
+    public registerRequest(employee: EmployeePayload, success: (user: EmployeePayload) => void, failure?: (error: Error) => void): void {
         const URL = "/registerRoute";
-        this.post<EmployeeEntity>(URL, {employee}).then(success).catch(failure);
+        this.post<EmployeePayload>(URL, {employee}).then(success).catch(failure);
     }
 
-    public batchRegisterRequest(employees: Array<EmployeeEntity>, success: (employees: Array<EmployeeEntity>) => void, failure?: (error: Error) => void): void {
+    public batchRegisterRequest(employees: Array<EmployeePayload>, success: (employees: Array<EmployeePayload>) => void, failure?: (error: Error) => void): void {
         const URL = "/batchRegisterRoute";
-        this.post<Array<EmployeeEntity>>(URL, {employees}).then(success).catch(failure);
+        this.post<Array<EmployeePayload>>(URL, {employees}).then(success).catch(failure);
     }
 
-    public resetPasswordRequest(newPassword: string, oldPassword: string, success: (employee: EmployeeEntity) => void, failure?: (error: Error) => void): void {
+    public resetPasswordRequest(newPassword: string, oldPassword: string, success: (employee: EmployeePayload) => void, failure?: (error: Error) => void): void {
         const URL = "/resetPasswordRoute";
-        this.post<EmployeeEntity>(URL, {newPassword, oldPassword}).then(success).catch(failure);
+        this.post<EmployeePayload>(URL, {newPassword, oldPassword}).then(success).catch(failure);
     }
 
     public getCurrentEmployeeIdRequest(success: (employeeId: string) => void, failure?: (error: Error) => void): void {

@@ -1,6 +1,6 @@
 import {useDemeterDispatch, useDemeterSelector} from "@D/core/store/demeter-hook";
 import {setRenameScheduleId, setRenameScheduleModalVisible} from "@D/core/store/features/schedule-slice";
-import {ProjectEntity} from "@D/core/entity/project-entity";
+import {ProjectPayload} from "@D/http/payload/project-payload.ts";
 import {useCallback} from "react";
 import {ProjectService} from "@D/core/service/project-service";
 import {useAntdMessage} from "@D/core/hooks/message/use-antd-message";
@@ -18,7 +18,7 @@ export const useRenameScheduleModal = () => {
     }
     const currentRenameScheduleId = useDemeterSelector(state => state.scheduleStore.renameScheduleId);
 
-    const renameSchedule = useCallback((project: ProjectEntity) => {
+    const renameSchedule = useCallback((project: ProjectPayload) => {
         const projectService = ProjectService.getInstance();
         projectService.updateProjectRequest(project, updatedProject => {
             dispatch(updateProjectEntity(updatedProject));

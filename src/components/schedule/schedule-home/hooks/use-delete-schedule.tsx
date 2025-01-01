@@ -2,7 +2,7 @@ import {Modal} from "antd";
 import {useCallback} from "react";
 import {useDemeterDispatch} from "@D/core/store/demeter-hook";
 import {ProjectService} from "@D/core/service/project-service";
-import {ProjectEntity} from "@D/core/entity/project-entity";
+import {ProjectPayload} from "@D/http/payload/project-payload.ts";
 import {deleteProjectEntity} from "@D/core/store/features/project-slice";
 import {useAntdMessage} from "@D/core/hooks/message/use-antd-message";
 
@@ -18,7 +18,7 @@ export const useDeleteSchedule = () => {
             okText: "Yes",
             cancelText: "No",
             onOk: () => {
-                projectService.deleteProjectByIdRequest(projectId, (deletedProject: ProjectEntity) => {
+                projectService.deleteProjectByIdRequest(projectId, (deletedProject: ProjectPayload) => {
                     dispatch(deleteProjectEntity(deletedProject));
                     success("Delete project successfully").then();
                 }, (error: Error) => failure(projectService.parseResponseError(error)));

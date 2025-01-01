@@ -1,16 +1,6 @@
 import {HttpPayload} from "@D/http/http-payload.ts";
 
-export interface IProjectEntity extends HttpPayload {
-    projectName: string;
-    projectStatus: number;
-    startDateTime: string;
-    description?: string;
-    endDateTime?: string;
-    version?: number;
-    order?: number;
-}
-
-export class ProjectEntity implements IProjectEntity {
+export class ProjectPayload implements HttpPayload {
     id: string;
     projectName: string;
     projectStatus: number;

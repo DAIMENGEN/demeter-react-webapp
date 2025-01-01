@@ -1,15 +1,6 @@
 import {HttpPayload} from "@D/http/http-payload.ts";
 
-export interface IEmployeeEntity extends HttpPayload {
-    account: string;
-    password: string;
-    employeeName: string;
-    email: string;
-    phone: string;
-    isActive: boolean;
-}
-
-export class EmployeeEntity implements IEmployeeEntity {
+export class EmployeePayload implements HttpPayload {
     id: string;
     account: string;
     password: string;

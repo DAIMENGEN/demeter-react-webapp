@@ -1,5 +1,5 @@
 import {useCallback} from "react";
-import {ProjectEntity} from "@D/core/entity/project-entity";
+import {ProjectPayload} from "@D/http/payload/project-payload.ts";
 import {useDemeterDispatch} from "@D/core/store/demeter-hook";
 import {ProjectService} from "@D/core/service/project-service";
 import {addProjectEntity} from "@D/core/store/features/project-slice";
@@ -18,7 +18,7 @@ export const useCreateSchedule = () => {
     }) => {
         const projectService = ProjectService.getInstance();
         const projectEntity = projectService.create(value);
-        projectService.createProjectRequest(projectEntity, (project: ProjectEntity) => {
+        projectService.createProjectRequest(projectEntity, (project: ProjectPayload) => {
             dispatch(addProjectEntity(project));
             dispatch(setAddScheduleModalVisible(false));
             success("Add project successfully").then();

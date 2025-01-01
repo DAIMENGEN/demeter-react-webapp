@@ -3,12 +3,12 @@ import React, {useCallback, useEffect, useState} from "react";
 import {Form, Input} from "antd";
 import {FullDraggableModal} from "full-flex-ui";
 import {useRenameScheduleModal} from "@D/components/schedule/schedule-rename/hooks/use-rename-schedule-modal";
-import {ProjectEntity} from "@D/core/entity/project-entity";
+import {ProjectPayload} from "@D/http/payload/project-payload.ts";
 import {ProjectService} from "@D/core/service/project-service";
 
 export const ScheduleRename = () => {
     const [form] = Form.useForm();
-    const [project, setProject] = useState<ProjectEntity>();
+    const [project, setProject] = useState<ProjectPayload>();
     const {
         renameScheduleModalVisible,
         setRenameScheduleModalVisible,

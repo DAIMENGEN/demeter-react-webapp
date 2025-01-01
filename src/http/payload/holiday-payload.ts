@@ -1,17 +1,8 @@
-import {HolidayType} from "@D/core/constant/holiday-type";
-import {CountryCode} from "@D/core/constant/country-code";
+import {HolidayType} from "@D/core/constant/holiday-type.ts";
+import {CountryCode} from "@D/core/constant/country-code.ts";
 import {HttpPayload} from "@D/http/http-payload.ts";
 
-export interface IHolidayEntity extends HttpPayload {
-    title: string;
-    holidayDate: string;
-    holidayType: HolidayType;
-    isRecurring: boolean;
-    countryCode: CountryCode;
-    description?: string;
-}
-
-export class HolidayEntity implements IHolidayEntity {
+export class HolidayPayload implements HttpPayload {
     id: string;
     title: string;
     holidayDate: string;
