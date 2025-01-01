@@ -1,3 +1,4 @@
+import {AnyType} from "@D/global-types";
 import axios, {AxiosInstance, AxiosResponse} from "axios";
 
 const axiosInstance: AxiosInstance = axios.create({
@@ -42,7 +43,7 @@ axiosInstance.interceptors.response.use(
 
 export class HttpClient {
 
-    async get<T>(url: string, params?: Record<string, unknown>): Promise<T> {
+    async get<T>(url: string, params?: Record<string, AnyType>): Promise<T> {
         const response: AxiosResponse<ApiResponse<T>> = await axiosInstance.get(url, {params}).catch(error => {
             throw new Error(`Request failed, URL: ${url}, error: ${error}`);
         });
@@ -54,7 +55,7 @@ export class HttpClient {
         }
     }
 
-    async post<T>(url: string, params?: Record<string, unknown>): Promise<T> {
+    async post<T>(url: string, params?: Record<string, AnyType>): Promise<T> {
         const response: AxiosResponse<ApiResponse<T>> = await axiosInstance.post(url, params).catch(error => {
             throw new Error(`Request failed, URL: ${url}, error: ${error}`);
         });
@@ -66,7 +67,7 @@ export class HttpClient {
         }
     }
 
-    async put<T>(url: string, params?: Record<string, unknown>): Promise<T> {
+    async put<T>(url: string, params?: Record<string, AnyType>): Promise<T> {
         const response: AxiosResponse<ApiResponse<T>> = await axiosInstance.put(url, params).catch(error => {
             throw new Error(`Request failed, URL: ${url}, error: ${error}`);
         });
