@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import {SnowflakeIdUtil} from "@D/utils/snowflake/snowflake-id-util";
+import {SnowflakeIdUtil} from "@D/utils/snowflake-id-util.ts";
 import {DataSourceType} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-types";
 
 export class ScheduleMaintenanceUtils {

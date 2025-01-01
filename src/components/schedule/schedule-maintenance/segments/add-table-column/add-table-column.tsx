@@ -5,7 +5,7 @@ import {HIGHLIGHT_COLOR} from "@D/core/style/theme";
 import {SearchIcon01} from "@D/icons/search-icon/search-icon-01";
 import {DataSourceType} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-types.ts";
 import {ProColumns} from "@ant-design/pro-table";
-import {SnowflakeIdUtil} from "@D/utils/snowflake/snowflake-id-util.ts";
+import {SnowflakeIdUtil} from "@D/utils/snowflake-id-util.ts";
 
 export const AddTableColumn: React.FC<{
     addColumn: (column: ProColumns<DataSourceType>) => void;

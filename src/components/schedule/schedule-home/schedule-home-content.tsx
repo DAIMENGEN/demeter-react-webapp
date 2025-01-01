@@ -1,6 +1,6 @@
 import "./schedule-home-content.scss";
 import {Button, Card, Collapse, Flex, Image, Layout} from "antd";
-import {DateUtils} from "@D/utils/date/date-utils";
+import {DateUtils} from "@D/utils/date-utils.ts";
 import schedulerIllustrationSvg from "@D/assets/images/svg/scheduler-illustration.svg";
 import {FeedbackIcon01} from "@D/icons/feedback-icon/feedback-icon-01";
 import {QuickIcon01} from "@D/icons/quick-icon/quick-icon-01";

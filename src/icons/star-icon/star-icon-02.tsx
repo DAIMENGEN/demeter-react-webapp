@@ -1,6 +1,6 @@
 import React from "react";
 import Icon from "@ant-design/icons/lib/components/Icon";
-import {StyleUtil} from "@D/utils/style/style-util";
+import {StyleUtil} from "@D/utils/style-util.ts";
 
 export const StarIcon02: React.FC<{ width: number, height: number, color?: string }> = (props) => {
 

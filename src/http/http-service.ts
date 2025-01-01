@@ -1,6 +1,6 @@
 import {HttpClient, HttpRequestParams} from "@D/http/http-client.ts";
 import {HttpPayload} from "@D/http/http-payload.ts";
-import {SnowflakeIdUtil} from "@D/utils/snowflake/snowflake-id-util.ts";
+import {SnowflakeIdUtil} from "@D/utils/snowflake-id-util.ts";
 
 export interface IHttpService<T> {
 
