@@ -1,4 +1,4 @@
-import {HttpClient} from "@D/http/http-client.ts";
+import {HttpClient, HttpRequestParams} from "@D/http/http-client.ts";
 import {HttpPayload} from "@D/http/http-payload.ts";
 import {SnowflakeIdUtil} from "@D/utils/snowflake/snowflake-id-util.ts";
 
@@ -8,6 +8,11 @@ export interface IHttpService<T> {
 
     update(oldData: T, partialFields: Omit<T, keyof HttpPayload>): T;
 
+    get<T>(url: string, params?: HttpRequestParams): Promise<T>;
+
+    put<T>(url: string, params?: HttpRequestParams): Promise<T>;
+
+    post<T>(url: string, params?: HttpRequestParams): Promise<T>;
 }
 
 export abstract class HttpService<T> implements IHttpService<T> {
@@ -30,15 +35,15 @@ export abstract class HttpService<T> implements IHttpService<T> {
         return this.httpClient.parseResponseError(error);
     }
 
-    public get<T>(url: string, params?: Record<string, unknown>): Promise<T> {
+    public get<T>(url: string, params?: HttpRequestParams): Promise<T> {
         return this.httpClient.get<T>(url, params);
     }
 
-    public put<T>(url: string, params?: Record<string, unknown>): Promise<T> {
+    public put<T>(url: string, params?: HttpRequestParams): Promise<T> {
         return this.httpClient.put<T>(url, params);
     }
 
-    public post<T>(url: string, params?: Record<string, unknown>): Promise<T> {
+    public post<T>(url: string, params?: HttpRequestParams): Promise<T> {
         return this.httpClient.post<T>(url, params);
     }
 }
