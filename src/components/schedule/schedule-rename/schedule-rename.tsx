@@ -1,5 +1,5 @@
 import "./schedule-rename.scss";
-import React, {useCallback, useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {Form, Input} from "antd";
 import {FullDraggableModal} from "full-flex-ui";
 import {useRenameScheduleModal} from "@D/components/schedule/schedule-rename/hooks/use-rename-schedule-modal";
@@ -20,7 +20,7 @@ export const ScheduleRename = () => {
     const onFinish = useCallback((values: { name: string }) => {
         if (project) {
             const projectService = ProjectService.getInstance();
-            const updateProject = projectService.update(project, {name: values.name});
+            const updateProject = projectService.update(project, {projectName: values.name});
             renameSchedule(updateProject);
             setRenameScheduleModalVisible(false);
         } else {

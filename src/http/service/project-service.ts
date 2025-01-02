@@ -50,7 +50,7 @@ export class ProjectService extends HttpService<ProjectPayload> {
 
     public updateProjectRequest(project: ProjectPayload, success: (updatedProject: ProjectPayload) => void, failure?: (error: Error) => void): void {
         const URL = "/updateProjectRoute";
-        this.put<ProjectPayload>(URL, {project}).then(success).catch(failure);
+        this.put<ProjectPayload>(URL, {...project}).then(success).catch(failure);
     }
 
     public updateProjectsRequest(projects: Array<ProjectPayload>, success: (updatedProjects: Array<ProjectPayload>) => void, failure?: (error: Error) => void): void {

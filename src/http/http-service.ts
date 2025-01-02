@@ -6,7 +6,7 @@ export interface IHttpService<T> {
 
     create(partialFields: Omit<T, keyof HttpPayload>): T;
 
-    update(oldData: T, partialFields: Omit<T, keyof HttpPayload>): T;
+    update(oldData: T, partialFields: Partial<Omit<T, keyof HttpPayload>>): T;
 
     get<T>(url: string, params?: HttpRequestParams): Promise<T>;
 
@@ -23,7 +23,7 @@ export abstract class HttpService<T> implements IHttpService<T> {
 
     public abstract create(partialFields: Omit<T, keyof HttpPayload>): T;
 
-    public update(oldData: T, partialFields: Omit<T, keyof HttpPayload>): T {
+    public update(oldData: T, partialFields: Partial<Omit<T, keyof HttpPayload>>): T {
         return {...oldData, ...partialFields}
     }
 

@@ -135,7 +135,7 @@ export const useTableColumns = () => {
                     options: employeeOptions,
                     showSearch: true,
                     filterOption: false,
-                    onSearch: fetchEmployee,
+                    onSearch: fetchEmployee(),
                     notFoundContent: fetchingEmployee ? <Spin size="small"/> : "Not Found",
                 }
             },
@@ -149,7 +149,7 @@ export const useTableColumns = () => {
                     options: employeeOptions,
                     showSearch: true,
                     filterOption: false,
-                    onSearch: fetchEmployee,
+                    onSearch: fetchEmployee(),
                     notFoundContent: fetchingEmployee ? <Spin size="small"/> : "Not Found",
                 }
             },
