@@ -11,10 +11,12 @@ import getStartedSvg from "@D/assets/images/svg/get-started-svg.svg";
 import helpCenterSvg from "@D/assets/images/svg/help-center-svg.svg";
 import {useState} from "react";
 import {useEmployeeName} from "@D/core/hooks/employee/use-employee-name";
+import {useDemeterSelector} from "@D/core/store/demeter-hook.ts";
 
 export const ScheduleHomeContent = () => {
     const {Header, Content} = Layout;
     const username = useEmployeeName();
+    const projects = useDemeterSelector(state => state.projectStore.projects);
     const [contentActiveKeys, setContentActiveKeys] = useState<Array<string>>(["recently-visited", "update-feed"]);
     return (
         <div className={`schedule-home-content`}>
@@ -54,17 +56,16 @@ export const ScheduleHomeContent = () => {
                                           key: 'recently-visited',
                                           label: <div>Recently visited</div>,
                                           children: <div>
-                                              {Array.from({length: 8}, (_, i) => (
-                                                  <Flex key={i} vertical={true}>
-                                                      <img src={scheduleTemplate} alt={"schedule template"}/>
-                                                      <div>
-                                                          <span>First Schedule</span>
-                                                      </div>
-                                                      <div>
-                                                          <span>Schedule owner: Mengen.dai</span>
-                                                      </div>
-                                                  </Flex>
-                                              ))}
+                                              {
+                                                  projects.map(project => (
+                                                      <Flex key={project.id} vertical={true}>
+                                                          <img src={scheduleTemplate} alt={"schedule template"}/>
+                                                          <div>
+                                                              <span>{project.projectName}</span>
+                                                          </div>
+                                                      </Flex>
+                                                  ))
+                                              }
                                           </div>,
                                       },
                                       {
