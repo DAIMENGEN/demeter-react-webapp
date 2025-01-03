@@ -1,4 +1,3 @@
-import "./schedule-create.scss";
 import dayjs from "dayjs";
 import {useState} from "react";
 import {Button, Flex, Form, Input, Select} from "antd";
@@ -21,7 +20,14 @@ export const ScheduleCreate = () => {
                             title={<div>
                                 <div>Add schedule</div>
                                 <Flex justify={"center"}>
-                                    <Button className={"add-schedule-icon"}>
+                                    <Button style={{
+                                        color: "white",
+                                        width: 80,
+                                        height: 80,
+                                        fontSize: 50,
+                                        borderRadius: 20,
+                                        backgroundColor: "#91003c"
+                                    }}>
                                         {scheduleName.at(0)}
                                     </Button>
                                 </Flex>
