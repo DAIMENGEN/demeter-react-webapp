@@ -2,7 +2,7 @@ import {useCallback} from "react";
 import {ProjectPayload} from "@D/http/payload/project-payload.ts";
 import {useDemeterDispatch} from "@D/core/store/demeter-hook";
 import {ProjectService} from "@D/http/service/project-service";
-import {addProjectEntity} from "@D/core/store/features/project-slice";
+import {addProject} from "@D/core/store/features/project-slice";
 import {setAddScheduleModalVisible} from "@D/core/store/features/schedule-slice";
 import {useAntdMessage} from "@D/core/hooks/message/use-antd-message";
 
@@ -19,7 +19,7 @@ export const useCreateSchedule = () => {
         const projectService = ProjectService.getInstance();
         const projectEntity = projectService.create(value);
         projectService.createProjectRequest(projectEntity, (project: ProjectPayload) => {
-            dispatch(addProjectEntity(project));
+            dispatch(addProject(project));
             dispatch(setAddScheduleModalVisible(false));
             success("Add project successfully").then();
         }, (error: Error) => failure(projectService.parseResponseError(error)));

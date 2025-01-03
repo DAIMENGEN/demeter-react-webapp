@@ -3,7 +3,7 @@ import {useCallback} from "react";
 import {useDemeterDispatch} from "@D/core/store/demeter-hook";
 import {ProjectService} from "@D/http/service/project-service";
 import {ProjectPayload} from "@D/http/payload/project-payload.ts";
-import {deleteProjectEntity} from "@D/core/store/features/project-slice";
+import {deleteProject} from "@D/core/store/features/project-slice";
 import {useAntdMessage} from "@D/core/hooks/message/use-antd-message";
 
 export const useDeleteSchedule = () => {
@@ -19,7 +19,7 @@ export const useDeleteSchedule = () => {
             cancelText: "No",
             onOk: () => {
                 projectService.deleteProjectByIdRequest(projectId, (deletedProject: ProjectPayload) => {
-                    dispatch(deleteProjectEntity(deletedProject));
+                    dispatch(deleteProject(deletedProject));
                     success("Delete project successfully").then();
                 }, (error: Error) => failure(projectService.parseResponseError(error)));
             }

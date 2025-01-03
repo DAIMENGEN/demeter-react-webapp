@@ -2,7 +2,7 @@ import {useDemeterSelector} from "@D/core/store/demeter-hook";
 import {useCallback} from "react";
 
 export const useScheduleMenuItems = (onClick: (projectId: string) => void) => {
-    const projectEntities = useDemeterSelector(state => state.projectStore.projectEntities);
+    const projectEntities = useDemeterSelector(state => state.projectStore.projects);
     const truncateString = useCallback((str: string, maxLength: number) => {
         if (str.length > maxLength) {
             return str.substring(0, maxLength) + '...';

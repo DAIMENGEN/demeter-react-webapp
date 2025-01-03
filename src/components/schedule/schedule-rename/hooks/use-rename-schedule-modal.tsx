@@ -4,7 +4,7 @@ import {ProjectPayload} from "@D/http/payload/project-payload.ts";
 import {useCallback} from "react";
 import {ProjectService} from "@D/http/service/project-service";
 import {useAntdMessage} from "@D/core/hooks/message/use-antd-message";
-import {updateProjectEntity} from "@D/core/store/features/project-slice";
+import {updateProject} from "@D/core/store/features/project-slice";
 
 export const useRenameScheduleModal = () => {
     const dispatch = useDemeterDispatch();
@@ -21,7 +21,7 @@ export const useRenameScheduleModal = () => {
     const renameSchedule = useCallback((project: ProjectPayload) => {
         const projectService = ProjectService.getInstance();
         projectService.updateProjectRequest(project, updatedProject => {
-            dispatch(updateProjectEntity(updatedProject));
+            dispatch(updateProject(updatedProject));
             success("Rename project successfully").then();
         }, error => failure(projectService.parseResponseError(error)))
     }, [dispatch, failure, success]);

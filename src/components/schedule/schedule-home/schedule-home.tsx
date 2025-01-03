@@ -17,7 +17,7 @@ import {ScheduleCreate} from "@D/components/schedule/schedule-create/schedule-cr
 import {useScheduleMenuItems} from "@D/components/schedule/schedule-home/hooks/use-schedule-menu-items";
 import {useDeleteSchedule} from "@D/components/schedule/schedule-home/hooks/use-delete-schedule";
 import {ProjectService} from "@D/http/service/project-service";
-import {setProjectEntities} from "@D/core/store/features/project-slice";
+import {setProjects} from "@D/core/store/features/project-slice";
 import {ScheduleRename} from "@D/components/schedule/schedule-rename/schedule-rename";
 import {Outlet} from "react-router-dom";
 import {
@@ -38,7 +38,7 @@ export const ScheduleHome: React.FC = () => {
     useEffect(() => {
         const projectService = ProjectService.getInstance();
         projectService.getProjectsByEmployeeIdRequest(projects => {
-            dispatch(setProjectEntities(projects));
+            dispatch(setProjects(projects));
         });
     }, [dispatch]);
 
