@@ -6,15 +6,15 @@ import {useFormDateFieldRules} from "@D/core/hooks/form/form-field/use-form-date
 import {useScheduleStatus} from "@D/components/schedule/schedule-create/hooks/use-schedule-status";
 import {useCreateSchedule} from "@D/components/schedule/schedule-create/hooks/use-create-schedule";
 import {useDemeterDispatch, useDemeterSelector} from "@D/core/store/demeter-hook";
-import {setAddScheduleModalVisible} from "@D/core/store/features/schedule-slice";
+import {setCreateScheduleModalVisible} from "@D/core/store/features/schedule-slice";
 
 export const ScheduleCreate = () => {
     const {TextArea} = Input;
     const [form] = Form.useForm();
     const dispatch = useDemeterDispatch();
-    const {addScheduleHolderMessage, addSchedule} = useCreateSchedule();
+    const {createScheduleHolderMessage, addSchedule} = useCreateSchedule();
     const [scheduleName, setScheduleName] = useState<string>("New Schedule");
-    const addScheduleModalVisible = useDemeterSelector(state => state.scheduleStore.addScheduleModalVisible);
+    const createScheduleModalVisible = useDemeterSelector(state => state.scheduleStore.createScheduleModalVisible);
     return (
         <FullDraggableModal classNames={{content: "schedule-create-draggable-modal"}}
                             title={<div>
@@ -33,14 +33,14 @@ export const ScheduleCreate = () => {
                                 </Flex>
                             </div>}
                             style={{top: 80}}
-                            open={addScheduleModalVisible}
+                            open={createScheduleModalVisible}
                             closable={true}
-                            onCancel={() => dispatch(setAddScheduleModalVisible(false))}
+                            onCancel={() => dispatch(setCreateScheduleModalVisible(false))}
                             maskClosable={false}
                             cancelText={"Cancel"}
                             okText={"Add schedule"}
                             onOk={() => form.submit()}>
-            {addScheduleHolderMessage}
+            {createScheduleHolderMessage}
             <Form name={"schedule-create"} layout={"vertical"} form={form} onFinish={addSchedule} initialValues={{
                 "projectName": "New Schedule",
                 "projectStatus": 3,

@@ -21,7 +21,7 @@ import {setProjects} from "@D/core/store/features/project-slice";
 import {ScheduleRename} from "@D/components/schedule/schedule-rename/schedule-rename";
 import {Outlet} from "react-router-dom";
 import {
-    setAddScheduleModalVisible,
+    setCreateScheduleModalVisible,
     setRenameScheduleId,
     setRenameScheduleModalVisible
 } from "@D/core/store/features/schedule-slice";
@@ -153,7 +153,7 @@ export const ScheduleHome: React.FC = () => {
                                                       e.domEvent.stopPropagation();
                                                       switch (e.key) {
                                                           case "add-new-schedule":
-                                                              dispatch(setAddScheduleModalVisible(true));
+                                                              dispatch(setCreateScheduleModalVisible(true));
                                                               break;
                                                           case "sort-schedule":
                                                               break;
