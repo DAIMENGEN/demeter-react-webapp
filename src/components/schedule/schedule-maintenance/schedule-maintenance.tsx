@@ -13,17 +13,17 @@ import {ActionType, EditableProTable} from "@ant-design/pro-table";
 import {ProjectTaskPayload} from "@D/http/payload/project-task-payload.ts";
 import {
     useScheduleMaintenanceTableScroll
-} from "@D/components/schedule/schedule-maintenance/use-schedule-maintenance-table-scroll.tsx";
+} from "@D/components/schedule/schedule-maintenance/maintenance-table/use-schedule-maintenance-table-scroll.tsx";
 import {
     useScheduleMaintenanceTableColumns
-} from "@D/components/schedule/schedule-maintenance/use-schedule-maintenance-table-columns.tsx";
+} from "@D/components/schedule/schedule-maintenance/maintenance-table/use-schedule-maintenance-table-columns.tsx";
 import {SaveIcon01} from "@D/icons/save-icon/save-icon-01.tsx";
 import {useAntdMessage} from "@D/core/hooks/message/use-antd-message.tsx";
 import {CopyIcon01} from "@D/icons/copy-icon/copy-icon-01.tsx";
 import {DeleteIcon01} from "@D/icons/delete-icon/delete-icon-01.tsx";
 import {
     ScheduleMaintenanceTableHeaderTitle
-} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-table-header-title.tsx";
+} from "@D/components/schedule/schedule-maintenance/maintenance-table/schedule-maintenance-table-header-title.tsx";
 
 export const ScheduleMaintenance = () => {
     const {contextHolderMessage, success} = useAntdMessage();
