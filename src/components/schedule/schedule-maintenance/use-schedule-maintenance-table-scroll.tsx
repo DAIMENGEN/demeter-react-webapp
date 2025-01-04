@@ -1,6 +1,6 @@
 import {useEffect, useMemo, useState} from "react";
 
-export const useTableScroll = () => {
+export const useScheduleMaintenanceTableScroll = () => {
     const otherHeight = useMemo(() => 291, []);
     const [scroll, setScroll] = useState({x: "max-content", y: window.innerHeight - otherHeight});
     useEffect(() => {

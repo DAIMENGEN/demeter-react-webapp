@@ -2,6 +2,7 @@ import {ProjectTaskEntity} from "@D/core/entity/project-task-entity.ts";
 import {SelectProps} from "antd";
 import {HttpService} from "@D/http/http-service.ts";
 import {HttpPayload} from "@D/http/http-payload.ts";
+import {ProjectTaskAttributePayload} from "@D/http/payload/project-task-attribute-payload.ts";
 
 export class ProjectTaskService extends HttpService<ProjectTaskEntity> {
 
@@ -28,6 +29,11 @@ export class ProjectTaskService extends HttpService<ProjectTaskEntity> {
             partialFields.order,
         ];
         return new ProjectTaskEntity(...args);
+    }
+
+    public getProjectTaskAttributesByProjectId(projectId: string, success: (attributes: Array<ProjectTaskAttributePayload>) => void, failure?: (error: Error) => void): void {
+        const URL = "/getProjectTaskAttributesByProjectIdRoute";
+        this.post<Array<ProjectTaskAttributePayload>>(URL, {projectId}).then(success).catch(failure);
     }
 
     public getProjectTaskTypeSelectOptionsRequest(success: (options: SelectProps["options"]) => void, failure?: (error: Error) => void): void {
