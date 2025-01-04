@@ -43,7 +43,7 @@ export const ScheduleMaintenanceTableHeaderTitle: React.FC<{
         setOptions(tableColumns)
     }, [tableColumns]);
     return (
-        <div className={"schedule-maintenance-table-header-title"}>
+        <div className={"schedule-maintenance-main-table-header-title"}>
             <Flex gap={10}>
                 <Button type="primary"
                         iconPosition={"end"}
