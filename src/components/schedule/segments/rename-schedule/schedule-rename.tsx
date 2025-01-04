@@ -1,8 +1,9 @@
-import "./schedule-rename.scss";
 import {useCallback, useEffect, useState} from "react";
 import {Form, Input} from "antd";
 import {FullDraggableModal} from "full-flex-ui";
-import {useRenameScheduleModal} from "@D/components/schedule/segments/schedule-rename/hooks/use-rename-schedule-modal.tsx";
+import {
+    useRenameScheduleModal
+} from "@D/components/schedule/segments/rename-schedule/hooks/use-rename-schedule-modal.tsx";
 import {ProjectPayload} from "@D/http/payload/project-payload.ts";
 import {ProjectService} from "@D/http/service/project-service.ts";
 
@@ -38,7 +39,7 @@ export const ScheduleRename = () => {
         }
     }, [form, renameScheduleId, renameScheduleModalVisible]);
     return (
-        <FullDraggableModal classNames={{content: "schedule-rename-draggable-modal"}}
+        <FullDraggableModal classNames={{content: "rename-schedule-draggable-modal"}}
                             open={renameScheduleModalVisible}
                             title={"Rename schedule"}
                             closable={true}

@@ -3,12 +3,12 @@ import {useState} from "react";
 import {Button, Flex, Form, Input, Select} from "antd";
 import {FullDraggableModal} from "full-flex-ui";
 import {useFormDateFieldRules} from "@D/core/hooks/form/form-field/use-form-date-filed-rules.tsx";
-import {useScheduleStatus} from "@D/components/schedule/segments/schedule-create/hooks/use-schedule-status.tsx";
-import {useCreateSchedule} from "@D/components/schedule/segments/schedule-create/hooks/use-create-schedule.tsx";
+import {useScheduleStatus} from "@D/components/schedule/segments/create-schedule/hooks/use-schedule-status.tsx";
+import {useCreateSchedule} from "@D/components/schedule/segments/create-schedule/hooks/use-create-schedule.tsx";
 import {useDemeterDispatch, useDemeterSelector} from "@D/core/store/demeter-hook.ts";
 import {setCreateScheduleModalVisible} from "@D/core/store/features/schedule-slice.ts";
 
-export const ScheduleCreate = () => {
+export const CreateSchedule = () => {
     const {TextArea} = Input;
     const [form] = Form.useForm();
     const dispatch = useDemeterDispatch();
@@ -16,7 +16,7 @@ export const ScheduleCreate = () => {
     const [scheduleName, setScheduleName] = useState<string>("New Schedule");
     const createScheduleModalVisible = useDemeterSelector(state => state.scheduleStore.createScheduleModalVisible);
     return (
-        <FullDraggableModal classNames={{content: "schedule-create-draggable-modal"}}
+        <FullDraggableModal classNames={{content: "create-schedule-draggable-modal"}}
                             title={<div>
                                 <div>Add schedule</div>
                                 <Flex justify={"center"}>
@@ -41,7 +41,7 @@ export const ScheduleCreate = () => {
                             okText={"Add schedule"}
                             onOk={() => form.submit()}>
             {createScheduleHolderMessage}
-            <Form name={"schedule-create"} layout={"vertical"} form={form} onFinish={addSchedule} initialValues={{
+            <Form name={"create-schedule"} layout={"vertical"} form={form} onFinish={addSchedule} initialValues={{
                 "projectName": "New Schedule",
                 "projectStatus": 3,
                 "startDateTime": dayjs().format("YYYY-MM-DD")

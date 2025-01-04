@@ -23,8 +23,8 @@ import {MoreIcon01} from "@D/icons/more-icon/more-icon-01.tsx";
 import {SearchIcon01} from "@D/icons/search-icon/search-icon-01.tsx";
 import {useScheduleMenuItems} from "@D/components/schedule/hooks/use-schedule-menu-items.tsx";
 import {Outlet} from "react-router-dom";
-import {ScheduleCreate} from "@D/components/schedule/segments/schedule-create/schedule-create.tsx";
-import {ScheduleRename} from "@D/components/schedule/segments/schedule-rename/schedule-rename.tsx";
+import {CreateSchedule} from "@D/components/schedule/segments/create-schedule/create-schedule.tsx";
+import {ScheduleRename} from "@D/components/schedule/segments/rename-schedule/schedule-rename.tsx";
 
 export const Schedule = () => {
     const {Sider} = Layout;
@@ -216,7 +216,7 @@ export const Schedule = () => {
             <Layout className={"schedule-body"} style={{marginInlineStart: marginInlineStart}}>
                 <Outlet/>
             </Layout>
-            <ScheduleCreate/>
+            <CreateSchedule/>
             <ScheduleRename/>
         </Layout>
     )
