@@ -2,7 +2,7 @@ import {useDemeterSelector} from "@D/core/store/demeter-hook";
 import {useCallback} from "react";
 
 export const useScheduleMenuItems = (onClick: (projectId: string) => void) => {
-    const projectEntities = useDemeterSelector(state => state.projectStore.projects);
+    const projects = useDemeterSelector(state => state.projectStore.projects);
     const truncateString = useCallback((str: string, maxLength: number) => {
         if (str.length > maxLength) {
             return str.substring(0, maxLength) + '...';
@@ -10,7 +10,7 @@ export const useScheduleMenuItems = (onClick: (projectId: string) => void) => {
             return str;
         }
     }, []);
-    return projectEntities.map(project => ({
+    return projects.map(project => ({
         key: project.id,
         label: <div className={`schedule-menu-item-title`} title={project.projectName}
                     onClick={() => onClick(project.id)}>{truncateString(project.projectName, 14)}</div>,
