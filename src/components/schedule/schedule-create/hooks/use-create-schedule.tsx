@@ -21,7 +21,7 @@ export const useCreateSchedule = () => {
         projectService.createProjectRequest(projectEntity, (project: ProjectPayload) => {
             dispatch(createProject(project));
             dispatch(setCreateScheduleModalVisible(false));
-            success("Add project successfully").then();
+            success("Create project successfully").then();
         }, (error: Error) => failure(projectService.parseResponseError(error)));
     }, [dispatch, failure, success]);
     return {
