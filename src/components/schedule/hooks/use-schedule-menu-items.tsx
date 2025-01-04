@@ -1,4 +1,4 @@
-import {useDemeterSelector} from "@D/core/store/demeter-hook";
+import {useDemeterSelector} from "@D/core/store/demeter-hook.ts";
 import {useCallback} from "react";
 
 export const useScheduleMenuItems = (onClick: (projectId: string) => void) => {

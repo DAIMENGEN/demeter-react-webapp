@@ -1,10 +1,10 @@
 import {Modal} from "antd";
 import {useCallback} from "react";
-import {useDemeterDispatch} from "@D/core/store/demeter-hook";
-import {ProjectService} from "@D/http/service/project-service";
+import {useDemeterDispatch} from "@D/core/store/demeter-hook.ts";
+import {ProjectService} from "@D/http/service/project-service.ts";
 import {ProjectPayload} from "@D/http/payload/project-payload.ts";
-import {deleteProject} from "@D/core/store/features/project-slice";
-import {useAntdMessage} from "@D/core/hooks/message/use-antd-message";
+import {deleteProject} from "@D/core/store/features/project-slice.ts";
+import {useAntdMessage} from "@D/core/hooks/message/use-antd-message.tsx";
 
 export const useDeleteSchedule = () => {
     const [modal, contextHolder] = Modal.useModal();

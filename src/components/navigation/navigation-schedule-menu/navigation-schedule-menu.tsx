@@ -30,7 +30,7 @@ export const NavigationScheduleMenu: React.FC = () => {
                     <Typography.Text>
                         Gantt charts are powerful visual tools that help teams effectively track progress and manage schedules, ensuring resources are allocated efficiently throughout a project.
                     </Typography.Text>
-                    <Button type="primary" onClick={() => navigate('/home-page/schedule-home')}>
+                    <Button type="primary" onClick={() => navigate('/home-page/schedule')}>
                         Enter
                     </Button>
                 </Flex>

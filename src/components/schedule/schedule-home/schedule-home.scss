@@ -1,101 +1,160 @@
-$content-height: calc(100vh - 50px);
-
 .schedule-home {
-  min-height: calc(100vh - 50px);
+  .schedule-home-header {
+    background-color: white;
+    height: 75px;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 3px 12px #e6e9ef;
 
-  .schedule-home-sider {
-    text-align: center;
-    position: fixed;
-    height: $content-height;
-    inset-inline-start: 0;
-    scrollbar-width: thin;
-    scrollbar-gutter: stable;
-    background-color: #ffffff;
-    border-inline-end: 1px solid rgba(5, 5, 5, 0.06);
-
-    .schedule-home-sider-trigger {
+    .title {
       height: 75px;
-      cursor: pointer;
-      text-align: center;
-      line-height: 75px;
-      transition: all 0.2s;
-    }
+      padding: 7.5px 30px 7.5px 0;
 
-    .schedule-home-sider-menu {
-      border-inline-end: none;
-    }
-
-    .schedule-home-sider-favorites-collapse {
-      border-radius: 0;
-
-      .schedule-home-sider-favorites-collapse-empty-content {
-        :first-child {
-          height: 150px;
-        }
-
-        :nth-child(2) {
-          color: #323338;
-          font-size: 18px;
-        }
-
-        :nth-child(3) {
-          color: #676879;
-          font-size: 14px;
-          padding-bottom: 50px;
-        }
+      div {
+        height: 30px;
+        line-height: 30px;
+        text-align: left;
       }
 
+      :first-child {
+        font-size: 18px;
+      }
+
+      :last-child {
+        font-size: 16px;
+      }
+    }
+
+    .background {
+      img {
+        width: 75px;
+        height: 75px;
+      }
+    }
+
+    .feedback-button {
+      height: 75px;
+      line-height: 75px;
+    }
+
+    .search-button {
+      height: 75px;
+      line-height: 75px;
+    }
+  }
+
+  .schedule-home-content {
+    background-color: white;
+    padding: 20px;
+
+    .schedule-home-content-left {
+      flex: 1;
+      border-radius: 10px;
+      box-shadow: 0 3px 12px #e6e9ef;
+
       .ant-collapse-header {
-        padding: 12px 5px;
+
+        .ant-collapse-expand-icon {
+          height: 34px;
+        }
 
         .ant-collapse-header-text {
           flex: none;
-        }
 
-        .ant-collapse-expand-icon {
-          padding-left: 22px;
-          padding-inline-end: 10px;
-        }
-      }
-    }
-
-    .schedule-home-sider-workspace-collapse {
-      border-radius: 0;
-
-      .schedule-home-sider-workspace-collapse-menu {
-        border-inline-end: none;
-
-        > li {
-          position: relative;
-
-          .schedule-menu-item-title {
-            position: absolute;
-            top: 0;
-            right: 0;
-            left: 0;
-            text-align: left;
-            padding-left: 20px;
+          div:first-child {
+            color: #323338;
+            font-size: 18px;
+            font-weight: 700;
           }
         }
       }
 
-      .ant-collapse-header {
-        padding: 12px 5px;
+      .ant-collapse-content-box {
+        > div:first-child {
+          display: grid;
+          grid-gap: 20px;
+          grid-auto-rows: auto;
+          grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
 
-        .ant-collapse-header-text {
-          flex: none;
-        }
+          > div {
+            border-radius: 5px;
+            overflow: hidden;
+            border: 1px solid #d0d4e4;
+            padding: 10px;
+          }
 
-        .ant-collapse-expand-icon {
-          padding-left: 23px;
-          padding-inline-end: 10px;
+          > div:hover {
+            border: none;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+          }
         }
       }
     }
-  }
 
-  .schedule-home-body {
-    padding-left: 5px;
-    overflow: auto;
+    .schedule-home-content-right {
+      width: 350px;
+
+      > div:first-child {
+
+        > div:nth-child(1) {
+          box-shadow: 0 3px 12px #e6e9ef;
+          padding: 10px;
+          border-radius: 10px;
+
+          p {
+            text-align: left;
+            font-size: 16px;
+            color: #323338;
+          }
+
+          button {
+            height: 40px;
+            font-size: 16px;
+            color: #323338;
+          }
+        }
+
+        > div:nth-child(2) {
+          color: #323338;
+          font-size: 16px;
+          text-align: left;
+          font-weight: 500;
+        }
+
+        > div:nth-child(3),
+        > div:nth-child(4) {
+          box-shadow: 0 3px 12px #e6e9ef;
+          transition: box-shadow 0.3s ease;
+
+          .ant-card-body {
+            padding: 10px;
+
+            .ant-flex.ant-flex-justify-space-between {
+              height: 50px;
+
+              .schedule-home-content-right-card-text {
+                text-align: left;
+                width: 78%;
+
+                h2 {
+                  font-weight: bold;
+                  color: #323338;
+                }
+              }
+
+              img {
+                width: 50px;
+              }
+            }
+          }
+        }
+
+        > div:nth-child(3):hover,
+        > div:nth-child(4):hover {
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+      }
+    }
   }
 }
