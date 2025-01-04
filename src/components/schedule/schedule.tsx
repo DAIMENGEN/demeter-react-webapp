@@ -31,7 +31,7 @@ export const Schedule = () => {
     const [collapsed, setCollapsed] = useState(false);
     const dispatch = useDemeterDispatch();
     const [marginInlineStart, setMarginInlineStart] = useState(200);
-    const [selectedKeys, setSelectedKeys] = useState<Array<string>>([]);
+    const [selectedKeys, setSelectedKeys] = useState<Array<string>>(["schedule-home"]);
     const [siderActiveKeys, setSiderActiveKeys] = useState<Array<string>>([]);
     const {deleteScheduleHolderMessage, deleteSchedule} = useDeleteSchedule();
 
@@ -59,10 +59,9 @@ export const Schedule = () => {
                               mode="inline"
                               selectedKeys={selectedKeys}
                               onClick={(e) => setSelectedKeys([e.key])}
-                              defaultSelectedKeys={['schedule-home']}
                               items={[
                                   {
-                                      key: 'schedule-divider',
+                                      key: 'divider-1',
                                       type: 'divider',
                                   },
                                   {
@@ -71,7 +70,7 @@ export const Schedule = () => {
                                       label: <div style={{textAlign: "left"}}>Schedule home</div>
                                   },
                                   {
-                                      key: 'my-work-divider_1',
+                                      key: 'divider-2',
                                       type: 'divider',
                                   },
                                   {
@@ -80,7 +79,7 @@ export const Schedule = () => {
                                       label: <div style={{textAlign: "left"}}>My work</div>
                                   },
                                   {
-                                      key: 'my-work-divider_2',
+                                      key: 'divider-3',
                                       type: 'divider',
                                   },
                               ]}/>
