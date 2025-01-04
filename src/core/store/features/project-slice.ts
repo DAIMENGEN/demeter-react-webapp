@@ -13,10 +13,10 @@ const projectStoreSlice = createSlice({
     name: "project",
     initialState,
     reducers: {
-        addProject(state, action: PayloadAction<ProjectPayload>) {
+        createProject(state, action: PayloadAction<ProjectPayload>) {
             state.projects.push(action.payload);
         },
-        addProjects(state, action: PayloadAction<Array<ProjectPayload>>) {
+        createProjects(state, action: PayloadAction<Array<ProjectPayload>>) {
             state.projects.push(...action.payload);
         },
         updateProject(state, action: PayloadAction<ProjectPayload>) {
@@ -51,8 +51,8 @@ const projectStoreSlice = createSlice({
 });
 
 export const {
-    addProject,
-    addProjects,
+    createProject,
+    createProjects,
     updateProject,
     updateProjects,
     deleteProject,
