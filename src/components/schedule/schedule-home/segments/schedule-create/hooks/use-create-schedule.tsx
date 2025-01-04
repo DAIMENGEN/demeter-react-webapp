@@ -1,10 +1,10 @@
 import {useCallback} from "react";
 import {ProjectPayload} from "@D/http/payload/project-payload.ts";
-import {useDemeterDispatch} from "@D/core/store/demeter-hook";
-import {ProjectService} from "@D/http/service/project-service";
-import {createProject} from "@D/core/store/features/project-slice";
-import {setCreateScheduleModalVisible} from "@D/core/store/features/schedule-slice";
-import {useAntdMessage} from "@D/core/hooks/message/use-antd-message";
+import {useDemeterDispatch} from "@D/core/store/demeter-hook.ts";
+import {ProjectService} from "@D/http/service/project-service.ts";
+import {createProject} from "@D/core/store/features/project-slice.ts";
+import {setCreateScheduleModalVisible} from "@D/core/store/features/schedule-slice.ts";
+import {useAntdMessage} from "@D/core/hooks/message/use-antd-message.tsx";
 
 export const useCreateSchedule = () => {
     const dispatch = useDemeterDispatch();

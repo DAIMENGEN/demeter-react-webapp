@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {SelectProps} from "antd";
-import {ProjectService} from "@D/http/service/project-service";
+import {ProjectService} from "@D/http/service/project-service.ts";
 
 export const useScheduleStatus = () => {
     const [scheduleStatus, setScheduleStatus] = useState<SelectProps["options"]>([]);

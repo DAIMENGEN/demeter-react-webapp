@@ -13,12 +13,12 @@ import {useDemeterDispatch} from "@D/core/store/demeter-hook";
 import {SortIcon01} from "@D/icons/sort-icon/sort-icon-01";
 import {AddIcon01} from "@D/icons/add-icon/add-icon-01";
 import {ImportIcon01} from "@D/icons/import-icon/import-icon-01";
-import {ScheduleCreate} from "@D/components/schedule/schedule-create/schedule-create";
+import {ScheduleCreate} from "@D/components/schedule/schedule-home/segments/schedule-create/schedule-create";
 import {useScheduleMenuItems} from "@D/components/schedule/schedule-home/hooks/use-schedule-menu-items";
 import {useDeleteSchedule} from "@D/components/schedule/schedule-home/hooks/use-delete-schedule";
 import {ProjectService} from "@D/http/service/project-service";
 import {setProjects} from "@D/core/store/features/project-slice";
-import {ScheduleRename} from "@D/components/schedule/schedule-rename/schedule-rename";
+import {ScheduleRename} from "@D/components/schedule/schedule-home/segments/schedule-rename/schedule-rename";
 import {Outlet} from "react-router-dom";
 import {
     setCreateScheduleModalVisible,

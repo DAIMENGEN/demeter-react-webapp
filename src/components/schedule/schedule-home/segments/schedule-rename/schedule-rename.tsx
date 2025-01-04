@@ -2,9 +2,9 @@ import "./schedule-rename.scss";
 import {useCallback, useEffect, useState} from "react";
 import {Form, Input} from "antd";
 import {FullDraggableModal} from "full-flex-ui";
-import {useRenameScheduleModal} from "@D/components/schedule/schedule-rename/hooks/use-rename-schedule-modal";
+import {useRenameScheduleModal} from "@D/components/schedule/schedule-home/segments/schedule-rename/hooks/use-rename-schedule-modal.tsx";
 import {ProjectPayload} from "@D/http/payload/project-payload.ts";
-import {ProjectService} from "@D/http/service/project-service";
+import {ProjectService} from "@D/http/service/project-service.ts";
 
 export const ScheduleRename = () => {
     const [form] = Form.useForm();

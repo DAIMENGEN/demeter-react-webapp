@@ -2,11 +2,11 @@ import dayjs from "dayjs";
 import {useState} from "react";
 import {Button, Flex, Form, Input, Select} from "antd";
 import {FullDraggableModal} from "full-flex-ui";
-import {useFormDateFieldRules} from "@D/core/hooks/form/form-field/use-form-date-filed-rules";
-import {useScheduleStatus} from "@D/components/schedule/schedule-create/hooks/use-schedule-status";
-import {useCreateSchedule} from "@D/components/schedule/schedule-create/hooks/use-create-schedule";
-import {useDemeterDispatch, useDemeterSelector} from "@D/core/store/demeter-hook";
-import {setCreateScheduleModalVisible} from "@D/core/store/features/schedule-slice";
+import {useFormDateFieldRules} from "@D/core/hooks/form/form-field/use-form-date-filed-rules.tsx";
+import {useScheduleStatus} from "@D/components/schedule/schedule-home/segments/schedule-create/hooks/use-schedule-status.tsx";
+import {useCreateSchedule} from "@D/components/schedule/schedule-home/segments/schedule-create/hooks/use-create-schedule.tsx";
+import {useDemeterDispatch, useDemeterSelector} from "@D/core/store/demeter-hook.ts";
+import {setCreateScheduleModalVisible} from "@D/core/store/features/schedule-slice.ts";
 
 export const ScheduleCreate = () => {
     const {TextArea} = Input;
