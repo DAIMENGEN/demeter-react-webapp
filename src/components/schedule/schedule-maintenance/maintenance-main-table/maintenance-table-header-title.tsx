@@ -1,13 +1,14 @@
 import React, {MutableRefObject, useEffect, useState} from "react";
 import {ActionType, ProColumns} from "@ant-design/pro-table";
 import {ProjectTaskPayload} from "@D/http/payload/project-task-payload.ts";
-import {Button, Checkbox, Flex, Input, Popover, Space} from "antd";
-import {AddIcon01} from "@D/icons/add-icon/add-icon-01.tsx";
+import {Button, Checkbox, Dropdown, Flex, Input, Popover, Space} from "antd";
 import {ScheduleMaintenanceUtils} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-utils.ts";
 import {HideIcon01} from "@D/icons/hide-icon/hide-icon-01.tsx";
 import {HIGHLIGHT_COLOR} from "@D/core/style/theme.ts";
 import {SearchIcon01} from "@D/icons/search-icon/search-icon-01.tsx";
 import {AddColumnIcon01} from "@D/icons/column-icon/add-column-icon-01.tsx";
+import {ImportIcon01} from "@D/icons/import-icon/import-icon-01.tsx";
+import {DownOutlined} from "@ant-design/icons";
 
 export const MaintenanceTableHeaderTitle: React.FC<{
     tableActionRef: MutableRefObject<ActionType | undefined>;
@@ -45,20 +46,30 @@ export const MaintenanceTableHeaderTitle: React.FC<{
     return (
         <div className={"schedule-maintenance-main-table-header-title"}>
             <Flex gap={10}>
-                <Button type="primary"
-                        iconPosition={"end"}
-                        icon={<AddIcon01 width={16} height={16} color={"#fff"}/>}
-                        onClick={() => {
-                            tableActionRef.current?.addEditRecord(ScheduleMaintenanceUtils.createRecord(parentKey, copyTableRowData), {
-                                parentKey: parentKey,
-                                newRecordType: "dataSource",
-                            });
-                            if (parentKey) {
-                                setExpandedRowKeys(keys => [...keys, parentKey])
-                            }
-                        }}>
-                    Add task
-                </Button>
+                <Dropdown.Button type={"primary"}
+                                 placement={"bottomLeft"}
+                                 icon={<DownOutlined />}
+                                 menu={{
+                                     items: [
+                                         {
+                                             key: "import-task",
+                                             icon: <ImportIcon01 width={16} height={16} color={"#000000"}/>,
+                                             label: "Import tasks",
+                                             onClick: () =>  alert("Import tasks")
+                                         }
+                                     ]
+                                 }}
+                                 onClick={() => {
+                                     tableActionRef.current?.addEditRecord(ScheduleMaintenanceUtils.createRecord(parentKey, copyTableRowData), {
+                                         parentKey: parentKey,
+                                         newRecordType: "dataSource",
+                                     });
+                                     if (parentKey) {
+                                         setExpandedRowKeys(keys => [...keys, parentKey])
+                                     }
+                                 }}>
+                    New Task
+                </Dropdown.Button>
                 <Popover title={<span style={{fontWeight: "700", fontSize: "16px"}}>Display columns</span>}
                          arrow={false}
                          trigger={"click"}
@@ -123,7 +134,7 @@ export const MaintenanceTableHeaderTitle: React.FC<{
                     <Button type="text"
                             style={{backgroundColor: highlightCreateColumnButton ? HIGHLIGHT_COLOR : ""}}
                             icon={<AddColumnIcon01 width={16} height={16} color={"#000000"}/>}>
-                        colum</Button>
+                        Colum</Button>
                 </Popover>
             </Flex>
         </div>
