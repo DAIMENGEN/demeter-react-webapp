@@ -2,12 +2,12 @@ import {useCallback, useEffect, useState} from "react";
 import {Form, Input} from "antd";
 import {FullDraggableModal} from "full-flex-ui";
 import {
-    useRenameScheduleModal
-} from "@D/components/schedule/segments/rename-schedule/hooks/use-rename-schedule-modal.tsx";
+    useRenameSchedule
+} from "@D/components/schedule/common/hooks/use-rename-schedule.tsx";
 import {ProjectPayload} from "@D/http/payload/project-payload.ts";
 import {ProjectService} from "@D/http/service/project-service.ts";
 
-export const ScheduleRename = () => {
+export const RenameSchedule = () => {
     const [form] = Form.useForm();
     const [project, setProject] = useState<ProjectPayload>();
     const {
@@ -16,7 +16,7 @@ export const ScheduleRename = () => {
         renameScheduleId,
         renameScheduleHolderMessage,
         renameSchedule
-    } = useRenameScheduleModal();
+    } = useRenameSchedule();
 
     const onFinish = useCallback((values: { name: string }) => {
         if (project) {
@@ -25,7 +25,7 @@ export const ScheduleRename = () => {
             renameSchedule(updateProject);
             setRenameScheduleModalVisible(false);
         } else {
-            console.error("ScheduleRename: Project is undefined");
+            console.error("RenameSchedule: Project is undefined");
         }
     }, [project, renameSchedule, setRenameScheduleModalVisible]);
 

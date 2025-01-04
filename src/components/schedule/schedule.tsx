@@ -2,7 +2,7 @@ import "./schedule.scss";
 import {useEffect, useState} from "react";
 import {Button, Collapse, Dropdown, Layout, Menu, Space} from "antd";
 import {useDemeterDispatch} from "@D/core/store/demeter-hook.ts";
-import {useDeleteSchedule} from "@D/components/schedule/hooks/use-delete-schedule.tsx";
+import {useDeleteSchedule} from "@D/components/schedule/common/hooks/use-delete-schedule.tsx";
 import {ProjectService} from "@D/http/service/project-service.ts";
 import {setProjects} from "@D/core/store/features/project-slice.ts";
 import {CarryOutOutlined, HomeOutlined, LeftOutlined, RightOutlined} from "@ant-design/icons";
@@ -21,10 +21,10 @@ import {
 } from "@D/core/store/features/schedule-slice.ts";
 import {MoreIcon01} from "@D/icons/more-icon/more-icon-01.tsx";
 import {SearchIcon01} from "@D/icons/search-icon/search-icon-01.tsx";
-import {useScheduleMenuItems} from "@D/components/schedule/hooks/use-schedule-menu-items.tsx";
+import {useScheduleMenuItems} from "@D/components/schedule/common/hooks/use-schedule-menu-items.tsx";
 import {Outlet} from "react-router-dom";
-import {CreateSchedule} from "@D/components/schedule/segments/create-schedule/create-schedule.tsx";
-import {ScheduleRename} from "@D/components/schedule/segments/rename-schedule/schedule-rename.tsx";
+import {CreateSchedule} from "@D/components/schedule/common/modals/create-schedule/create-schedule.tsx";
+import {RenameSchedule} from "@D/components/schedule/common/modals/rename-schedule/rename-schedule.tsx";
 
 export const Schedule = () => {
     const {Sider} = Layout;
@@ -217,7 +217,7 @@ export const Schedule = () => {
                 <Outlet/>
             </Layout>
             <CreateSchedule/>
-            <ScheduleRename/>
+            <RenameSchedule/>
         </Layout>
     )
 }

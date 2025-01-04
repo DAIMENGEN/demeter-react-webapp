@@ -6,7 +6,7 @@ import {ProjectService} from "@D/http/service/project-service.ts";
 import {useAntdMessage} from "@D/core/hooks/message/use-antd-message.tsx";
 import {updateProject} from "@D/core/store/features/project-slice.ts";
 
-export const useRenameScheduleModal = () => {
+export const useRenameSchedule = () => {
     const dispatch = useDemeterDispatch();
     const {contextHolderMessage, success, failure} = useAntdMessage();
     const setVisible = (visible: boolean) => {
