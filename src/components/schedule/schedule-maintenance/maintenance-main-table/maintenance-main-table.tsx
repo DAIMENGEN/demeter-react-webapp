@@ -1,21 +1,21 @@
 import {ProjectTaskPayload} from "@D/http/payload/project-task-payload.ts";
 import {
-    useScheduleMaintenanceTableScroll
-} from "@D/components/schedule/schedule-maintenance/maintenance-main-table/use-schedule-maintenance-table-scroll.tsx";
+    useMaintenanceTableScroll
+} from "@D/components/schedule/schedule-maintenance/maintenance-main-table/use-maintenance-table-scroll.tsx";
 import {Button, Popconfirm} from "antd";
 import {SaveIcon01} from "@D/icons/save-icon/save-icon-01.tsx";
 import {CopyIcon01} from "@D/icons/copy-icon/copy-icon-01.tsx";
 import {PRIMARY_COLOR} from "@D/core/style/theme.ts";
 import {DeleteIcon01} from "@D/icons/delete-icon/delete-icon-01.tsx";
 import {
-    ScheduleMaintenanceTableHeaderTitle
-} from "@D/components/schedule/schedule-maintenance/maintenance-main-table/schedule-maintenance-table-header-title.tsx";
+    MaintenanceTableHeaderTitle
+} from "@D/components/schedule/schedule-maintenance/maintenance-main-table/maintenance-table-header-title.tsx";
 import {ActionType, EditableProTable} from "@ant-design/pro-table";
 import {useAntdMessage} from "@D/core/hooks/message/use-antd-message";
 import React, {useRef, useState} from "react";
 import {
-    useScheduleMaintenanceTableColumns
-} from "@D/components/schedule/schedule-maintenance/maintenance-main-table/use-schedule-maintenance-table-columns.tsx";
+    useMaintenanceTableColumns
+} from "@D/components/schedule/schedule-maintenance/maintenance-main-table/use-maintenance-table-columns.tsx";
 
 export const MaintenanceMainTable = () => {
     const {contextHolderMessage, success} = useAntdMessage();
@@ -29,7 +29,7 @@ export const MaintenanceMainTable = () => {
         displayTableColumn,
         isAllColumnsVisible,
         createTableColumnMessage
-    } = useScheduleMaintenanceTableColumns("0");
+    } = useMaintenanceTableColumns("0");
     const [dataSource, setDataSource] = useState<readonly ProjectTaskPayload[]>([]);
     const [copyTableRowData, setCopyTableRowData] = useState<ProjectTaskPayload>();
     const [expandedRowKeys, setExpandedRowKeys] = useState<React.Key[]>([]);
@@ -44,7 +44,7 @@ export const MaintenanceMainTable = () => {
                 value={dataSource}
                 columns={displayColumns}
                 recordCreatorProps={false}
-                scroll={useScheduleMaintenanceTableScroll()}
+                scroll={useMaintenanceTableScroll()}
                 actionRef={scheduleMaintenanceTableActionRef}
                 expandable={{
                     defaultExpandAllRows: true,
@@ -103,7 +103,7 @@ export const MaintenanceMainTable = () => {
                     },
                     onChange: setEditableRowKeys,
                 }}
-                headerTitle={<ScheduleMaintenanceTableHeaderTitle
+                headerTitle={<MaintenanceTableHeaderTitle
                     parentKey={parentKey}
                     tableColumns={tableColumns}
                     displayColumns={displayColumns}

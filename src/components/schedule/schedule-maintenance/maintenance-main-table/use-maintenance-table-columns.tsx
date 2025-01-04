@@ -5,7 +5,7 @@ import {ProjectTaskService} from "@D/http/service/project-task-service.ts";
 import {JsonObject} from "@D/global-types";
 import {useAntdMessage} from "@D/core/hooks/message/use-antd-message.tsx";
 
-export const useScheduleMaintenanceTableColumns = (projectId: string) => {
+export const useMaintenanceTableColumns = (projectId: string) => {
     const projectTaskService = useMemo(() => ProjectTaskService.getInstance(), []);
     const {contextHolderMessage, failure} = useAntdMessage();
     const [tableColumns, setTableColumns] = useState<ProColumns<ProjectTaskPayload>[]>([]);

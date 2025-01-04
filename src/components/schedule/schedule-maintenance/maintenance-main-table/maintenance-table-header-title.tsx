@@ -9,7 +9,7 @@ import {HIGHLIGHT_COLOR} from "@D/core/style/theme.ts";
 import {SearchIcon01} from "@D/icons/search-icon/search-icon-01.tsx";
 import {AddColumnIcon01} from "@D/icons/column-icon/add-column-icon-01.tsx";
 
-export const ScheduleMaintenanceTableHeaderTitle: React.FC<{
+export const MaintenanceTableHeaderTitle: React.FC<{
     tableActionRef: MutableRefObject<ActionType | undefined>;
     tableColumns: ProColumns<ProjectTaskPayload>[];
     displayColumns: ProColumns<ProjectTaskPayload>[];
