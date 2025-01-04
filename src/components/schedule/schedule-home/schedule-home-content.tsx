@@ -12,6 +12,7 @@ import helpCenterSvg from "@D/assets/images/svg/help-center-svg.svg";
 import {useState} from "react";
 import {useEmployeeName} from "@D/core/hooks/employee/use-employee-name";
 import {useDemeterSelector} from "@D/core/store/demeter-hook.ts";
+import {StarIcon02} from "@D/icons/star-icon/star-icon-02.tsx";
 
 export const ScheduleHomeContent = () => {
     const {Header, Content} = Layout;
@@ -58,11 +59,30 @@ export const ScheduleHomeContent = () => {
                                           children: <div>
                                               {
                                                   projects.map(project => (
-                                                      <Flex key={project.id} vertical={true}>
-                                                          <img src={scheduleTemplate} alt={"schedule template"}/>
-                                                          <div>
-                                                              <span>{project.projectName}</span>
-                                                          </div>
+                                                      <Flex key={project.id} vertical={true} gap={5}>
+                                                          <Flex justify={"center"}>
+                                                              <img src={scheduleTemplate} alt={"schedule template"} style={{borderRadius: 5}}/>
+                                                          </Flex>
+                                                          <Flex justify={"space-between"}>
+                                                              <div style={{
+                                                                  fontSize: 16,
+                                                                  fontWeight: 700,
+                                                                  alignContent: "center",
+                                                              }}>{project.projectName}</div>
+                                                              <div style={{fontSize: 16}}>
+                                                                  <Button type={"text"} style={{width: 20}} onClick={() => alert("收藏的逻辑")}>
+                                                                      <StarIcon02 width={16} height={16} color={"#2c2c2c"}/>
+                                                                  </Button>
+                                                              </div>
+                                                          </Flex>
+                                                          <Flex justify={"space-between"}>
+                                                              <div>
+                                                                  {project.startDateTime}
+                                                              </div>
+                                                              <div>
+                                                                  {project.endDateTime ? project.endDateTime : "No end date"}
+                                                              </div>
+                                                          </Flex>
                                                       </Flex>
                                                   ))
                                               }
