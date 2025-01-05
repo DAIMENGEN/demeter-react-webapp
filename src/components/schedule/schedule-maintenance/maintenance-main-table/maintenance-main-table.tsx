@@ -27,7 +27,7 @@ export const MaintenanceMainTable = () => {
         displayTableColumn,
         tableColumnConfigs,
         createTableColumnMessage
-    } = useMaintenanceTableColumns("0");
+    } = useMaintenanceTableColumns("1721551942276222976");
     const [dataSource, setDataSource] = useState<readonly ProjectTaskPayload[]>([]);
     const [copyTableRowData, setCopyTableRowData] = useState<ProjectTaskPayload>();
     const [expandedRowKeys, setExpandedRowKeys] = useState<React.Key[]>([]);

@@ -85,6 +85,8 @@ export const useMaintenanceTableColumns = (projectId: string) => {
                 },
                 minWidth: 200,
             },
+        ];
+        const actionColumns: TableColumns = [
             {
                 key: "action",
                 title: "Action",
@@ -100,16 +102,17 @@ export const useMaintenanceTableColumns = (projectId: string) => {
             // @ts-expect-error
             const columns: TableColumns = attributes.map(attribute => {
                 const properties: JsonObject = JSON.parse(attribute.properties ?? "{}");
+                const title = (properties.title ?? attribute.taskAttributeName) as string;
                 return {
                     key: attribute.taskAttributeName,
-                    title: properties.title ?? attribute.taskAttributeName,
+                    title: title,
                     dataIndex: attribute.taskAttributeName,
                     valueType: properties.valueType,
                     minWidth: properties.minWidth,
                     fieldProps: properties.fieldProps,
                 }
             });
-            const tableColumns: TableColumns = defaultColumns.concat(columns);
+            const tableColumns: TableColumns = defaultColumns.concat(columns).concat(actionColumns);
             setTableColumnConfigs(tableColumns.map(tableColumn => ({tableColumn, display: true})));
         }, error => {
             console.log(error);
