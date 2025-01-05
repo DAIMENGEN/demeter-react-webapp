@@ -21,13 +21,11 @@ export const MaintenanceMainTable = () => {
     const {contextHolderMessage, success} = useAntdMessage();
     const scheduleMaintenanceTableActionRef = useRef<ActionType>();
     const {
-        tableColumns,
-        displayColumns,
         hiddenTableColumn,
         createTableColumn,
         updateTableColumn,
         displayTableColumn,
-        isAllColumnsVisible,
+        tableColumnConfigs,
         createTableColumnMessage
     } = useMaintenanceTableColumns("0");
     const [dataSource, setDataSource] = useState<readonly ProjectTaskPayload[]>([]);
@@ -42,7 +40,7 @@ export const MaintenanceMainTable = () => {
             <EditableProTable<ProjectTaskPayload>
                 rowKey="id"
                 value={dataSource}
-                columns={displayColumns}
+                columns={tableColumnConfigs.filter(c => c.display).map(c => c.tableColumn)}
                 recordCreatorProps={false}
                 scroll={useMaintenanceTableScroll()}
                 actionRef={scheduleMaintenanceTableActionRef}
@@ -105,14 +103,12 @@ export const MaintenanceMainTable = () => {
                 }}
                 headerTitle={<MaintenanceTableHeaderTitle
                     parentKey={parentKey}
-                    tableColumns={tableColumns}
-                    displayColumns={displayColumns}
                     copyTableRowData={copyTableRowData}
                     createTableColumn={createTableColumn}
                     updateTableColumn={updateTableColumn}
                     hiddenTableColumn={hiddenTableColumn}
                     displayTableColumn={displayTableColumn}
-                    isAllColumnsVisible={isAllColumnsVisible}
+                    tableColumnConfigs={tableColumnConfigs}
                     setExpandedRowKeys={setExpandedRowKeys}
                     tableActionRef={scheduleMaintenanceTableActionRef}
                 />}

@@ -1,22 +1,24 @@
 import React, {useCallback, useEffect, useMemo, useState} from "react";
-import {ProjectTaskPayload} from "@D/http/payload/project-task-payload.ts";
-import {ProColumns} from "@ant-design/pro-table";
 import {ProjectTaskService} from "@D/http/service/project-task-service.ts";
 import {JsonObject} from "@D/global-types";
 import {useAntdMessage} from "@D/core/hooks/message/use-antd-message.tsx";
+import {
+    TableColumn,
+    TableColumnConfigs,
+    TableColumns
+} from "@D/components/schedule/schedule-maintenance/maintenance-main-table/maintenance-main-table-types";
 
 export const useMaintenanceTableColumns = (projectId: string) => {
+    console.log("useMaintenanceTableColumns");
     const projectTaskService = useMemo(() => ProjectTaskService.getInstance(), []);
     const {contextHolderMessage, failure} = useAntdMessage();
-    const [tableColumns, setTableColumns] = useState<ProColumns<ProjectTaskPayload>[]>([]);
-    const [displayColumns, setDisplayColumns] = useState<ProColumns<ProjectTaskPayload>[]>([]);
-    const isAllColumnsVisible = useMemo(() => displayColumns.length === tableColumns.length, [tableColumns.length, displayColumns.length]);
+    const [tableColumnConfigs, setTableColumnConfigs] = useState<TableColumnConfigs>([]);
 
-    const createTableColumn = useCallback((tableColumn: ProColumns<ProjectTaskPayload>) => {
-        setTableColumns(tableColumns => {
-            const exists = tableColumns.some(c => c.key === tableColumn.key)
+    const createTableColumn = useCallback((tableColumn: TableColumn) => {
+        setTableColumnConfigs(tableColumns => {
+            const exists = tableColumns.some(c => c.tableColumn.key === tableColumn.key)
             if (!exists) {
-                tableColumns.splice(tableColumns.length - 1, 0, tableColumn);
+                tableColumns.splice(tableColumns.length - 1, 0, {tableColumn, display: true});
             } else {
                 failure("Column already exists", 2).then();
             }
@@ -26,32 +28,45 @@ export const useMaintenanceTableColumns = (projectId: string) => {
 
     const displayTableColumn = useCallback((columnKey: React.Key) => {
         if (columnKey === "*") {
-            setDisplayColumns(tableColumns);
+            setTableColumnConfigs(tableColumns => tableColumns.map(c => {
+                c.display = true;
+                return c;
+            }));
         } else {
-            setDisplayColumns(columns => {
-                const column = tableColumns.find(column => column.key === columnKey);
-                if (column) {
-                    return [...columns, column];
+            setTableColumnConfigs(tableColumns => tableColumns.map(c => {
+                if (c.tableColumn.key === columnKey) {
+                    c.display = true;
                 }
-                return columns;
-            });
+                return c;
+            }));
         }
-    }, [tableColumns]);
+    }, []);
 
     const hiddenTableColumn = useCallback((columnKey: React.Key) => {
         if (columnKey === "*") {
-            setDisplayColumns([]);
+            setTableColumnConfigs(tableColumns => tableColumns.map(c => {
+                c.display = false;
+                return c;
+            }));
         } else {
-            setDisplayColumns(columns => columns.filter((column) => column.key !== columnKey));
+            setTableColumnConfigs(tableColumns => tableColumns.map(c => {
+                if (c.tableColumn.key === columnKey) {
+                    c.display = false;
+                }
+                return c;
+            }));
         }
     }, []);
 
-    const updateTableColumn = useCallback((tableColumn: ProColumns<ProjectTaskPayload>) => {
-        setTableColumns(tableColumns => tableColumns.map(c => c.key === tableColumn.key ? tableColumn : c));
+    const updateTableColumn = useCallback((tableColumn: TableColumn) => {
+        setTableColumnConfigs(tableColumns => tableColumns.map(c => c.tableColumn.key === tableColumn.key ? {
+            tableColumn,
+            display: true
+        } : c));
     }, []);
 
     useEffect(() => {
-        const defaultColumns: Array<ProColumns<ProjectTaskPayload>> = [
+        const defaultColumns: TableColumns = [
             {
                 key: "taskName",
                 title: "TaskName",
@@ -79,7 +94,7 @@ export const useMaintenanceTableColumns = (projectId: string) => {
         projectTaskService.getProjectTaskAttributesByProjectId(projectId, attributes => {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-expect-error
-            const columns: ProColumns<ProjectTaskPayload>[] = attributes.map(attribute => {
+            const columns: TableColumns = attributes.map(attribute => {
                 const properties: JsonObject = JSON.parse(attribute.properties ?? "{}");
                 return {
                     key: attribute.taskAttributeName,
@@ -90,22 +105,19 @@ export const useMaintenanceTableColumns = (projectId: string) => {
                     fieldProps: properties.fieldProps,
                 }
             });
-            const tableColumns = defaultColumns.concat(columns);
-            setTableColumns(tableColumns);
-            setDisplayColumns(tableColumns);
+            const tableColumns: TableColumns = defaultColumns.concat(columns);
+            setTableColumnConfigs(tableColumns.map(tableColumn => ({tableColumn, display: true})));
         }, error => {
             console.log(error);
         });
     }, [projectId, projectTaskService]);
 
     return {
-        tableColumns,
-        displayColumns,
         hiddenTableColumn,
         createTableColumn,
         updateTableColumn,
         displayTableColumn,
-        isAllColumnsVisible,
+        tableColumnConfigs,
         createTableColumnMessage: contextHolderMessage,
     }
 }
