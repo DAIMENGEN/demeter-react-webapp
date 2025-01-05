@@ -12,6 +12,7 @@ import {DownOutlined} from "@ant-design/icons";
 import {
     TableColumnConfigs
 } from "@D/components/schedule/schedule-maintenance/maintenance-main-table/maintenance-main-table-types";
+import {TextColumn} from "@D/components/schedule/schedule-maintenance/maintenance-main-table/columns/text-column.tsx";
 
 export const MaintenanceTableHeaderTitle: React.FC<{
     tableActionRef: MutableRefObject<ActionType | undefined>;
@@ -123,16 +124,7 @@ export const MaintenanceTableHeaderTitle: React.FC<{
                                     }}
                                     suffix={<SearchIcon01 width={16} height={16} color={"#bfbfbf"}/>}/>
                              <Flex gap={10} wrap={true}>
-                                 <Button onClick={() => {
-                                     createTableColumn({
-                                         key: "newColumn",
-                                         title: "New Column",
-                                         dataIndex: "newColumn",
-                                     });
-                                     displayTableColumn("newColumn");
-                                 }}>
-                                     Text
-                                 </Button>
+                                 <TextColumn createTableColumn={createTableColumn}/>
                              </Flex>
                          </Space>}>
                     <Button type="text"

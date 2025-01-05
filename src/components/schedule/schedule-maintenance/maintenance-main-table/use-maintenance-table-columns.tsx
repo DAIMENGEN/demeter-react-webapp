@@ -9,31 +9,35 @@ import {
 } from "@D/components/schedule/schedule-maintenance/maintenance-main-table/maintenance-main-table-types";
 
 export const useMaintenanceTableColumns = (projectId: string) => {
-    console.log("useMaintenanceTableColumns");
     const projectTaskService = useMemo(() => ProjectTaskService.getInstance(), []);
     const {contextHolderMessage, failure} = useAntdMessage();
     const [tableColumnConfigs, setTableColumnConfigs] = useState<TableColumnConfigs>([]);
 
     const createTableColumn = useCallback((tableColumn: TableColumn) => {
-        setTableColumnConfigs(tableColumns => {
-            const exists = tableColumns.some(c => c.tableColumn.key === tableColumn.key)
+        setTableColumnConfigs(configs => {
+            const exists = configs.some(c => c.tableColumn.key === tableColumn.key)
             if (!exists) {
-                tableColumns.splice(tableColumns.length - 1, 0, {tableColumn, display: true});
+                const targetIndex = configs.length - 1;
+                return [
+                    ...configs.slice(0, targetIndex),
+                    {tableColumn, display: true},
+                    ...configs.slice(targetIndex)
+                ];
             } else {
                 failure("Column already exists", 2).then();
             }
-            return tableColumns;
+            return configs;
         });
     }, [failure]);
 
     const displayTableColumn = useCallback((columnKey: React.Key) => {
         if (columnKey === "*") {
-            setTableColumnConfigs(tableColumns => tableColumns.map(c => {
+            setTableColumnConfigs(configs => configs.map(c => {
                 c.display = true;
                 return c;
             }));
         } else {
-            setTableColumnConfigs(tableColumns => tableColumns.map(c => {
+            setTableColumnConfigs(configs => configs.map(c => {
                 if (c.tableColumn.key === columnKey) {
                     c.display = true;
                 }
@@ -44,12 +48,12 @@ export const useMaintenanceTableColumns = (projectId: string) => {
 
     const hiddenTableColumn = useCallback((columnKey: React.Key) => {
         if (columnKey === "*") {
-            setTableColumnConfigs(tableColumns => tableColumns.map(c => {
+            setTableColumnConfigs(configs => configs.map(c => {
                 c.display = false;
                 return c;
             }));
         } else {
-            setTableColumnConfigs(tableColumns => tableColumns.map(c => {
+            setTableColumnConfigs(configs => configs.map(c => {
                 if (c.tableColumn.key === columnKey) {
                     c.display = false;
                 }
@@ -59,7 +63,7 @@ export const useMaintenanceTableColumns = (projectId: string) => {
     }, []);
 
     const updateTableColumn = useCallback((tableColumn: TableColumn) => {
-        setTableColumnConfigs(tableColumns => tableColumns.map(c => c.tableColumn.key === tableColumn.key ? {
+        setTableColumnConfigs(configs => configs.map(c => c.tableColumn.key === tableColumn.key ? {
             tableColumn,
             display: true
         } : c));
