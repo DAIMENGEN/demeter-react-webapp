@@ -104,7 +104,7 @@ export const useMaintenanceTableColumns = (projectId: string) => {
                 const properties: JsonObject = JSON.parse(attribute.properties ?? "{}");
                 const title = (properties.title ?? attribute.taskAttributeName) as string;
                 return {
-                    key: attribute.taskAttributeName,
+                    key: attribute.id,
                     title: title,
                     dataIndex: attribute.taskAttributeName,
                     valueType: properties.valueType,
