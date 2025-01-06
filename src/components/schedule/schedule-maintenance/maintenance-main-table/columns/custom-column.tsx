@@ -1,27 +1,28 @@
 import {Button, Col, Drawer, Form, Input, InputNumber, Row, Space} from "antd";
 import React, {useMemo, useState} from "react";
-import {ProColumns} from "@ant-design/pro-table";
-import {ProjectTaskPayload} from "@D/http/payload/project-task-payload.ts";
 import {ProjectTaskService} from "@D/http/service/project-task-service.ts";
 import {ProjectTaskAttributePayload} from "@D/http/payload/project-task-attribute-payload.ts";
 import {SnowflakeIdUtil} from "@D/utils/snowflake-id-util.ts";
 import {JsonObject} from "@D/global-types";
 import {JsonUtils} from "@D/utils/json-utils.ts";
+import {
+    TableColumn
+} from "@D/components/schedule/schedule-maintenance/maintenance-main-table/maintenance-main-table-types";
 
-export const TextColumn: React.FC<{
+export const CustomColumn: React.FC<{
     projectId: string;
-    createTableColumn: (tableColumn: ProColumns<ProjectTaskPayload>) => void;
+    createTableColumn: (tableColumn: TableColumn) => void;
 }> = ({projectId, createTableColumn}) => {
     const [form] = Form.useForm();
     const [visible, setVisible] = useState<boolean>();
     const projectTaskService = useMemo(() => ProjectTaskService.getInstance(), []);
     return (
-        <div className={"text-column"}>
+        <div className={"custom-column"}>
             <Button onClick={() => setVisible(true)}>
                 Text
             </Button>
-            <Drawer classNames={{content: "create-text-column-drawer"}}
-                    title={"Create Text Column"}
+            <Drawer classNames={{content: "create-custom-column-drawer"}}
+                    title={"Create Custom Column"}
                     open={visible}
                     closable={true}
                     width={720}
