@@ -13,6 +13,7 @@ import {
     MaintenanceMainTable
 } from "@D/components/schedule/schedule-maintenance/maintenance-main-table/maintenance-main-table.tsx";
 import {useParams} from "react-router-dom";
+import {useScheduleName} from "@D/components/schedule/common/hooks/use-schedule-name.tsx";
 
 export const ScheduleMaintenance = () => {
     const {projectId} = useParams<{projectId: string}>();
@@ -31,7 +32,7 @@ export const ScheduleMaintenance = () => {
                                 iconPosition={"end"}
                                 style={{backgroundColor: highlightScheduleTitle ? HIGHLIGHT_COLOR : ""}}
                                 icon={<DownIcon01 width={15} height={15} color={"#000000"}/>}>
-                            <span style={{fontSize: 25, fontWeight: "normal"}}>CardTitle</span>
+                            <span style={{fontSize: 25, fontWeight: "normal"}}>{useScheduleName(projectId as string)}</span>
                         </Button>
                     </Popover>
                     <Flex gap={10} justify={"flex-end"} style={{paddingRight: 10}}>
