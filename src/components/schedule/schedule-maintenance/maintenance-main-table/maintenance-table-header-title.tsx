@@ -1,7 +1,7 @@
 import React, {MutableRefObject, useMemo, useState} from "react";
 import {ActionType, ProColumns} from "@ant-design/pro-table";
 import {ProjectTaskPayload} from "@D/http/payload/project-task-payload.ts";
-import {Button, Checkbox, Divider, Dropdown, Flex, Input, Popover, Space} from "antd";
+import {Button, Checkbox, Col, Divider, Dropdown, Flex, Input, Popover, Row, Space} from "antd";
 import {ScheduleMaintenanceUtils} from "@D/components/schedule/schedule-maintenance/schedule-maintenance-utils.ts";
 import {HideIcon01} from "@D/icons/hide-icon/hide-icon-01.tsx";
 import {HIGHLIGHT_COLOR} from "@D/core/style/theme.ts";
@@ -21,6 +21,12 @@ import {
 import {
     CheckpointColumn
 } from "@D/components/schedule/schedule-maintenance/maintenance-main-table/columns/checkpoint-column.tsx";
+import {
+    StartDateTimeColumn
+} from "@D/components/schedule/schedule-maintenance/maintenance-main-table/columns/start-date-time-column.tsx";
+import {
+    EndDateTimeColumn
+} from "@D/components/schedule/schedule-maintenance/maintenance-main-table/columns/end-date-time-column.tsx";
 
 export const MaintenanceTableHeaderTitle: React.FC<{
     tableActionRef: MutableRefObject<ActionType | undefined>;
@@ -137,10 +143,24 @@ export const MaintenanceTableHeaderTitle: React.FC<{
                                               plain>
                                          System Columns
                                      </Divider>
-                                     <Flex gap={10} wrap={true}>
-                                         <MilestoneColumn projectId={projectId} createTableColumn={createTableColumn}/>
-                                         <CheckpointColumn projectId={projectId} createTableColumn={createTableColumn}/>
-                                     </Flex>
+                                     <Space direction={"vertical"} size={10}>
+                                         <Row gutter={24}>
+                                             <Col className="gutter-row" span={12}>
+                                                 <MilestoneColumn projectId={projectId} createTableColumn={createTableColumn}/>
+                                             </Col>
+                                             <Col className="gutter-row" span={12}>
+                                                 <CheckpointColumn projectId={projectId} createTableColumn={createTableColumn}/>
+                                             </Col>
+                                         </Row>
+                                         <Row gutter={24}>
+                                             <Col className="gutter-row" span={12}>
+                                                 <StartDateTimeColumn projectId={projectId} createTableColumn={createTableColumn}/>
+                                             </Col>
+                                             <Col className="gutter-row" span={12}>
+                                                 <EndDateTimeColumn projectId={projectId} createTableColumn={createTableColumn}/>
+                                             </Col>
+                                         </Row>
+                                     </Space>
                                  </div>
                                  <div>
                                      <Divider orientationMargin={0} orientation={"left"} style={{color: "#7e7f8d"}}
