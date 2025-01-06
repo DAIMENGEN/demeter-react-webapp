@@ -22,12 +22,13 @@ import {
 import {MoreIcon01} from "@D/icons/more-icon/more-icon-01.tsx";
 import {SearchIcon01} from "@D/icons/search-icon/search-icon-01.tsx";
 import {useScheduleMenuItems} from "@D/components/schedule/common/hooks/use-schedule-menu-items.tsx";
-import {Outlet} from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
 import {CreateSchedule} from "@D/components/schedule/common/modals/create-schedule/create-schedule.tsx";
 import {RenameSchedule} from "@D/components/schedule/common/modals/rename-schedule/rename-schedule.tsx";
 
 export const Schedule = () => {
     const {Sider} = Layout;
+    const navigate = useNavigate();
     const [collapsed, setCollapsed] = useState(false);
     const dispatch = useDemeterDispatch();
     const [marginInlineStart, setMarginInlineStart] = useState(200);
@@ -177,8 +178,9 @@ export const Schedule = () => {
                                           children: <Menu className={"schedule-sider-workspace-collapse-menu"}
                                                           mode="vertical"
                                                           selectedKeys={selectedKeys}
-                                                          items={useScheduleMenuItems(key => {
-                                                              setSelectedKeys([key]);
+                                                          items={useScheduleMenuItems(projectId => {
+                                                              setSelectedKeys([projectId]);
+                                                              navigate(`/home-page/schedule/maintenance/${projectId}`);
                                                           })}
                                                           onClick={(e) => {
                                                               const {key, keyPath, domEvent} = e;
