@@ -4,15 +4,14 @@ import {
 } from "@D/components/schedule/schedule-maintenance/maintenance-main-table/maintenance-main-table-types";
 import {Button} from "antd";
 
-export const MilestoneColumn: React.FC<{
+export const TaskStatusColumn: React.FC<{
     projectId: string,
     createTableColumn: (tableColumn: TableColumn) => void;
 }> = () => {
-
     return (
-        <div className={"milestone-column"}>
+        <div className={"task-status-column"}>
             <Button>
-                Milestone
+                TaskStatus
             </Button>
         </div>
     );

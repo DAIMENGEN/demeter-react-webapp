@@ -16,11 +16,11 @@ import {
     CustomColumn
 } from "@D/components/schedule/schedule-maintenance/maintenance-main-table/columns/custom-column.tsx";
 import {
-    MilestoneColumn
-} from "@D/components/schedule/schedule-maintenance/maintenance-main-table/columns/milestone-column.tsx";
+    TaskTypeColumn
+} from "@D/components/schedule/schedule-maintenance/maintenance-main-table/columns/task-type-column.tsx";
 import {
-    CheckpointColumn
-} from "@D/components/schedule/schedule-maintenance/maintenance-main-table/columns/checkpoint-column.tsx";
+    TaskStatusColumn
+} from "@D/components/schedule/schedule-maintenance/maintenance-main-table/columns/task-status-column.tsx";
 import {
     StartDateTimeColumn
 } from "@D/components/schedule/schedule-maintenance/maintenance-main-table/columns/start-date-time-column.tsx";
@@ -146,10 +146,10 @@ export const MaintenanceTableHeaderTitle: React.FC<{
                                      <Space direction={"vertical"} size={10}>
                                          <Row gutter={24}>
                                              <Col className="gutter-row" span={12}>
-                                                 <MilestoneColumn projectId={projectId} createTableColumn={createTableColumn}/>
+                                                 <TaskTypeColumn projectId={projectId} createTableColumn={createTableColumn}/>
                                              </Col>
                                              <Col className="gutter-row" span={12}>
-                                                 <CheckpointColumn projectId={projectId} createTableColumn={createTableColumn}/>
+                                                 <TaskStatusColumn projectId={projectId} createTableColumn={createTableColumn}/>
                                              </Col>
                                          </Row>
                                          <Row gutter={24}>
