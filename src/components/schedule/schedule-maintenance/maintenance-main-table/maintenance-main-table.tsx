@@ -17,7 +17,7 @@ import {
     useMaintenanceTableColumns
 } from "@D/components/schedule/schedule-maintenance/maintenance-main-table/use-maintenance-table-columns.tsx";
 
-export const MaintenanceMainTable = () => {
+export const MaintenanceMainTable: React.FC<{ projectId: string }> = ({projectId}) => {
     const {contextHolderMessage, success} = useAntdMessage();
     const scheduleMaintenanceTableActionRef = useRef<ActionType>();
     const {
@@ -27,7 +27,7 @@ export const MaintenanceMainTable = () => {
         displayTableColumn,
         tableColumnConfigs,
         createTableColumnMessage
-    } = useMaintenanceTableColumns("1721551942276222976");
+    } = useMaintenanceTableColumns(projectId);
     const [dataSource, setDataSource] = useState<readonly ProjectTaskPayload[]>([]);
     const [copyTableRowData, setCopyTableRowData] = useState<ProjectTaskPayload>();
     const [expandedRowKeys, setExpandedRowKeys] = useState<React.Key[]>([]);

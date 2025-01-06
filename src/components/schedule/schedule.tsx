@@ -187,7 +187,7 @@ export const Schedule = () => {
                                                               const projectId = keyPath[keyPath.length - 1];
                                                               switch (key) {
                                                                   case `${projectId}-open-in-new-table`:
-                                                                      window.open("http://127.0.0.1:3000/home-page/schedule/maintenance-schedule", "_blank")
+                                                                      window.open(`http://127.0.0.1:3000/home-page/schedule/maintenance/${projectId}`, "_blank")
                                                                       break;
                                                                   case `${projectId}-rename-schedule`:
                                                                       dispatch(setRenameScheduleId(projectId));

@@ -12,8 +12,10 @@ import {useState} from "react";
 import {
     MaintenanceMainTable
 } from "@D/components/schedule/schedule-maintenance/maintenance-main-table/maintenance-main-table.tsx";
+import {useParams} from "react-router-dom";
 
 export const ScheduleMaintenance = () => {
+    const {projectId} = useParams<{projectId: string}>();
     const scheduleMaintenanceRef = useHtmlDivElementRef();
     const [highlightScheduleTitle, setHighlightScheduleTitle] = useState<boolean>();
     return (
@@ -52,7 +54,7 @@ export const ScheduleMaintenance = () => {
                 ]} tabBarGutter={0}/>
             </div>
             <div className={"schedule-maintenance-body"}>
-                <MaintenanceMainTable/>
+                <MaintenanceMainTable projectId={projectId as string}/>
                 {/*<MaintenanceMainGantt/>*/}
             </div>
         </div>
