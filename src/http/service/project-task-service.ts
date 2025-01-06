@@ -31,7 +31,12 @@ export class ProjectTaskService extends HttpService<ProjectTaskEntity> {
         return new ProjectTaskEntity(...args);
     }
 
-    public getProjectTaskAttributesByProjectId(projectId: string, success: (attributes: Array<ProjectTaskAttributePayload>) => void, failure?: (error: Error) => void): void {
+    public createProjectTaskAttributeRequest(projectId: string, projectTaskAttribute: ProjectTaskAttributePayload, success: (attribute: ProjectTaskAttributePayload) => void, failure?: (error: Error) => void): void {
+        const URL = "createProjectTaskAttributeRoute";
+        this.post<ProjectTaskAttributePayload>(URL, {projectId, projectTaskAttribute}).then(success).catch(failure);
+    }
+
+    public getProjectTaskAttributesByProjectIdRequest(projectId: string, success: (attributes: Array<ProjectTaskAttributePayload>) => void, failure?: (error: Error) => void): void {
         const URL = "/getProjectTaskAttributesByProjectIdRoute";
         this.post<Array<ProjectTaskAttributePayload>>(URL, {projectId}).then(success).catch(failure);
     }

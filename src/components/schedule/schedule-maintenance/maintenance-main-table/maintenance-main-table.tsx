@@ -102,6 +102,7 @@ export const MaintenanceMainTable: React.FC<{ projectId: string }> = ({projectId
                     onChange: setEditableRowKeys,
                 }}
                 headerTitle={<MaintenanceTableHeaderTitle
+                    projectId={projectId}
                     parentKey={parentKey}
                     copyTableRowData={copyTableRowData}
                     createTableColumn={createTableColumn}

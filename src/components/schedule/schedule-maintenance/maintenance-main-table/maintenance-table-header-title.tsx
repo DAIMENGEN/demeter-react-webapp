@@ -16,6 +16,7 @@ import {TextColumn} from "@D/components/schedule/schedule-maintenance/maintenanc
 
 export const MaintenanceTableHeaderTitle: React.FC<{
     tableActionRef: MutableRefObject<ActionType | undefined>;
+    projectId: string;
     parentKey: string | undefined;
     createTableColumn: (tableColumn: ProColumns<ProjectTaskPayload>) => void;
     updateTableColumn: (tableColumn: ProColumns<ProjectTaskPayload>) => void;
@@ -27,6 +28,7 @@ export const MaintenanceTableHeaderTitle: React.FC<{
 }> = ({
           tableActionRef,
           tableColumnConfigs,
+          projectId,
           parentKey,
           createTableColumn,
           // updateTableColumn,
@@ -124,7 +126,7 @@ export const MaintenanceTableHeaderTitle: React.FC<{
                                     }}
                                     suffix={<SearchIcon01 width={16} height={16} color={"#bfbfbf"}/>}/>
                              <Flex gap={10} wrap={true}>
-                                 <TextColumn createTableColumn={createTableColumn}/>
+                                 <TextColumn projectId={projectId} createTableColumn={createTableColumn}/>
                              </Flex>
                          </Space>}>
                     <Button type="text"
